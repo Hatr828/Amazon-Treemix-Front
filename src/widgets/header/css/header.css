@@ -1,5 +1,183 @@
 ﻿header {
+    width: 100%;
     display: flex;
     flex-direction: column;
+}
+.headerTopSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 23px 48px;
+    background-color: #49516D;
+}
+.headerBottomSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #9EA5B8;
+    padding: 0 5%;
+}
+
+.geoMarker {
+    display: flex;
+    flex-direction: row;
+}
+
+.headerButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 14px;
+    padding: 10px 14px;
+    height: 50px;
+
+}
+
+.headerText {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    color: white;
+}
+.headerText > span:first-child {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-shadow: 0px 2px 4px 0px #00000033;
+}
+
+.headerText > span:last-child {
+    font-family: Roboto, sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-shadow: 0px 2px 4px 0px #00000033;
+}
+
+
+.headerIcon {
+    display: flex;
+    align-items: center;
+}
+
+.cartButton {
+    border: 2px solid rgba(0,0,0,0);
+    border-radius: 14px;
+    background-color: rgba(255, 255, 255, .2);
+}
+
+svg {
+    height: 50px;
+    width: 50px;
+}
+
+/*//////////////*/
+
+.cart {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-icon {
+    width: 50px;
+    height: 50px;
+    background: #6b708b;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: linear-gradient(144.29deg, #FFDB5A -0.18%, #FF825A 101.85%);
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 4px 7px;
+    font-size: 14px;
+    box-shadow: -4px 4px 6px 0px #0000001A inset;
+}
+
+.cart-badge * {
+    font-family: Roboto, sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    text-align: center;
+    box-shadow: 0px 2px 4px 0px #00000033;
+}
+
+.buttonMore {
+    background: none;
+    border: none;
+    margin: 32px 23px;
+}
+
+.buttonMore * {
+    filter: drop-shadow( 0px 2px 4px #00000033);
+}
+
+.headerBottomSection * {
+    color: white;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 17px;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+.linksGroup {
     width: 100%;
+    display: flex;
+    margin: 0 50px;
+    padding: 0 5%;
+}
+
+.linksGroup * {
+    padding: 0 5%;
+}
+
+.searchForm {
+    display: flex;
+    align-items: stretch;
+    height: 50px;
+    width: 500px;
+}
+
+.form {
+    display: flex;
+    flex: 1;
+}
+
+.formInput {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    padding: 0 8px;
+    border: 0 solid #ccc;
+    border-radius: 0;
+}
+
+.formSubmitButton {
+    background-color: #fff;
+    border-top-right-radius: 26px;
+    border-bottom-right-radius: 26px;
+}
+.searchFormButton {
+    border-radius: 26px;
+    width: 100px;
 }
