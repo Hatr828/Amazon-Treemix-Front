@@ -1,216 +1,210 @@
 ﻿header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .headerTopSection {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 23px 48px;
-    background-color: #49516D;
-    height: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 23px 48px;
+  background-color: #49516d;
+  height: 90px;
 }
 .headerBottomSection {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #9EA5B8;
-    padding: 0 5%;
-    height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #9ea5b8;
+  padding: 0 5%;
+  height: 60px;
 }
 
-
 .geoMarker {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .headerButton {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-    background: none;
-    border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 14px;
-    padding: 10px 14px;
-    height: 50px;
+  background: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 10px 14px;
+  height: 50px;
 }
 
 .headerText {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  color: white;
 }
 .headerText > span:first-child {
-    font-family: Roboto, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 1.2;
-    letter-spacing: 0;
-    text-shadow: 0px 2px 4px 0px #00000033;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-shadow: 0px 2px 4px 0px #00000033;
 }
 
 .headerText > span:last-child {
-    font-family: Roboto, sans-serif;
-    font-weight: 900;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 1.2;
-    letter-spacing: 0;
-    text-shadow: 0px 2px 4px 0px #00000033;
+  font-family: Roboto, sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-shadow: 0px 2px 4px 0px #00000033;
 }
 
-
 .headerIcon {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .cartButton {
-    border: 2px solid rgba(0,0,0,0);
-    border-radius: 14px;
-    background-color: rgba(255, 255, 255, .2);
-    margin-right: 10%;
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-right: 10%;
 }
-
 
 /*//////////////*/
 
 .cart {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
 }
 
 .cart-icon {
-    width: 60%;
-    height: 60%;
-    background: #6b708b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 60%;
+  height: 60%;
+  background: #6b708b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cart-badge {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background: linear-gradient(144.29deg, #FFDB5A -0.18%, #FF825A 101.85%);
-    color: white;
-    font-weight: bold;
-    border-radius: 50%;
-    padding: 4px 7px;
-    font-size: 14px;
-    box-shadow: -4px 4px 6px 0px #0000001A inset;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: linear-gradient(144.29deg, #ffdb5a -0.18%, #ff825a 101.85%);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 4px 7px;
+  font-size: 14px;
+  box-shadow: -4px 4px 6px 0px #0000001a inset;
 }
 
 .cart-badge * {
-    font-family: Roboto, sans-serif;
-    font-weight: 900;
-    font-style: normal;
-    font-size: 12px;
-    line-height: 1.5;
-    letter-spacing: 0;
-    text-align: center;
-    box-shadow: 0px 2px 4px 0px #00000033;
+  font-family: Roboto, sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-align: center;
+  box-shadow: 0px 2px 4px 0px #00000033;
 }
 
 .buttonMore {
-    background: none;
-    border: none;
-    margin-left: 10%;
+  background: none;
+  border: none;
+  margin-left: 10%;
 }
 
-
 .linksGroup {
-    width: 100%;
-    display: flex;
-    margin: 0 50px;
-    padding: 0 5%;
-    white-space: nowrap;
+  width: 100%;
+  display: flex;
+  margin: 0 50px;
+  padding: 0 5%;
+  white-space: nowrap;
 }
 
 .linksGroup * {
-    padding: 0 5%;
-    color: white;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 17px;
-    line-height: 1.5;
-    letter-spacing: 0;
-    text-shadow: 0px 2px 4px 0px #00000033;
-;
+  padding: 0 5%;
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-shadow: 0px 2px 4px 0px #00000033;
 }
 
 .searchForm {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    width: 50%;
-    background-color: #fff;
-    border-radius: 26px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 26px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .searchFormButton {
-    height: 100%;
-    width: 80px;
-    border-radius: 26px;
-    border: none;
-    background: #9EA5B8;
-    color: #fff;
-    cursor: pointer;
+  height: 100%;
+  width: 80px;
+  border-radius: 26px;
+  border: none;
+  background: #9ea5b8;
+  color: #fff;
+  cursor: pointer;
 
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 18px;
-    line-height: 1.5;
-    letter-spacing: 0;
-    text-shadow: 0 2px 4px #00000033;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-shadow: 0 2px 4px #00000033;
 }
 
 .form {
-    background: #F8F8F8;
-    border-radius: 26px;
-    display: flex;
-    flex: 1;
-    height: 100%;
-    align-items: center;
+  background: #f8f8f8;
+  border-radius: 26px;
+  display: flex;
+  flex: 1;
+  height: 100%;
+  align-items: center;
 }
 
 .formInput {
-    flex: 1;
-    height: 100%;
-    border: none;
-    outline: none;
-    padding: 0 15px;
-    background: transparent;
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 15px;
+  background: transparent;
 }
 
 .formSubmitButton {
-    height: 55%;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-right: 15px;
+  height: 55%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 15px;
 }
 
-
 .mainLogo {
-    width: 109px;
-    height: 62px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
-    margin-left: 10%;
+  width: 109px;
+  height: 62px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
+  margin-left: 10%;
 }
