@@ -1,4 +1,354 @@
+.main-div-homePage {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+}
+
 .main-photo-homePage {
     width: 100%;
-    height: 30vw;
+    height: 30.312vw;
+}
+
+/* Большие блочки */
+.div-for-big-blocks {
+    display: flex;
+    position: relative;
+
+    width: 79.792vw;
+    gap: 1.042vw;
+    bottom: 7.5vw;
+}
+
+.div-big-block {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background-color: white;
+
+    width: 19.167vw;
+    height: 23.958vw;
+    padding: 1.25vw;
+    border-radius: 1.042vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.photo-div-big-block {
+    width: 16.042vw;
+    height: 18.75vw;
+}
+
+.head-text-more {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: Roboto;
+    font-weight: 600;
+    font-size: 1.25vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 0.7vw;
+}
+
+.text-more {
+    color: rgba(51, 51, 51, 1);
+    cursor: pointer;
+
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 0.677vw;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.text-more:hover {
+    color: rgb(121, 120, 120);
+}
+
+.div-for-special-big-block {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    width: 19.167vw;
+    height: 23.958vw;
+    gap: 0.6vw;
+}
+
+.div-pre-big-block {
+    display: flex;
+    background-image: url("/photo.png");
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    width: 19.167vw;
+    height: 15.208vw;
+    border-radius: 1.042vw;
+    padding: 3.57vw;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 1.25vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.div-pre-sign-block {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    width: 19.167vw;
+    height: 8.177vw;
+    border-radius: 1.042vw;
+    padding: 2vw;
+    gap: 0.5vw;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 1.25vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    background: linear-gradient(
+        40deg,
+        rgba(158, 165, 184, 1),
+        rgba(205, 206, 208, 1)
+    );
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.button-pre-sign-block {
+    background-color: rgba(73, 81, 109, 1);
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    padding: 0.25vw 1.75vw 0.25vw 1.75vw;
+    border-radius: 2.552vw;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 0.938vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+.button-pre-sign-block:hover {
+    transform: translateY(-1px);
+}
+
+.button-pre-sign-block:active {
+    transform: translateY(0);
+}
+
+/* Маленькие блочки в большом */
+
+.div-for-small-blocks-in-big {
+    display: flex;
+    position: relative;
+
+    width: 79.792vw;
+    gap: 1.042vw;
+    bottom: 7vw;
+}
+
+.photo-div-for-small-blocks-in-big {
+    width: 5.677vw;
+    height: 4.948vw;
+}
+
+.div-big-for-small-icon {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+
+    gap: 0.83vw;
+}
+
+.div-for-small-icon {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+    color: rgba(51, 51, 51, 1);
+
+    border-radius: 0.521vw;
+    width: 7.917vw;
+    height: 7.917vw;
+    font-weight: 300;
+    font-size: 0.625vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    padding: 1vw;
+    gap: 0.25vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.div-for-small-icon:hover {
+    transform: translateY(-3px);
+}
+
+.div-for-small-icon:active {
+    transform: translateY(0);
+}
+
+/* Блоки в колонку и в ряд */
+
+.div-for-column-row {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+
+    width: 79.792vw;
+    bottom: 5.5vw;
+}
+
+.div-for-column-blocks-in-big {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 34.323vw;
+    height: 33.073vw;
+}
+
+.head-text-more-column {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: Roboto;
+    font-weight: 600;
+    font-size: 1.25vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 0.7vw;
+    padding: 0 0 0 1.5vw;
+}
+
+.div-column {
+    display: flex;
+    position: relative;
+
+    width: 100%;
+    height: 8.958vw;
+    gap: 1.5vw;
+}
+
+.icon-column {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    width: 9.063vw;
+    height: 9.063vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+    border-radius: 0.521vw;
+}
+
+.icon-column:hover {
+    transform: translateY(-3px);
+}
+
+.icon-column:active {
+    transform: translateY(0);
+}
+
+.photo-column-product {
+    width: 7.5vw;
+    height: 7.5vw;
+}
+
+.div-cost-name-product {
+    display: flex;
+    position: relative;
+    width: max-content;
+    flex-direction: column;
+}
+
+.div-name-product {
+    display: flex;
+    position: relative;
+    height: max-content;
+
+    width: 20.208vw;
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 0.938vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 0.5vw;
+}
+
+.div-cost-product {
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 1.875vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.div-for-row-blocks-in-big {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 44.427vw;
+    height: 33.281vw;
+}
+
+.div-for-rows {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 30.5vw;
+}
+
+.div-row {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 14.2vw;
+    height: 100%;
+    border-radius: 0.521vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+    padding: 0 0 1vw 1vw;
+}
+
+.photo-row-product {
+    display: flex;
+    position: relative;
+    margin-left: auto;
+
+    width: 11.25vw;
+    height: 19.688vw;
+    top: 3.5vw;
+}
+
+.div-name-product-column {
+    font-family: Roboto;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 1.146vw;
+    line-height: 120%;
+    letter-spacing: 0%;
 }
