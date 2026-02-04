@@ -1,4 +1,5 @@
 import "./globals.css";
+import { CartProvider } from '@/features/cart';
 
 export default function RootLayout({
   children,
@@ -7,7 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+    <CartProvider>
       <body>{children}</body>
+    </CartProvider>
     </html>
   );
 }
