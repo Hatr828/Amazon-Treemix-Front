@@ -87,6 +87,104 @@ export function HomePage() {
                 </div>
             </div>
             {/*  */}
+            <div className="div-for-list-product">
+                <div className="head-text-more-list">
+                    Home Decor Under $20
+                    <div className="text-more">More →</div>
+                </div>
+                <div className="list-product">
+                    <i className="bi bi-chevron-left"></i>
+                    {[1, 2, 3, 4, 5].map((_, index) => (
+                        <div className="icon-list-product" key={index}>
+                            <div className="icon-for-list-product-photo">
+                                <img src="/example1-product.png" className="list-product-photo" />
+                            </div>
+                            <div className="text-list-product">
+                                Candy Light 5.22 10sm Cobalt 10sm Cobalt
+                                <div className="list-cost-product">
+                                    <span className="currency">$</span>530
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    <i className="bi bi-chevron-right"></i>
+                </div>
+            </div>
+            {/*  */}
+            <div className="div-banner">
+                <div className="banner-text-button">
+                    Sign in for the best experience
+                    <button className="banner-button">Sign in securely</button>
+                </div>
+                <div className="banner-name">
+                    Naming
+                </div>
+            </div>
+            {/*  */}
+            <div className="div-for-middle-blocks">
+                {[1, 2, 3, 4].map((_, index) =>
+                    index % 2 === 0 ? (
+                        <div className="middle-block-chevron" key={index}>
+                            <div className="head-text-middle-block">
+                                Product
+                            </div>
+                            <div className="div-with-chevron">
+                                <div className="block-for-chevron">
+                                    <i className="bi bi-chevron-left left"></i>
+                                </div>
+                                <img src="/example1-product.png" className="middle-block-photo-chevron" />
+                                <div className="block-for-chevron">
+                                    <i className="bi bi-chevron-right right"></i>
+                                </div>
+                            </div>
+                            <div className="div-name-product-middle-block">
+                                Product
+                                <div className="list-cost-product">
+                                    <span className="currency">$</span>530
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="middle-block" key={index}>
+                            <div className="head-text-more-list">
+                                Product
+                                <div className="text-more">More →</div>
+                            </div>
+                            <img src="/example1-product.png" className="middle-block-photo" />
+                        </div>
+                    )
+                )}
+            </div>
+            {/*  */}
+            <div className="div-for-list-product-viewed">
+                <div className="head-text-more-list">
+                    Last viewed
+                </div>
+                <div className="list-product-product-viewed">
+                    <i className="bi bi-chevron-left"></i>
+                    {[1, 2, 3, 4, 5].map((_, index) => (
+                        <div className="icon-list-product-viewed" key={index}>
+                            <img src="/example1-product.png" className="list-product-photo-viewed" />
+                            <div className="name-product-viewed">
+                                Tablet Xiaomi Mi Pad 5 6/256Gb 
+                            </div>
+                        </div>
+                    ))}
+                    <i className="bi bi-chevron-right"></i>
+                </div>
+            </div>
+            {/*  */}
+            <div className="div-recommendations">
+                See personalized recommendations
+                <button className="button-recommendations">Sign in</button>
+                <div className="div-customer-text">
+                    New Customer?
+                    <div className="div-start-here">
+                        Start here.
+                    </div>
+                </div>
+            </div>
+            {/*  */}
         </div>
     );
 }
