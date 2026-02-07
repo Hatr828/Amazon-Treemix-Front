@@ -1,6 +1,42 @@
 import "./HomePage.css"
+import { useState } from "react";
+
+// пример будущего массива идущего с БД
+const products = [
+  { img: "/example1-product.png", name: "Tablet Xiaomi Mi Pad 5 6/256Gb" },
+  { img: "/example2-product.png", name: "Tablet Samsung Galaxy Tab S8" },
+  { img: "/example3-product.png", name: "Tablet Apple iPad Air" },
+  { img: "/example1-product.png", name: "Tablet Lenovo Tab P11" },
+  { img: "/example2-product.png", name: "Tablet Huawei MatePad" },
+  { img: "/example3-product.png", name: "Tablet Microsoft Surface" },
+  { img: "/example3-product.png", name: "Tablet Microsoft Surface" },
+  { img: "/example3-product.png", name: "Tablet Microsoft Surface" },
+]; 
 
 export function HomePage() {
+
+    const [startIndex, setStartIndex] = useState(0);
+
+    const visibleCount = 5;
+
+    const nextSlide = () => {
+        setStartIndex(prev => (prev + 1) % products.length);
+    };
+
+    const prevSlide = () => {
+        setStartIndex(prev =>
+        (prev - 1 + products.length) % products.length
+        );
+    };
+
+    const visibleItems = [];
+
+    for (let i = 0; i < visibleCount; i++) {
+        visibleItems.push(
+        products[(startIndex + i) % products.length]
+        );
+    }
+
     return (
         <div className="main-div-homePage">
             <img src="/main-photo.png" className="main-photo-homePage"/>
@@ -93,21 +129,21 @@ export function HomePage() {
                     <div className="text-more">More →</div>
                 </div>
                 <div className="list-product">
-                    <i className="bi bi-chevron-left"></i>
-                    {[1, 2, 3, 4, 5].map((_, index) => (
+                    <i className="bi bi-chevron-left" onClick={prevSlide}></i>
+                    {visibleItems.map((product, index) => (
                         <div className="icon-list-product" key={index}>
                             <div className="icon-for-list-product-photo">
-                                <img src="/example1-product.png" className="list-product-photo" />
+                                <img src={product.img} className="list-product-photo" />
                             </div>
                             <div className="text-list-product">
-                                Candy Light 5.22 10sm Cobalt 10sm Cobalt
+                                {product.name}
                                 <div className="list-cost-product">
                                     <span className="currency">$</span>530
                                 </div>
                             </div>
                         </div>
-                    ))}
-                    <i className="bi bi-chevron-right"></i>
+                        ))}
+                    <i className="bi bi-chevron-right" onClick={nextSlide}></i>
                 </div>
             </div>
             {/*  */}
@@ -124,34 +160,16 @@ export function HomePage() {
             <div className="div-for-middle-blocks">
                 {[1, 2, 3, 4].map((_, index) =>
                     index % 2 === 0 ? (
-                        <div className="middle-block-chevron" key={index}>
-                            <div className="head-text-middle-block">
-                                Product
-                            </div>
-                            <div className="div-with-chevron">
-                                <div className="block-for-chevron">
-                                    <i className="bi bi-chevron-left left"></i>
-                                </div>
-                                <img src="/example1-product.png" className="middle-block-photo-chevron" />
-                                <div className="block-for-chevron">
-                                    <i className="bi bi-chevron-right right"></i>
-                                </div>
-                            </div>
-                            <div className="div-name-product-middle-block">
-                                Product
-                                <div className="list-cost-product">
-                                    <span className="currency">$</span>530
-                                </div>
-                            </div>
-                        </div>
+                    <ChevronBlock key={index} />
                     ) : (
-                        <div className="middle-block" key={index}>
-                            <div className="head-text-more-list">
-                                Product
-                                <div className="text-more">More →</div>
-                            </div>
-                            <img src="/example1-product.png" className="middle-block-photo" />
+                    <div className="middle-block" key={index}>
+                        <div className="head-text-more-list">
+                        Product
+                        <div className="text-more">More →</div>
                         </div>
+
+                        <img src="/example1-product.png" className="middle-block-photo" />
+                    </div>
                     )
                 )}
             </div>
@@ -161,16 +179,16 @@ export function HomePage() {
                     Last viewed
                 </div>
                 <div className="list-product-product-viewed">
-                    <i className="bi bi-chevron-left"></i>
-                    {[1, 2, 3, 4, 5].map((_, index) => (
+                    <i className="bi bi-chevron-left" onClick={prevSlide}></i>
+                    {visibleItems.map((product, index) => (
                         <div className="icon-list-product-viewed" key={index}>
-                            <img src="/example1-product.png" className="list-product-photo-viewed" />
+                            <img src={product.img} className="list-product-photo-viewed" />
                             <div className="name-product-viewed">
-                                Tablet Xiaomi Mi Pad 5 6/256Gb 
+                                {product.name}
                             </div>
                         </div>
                     ))}
-                    <i className="bi bi-chevron-right"></i>
+                    <i className="bi bi-chevron-right" onClick={nextSlide}></i>
                 </div>
             </div>
             {/*  */}
@@ -188,3 +206,53 @@ export function HomePage() {
         </div>
     );
 }
+
+const ChevronBlock = () => {
+  const images = [
+    "/example1-product.png",
+    "/example2-product.png",
+    "/example3-product.png"
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const next = () => {
+    setCurrentIndex(prev => (prev + 1) % images.length);
+  };
+
+  const prev = () => {
+    setCurrentIndex(prev =>
+      (prev - 1 + images.length) % images.length
+    );
+  };
+
+  return (
+    <div className="middle-block-chevron">
+      <div className="head-text-middle-block">
+        Product
+      </div>
+
+      <div className="div-with-chevron">
+        <div className="block-for-chevron">
+          <i className="bi bi-chevron-left left" onClick={prev}></i>
+        </div>
+
+        <img
+          src={images[currentIndex]}
+          className="middle-block-photo-chevron"
+        />
+
+        <div className="block-for-chevron">
+          <i className="bi bi-chevron-right right" onClick={next}></i>
+        </div>
+      </div>
+
+      <div className="div-name-product-middle-block">
+        Product
+        <div className="list-cost-product">
+          <span className="currency">$</span>530
+        </div>
+      </div>
+    </div>
+  );
+};
