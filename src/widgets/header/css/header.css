@@ -76,6 +76,7 @@
     border-radius: 14px;
     background-color: rgba(255, 255, 255, .2);
     margin-right: 10%;
+    cursor: pointer;
 }
 
 
@@ -88,12 +89,12 @@
     justify-content: center;
     height: 50px;
     width: 50px;
+    background: none;
 }
 
 .cart-icon {
     width: 60%;
     height: 60%;
-    background: #6b708b;
     display: flex;
     align-items: center;
     justify-content: center;
