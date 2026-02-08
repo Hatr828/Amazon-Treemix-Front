@@ -1,0 +1,58 @@
+.cart_modal_wrapper {
+    background-color: #F8F8F8;
+}
+
+.product_title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+.delete_button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.price {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+.dollar_icon {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: 0;
+}
+.additions {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: #496B94;
+}
+.dropdown_btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.additions_list {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
