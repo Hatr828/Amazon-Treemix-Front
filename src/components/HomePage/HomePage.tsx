@@ -1,5 +1,8 @@
+"use client";
+
 import "./HomePage.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // пример будущего массива идущего с БД
 const products = [
@@ -39,7 +42,7 @@ export function HomePage() {
 
     return (
         <div className="main-div-homePage">
-            <img src="/main-photo.png" className="main-photo-homePage"/>
+            <MainPhotoSlider />
             {/*  */}
             <div className="div-for-big-blocks">
                 {[1, 2, 3].map((_, index) => (
@@ -256,3 +259,36 @@ const ChevronBlock = () => {
     </div>
   );
 };
+
+const MainPhotoSlider = () => {
+  const images = [
+    "/main-photo.png",
+    "/main-photo1.png",
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex(prev => (prev + 1) % images.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="main-photo-homePage">
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={images[index]}
+          src={images[index]}
+          className="main-photo-homePage"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+        />
+      </AnimatePresence>
+    </div>
+  );
+}
