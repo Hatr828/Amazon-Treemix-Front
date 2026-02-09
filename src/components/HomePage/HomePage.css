@@ -1,0 +1,736 @@
+.main-div-homePage {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+}
+
+.main-photo-homePage {
+    width: 100%;
+    height: 30.312vw;
+}
+
+/* Большие блочки */
+.div-for-big-blocks {
+    display: flex;
+    position: relative;
+
+    width: 79.792vw;
+    gap: 1.042vw;
+    bottom: 7.5vw;
+}
+
+.div-big-block {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background-color: white;
+
+    width: 19.167vw;
+    height: 23.958vw;
+    padding: 1.25vw;
+    border-radius: 1.042vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.photo-div-big-block {
+    width: 16.042vw;
+    height: 18.75vw;
+}
+
+.head-text-more {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.25vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 0.7vw;
+}
+
+.text-more {
+    color: rgba(51, 51, 51, 1);
+    cursor: pointer;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.677vw;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.text-more:hover {
+    color: rgb(121, 120, 120);
+}
+
+.div-for-special-big-block {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    width: 19.167vw;
+    height: 23.958vw;
+    gap: 0.6vw;
+}
+
+.div-pre-big-block {
+    display: flex;
+    background-image: url("/photo.png");
+    background-size: cover; 
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    width: 19.167vw;
+    height: 15.208vw;
+    border-radius: 1.042vw;
+    padding: 3.57vw;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 1.25vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+    text-shadow: 0px 0.208vw 0.208vw rgba(0, 0, 0, 0.25);
+}
+
+.div-pre-sign-block {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    width: 19.167vw;
+    height: 8.177vw;
+    border-radius: 1.042vw;
+    padding: 2vw;
+    gap: 0.5vw;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 1.25vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    background: linear-gradient(
+        40deg,
+        rgba(158, 165, 184, 1),
+        rgba(205, 206, 208, 1)
+    );
+    text-shadow: 0px 0.208vw 0.208vw rgba(0, 0, 0, 0.25);
+    color: white;
+}
+
+.button-pre-sign-block {
+    background-color: rgba(73, 81, 109, 1);
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    padding: 0.25vw 1.75vw 0.25vw 1.75vw;
+    border-radius: 2.552vw;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 0.938vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+.button-pre-sign-block:hover {
+    transform: translateY(-1px);
+}
+
+.button-pre-sign-block:active {
+    transform: translateY(0);
+}
+
+/* Маленькие блочки в большом */
+
+.div-for-small-blocks-in-big {
+    display: flex;
+    position: relative;
+
+    width: 79.792vw;
+    gap: 1.042vw;
+    bottom: 7vw;
+}
+
+.photo-div-for-small-blocks-in-big {
+    width: 5.677vw;
+    height: 4.948vw;
+}
+
+.div-big-for-small-icon {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+
+    gap: 0.83vw;
+}
+
+.div-for-small-icon {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+    color: rgba(51, 51, 51, 1);
+
+    border-radius: 0.521vw;
+    width: 7.917vw;
+    height: 7.917vw;
+    font-weight: 300;
+    font-size: 0.625vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    padding: 1vw;
+    gap: 0.25vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.div-for-small-icon:hover {
+    transform: translateY(-3px);
+}
+
+.div-for-small-icon:active {
+    transform: translateY(0);
+}
+
+/* Блоки в колонку и в ряд */
+
+.div-for-column-row {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+
+    width: 79.792vw;
+    bottom: 5.5vw;
+}
+
+.div-for-column-blocks-in-big {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 34.323vw;
+    height: 33.073vw;
+}
+
+.head-text-more-column {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.25vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 0.7vw;
+    padding: 0 0 0 1.5vw;
+}
+
+.div-column {
+    display: flex;
+    position: relative;
+
+    width: 100%;
+    height: 8.958vw;
+    gap: 1.5vw;
+}
+
+.icon-column {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    width: 9.063vw;
+    height: 9.063vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+    border-radius: 0.521vw;
+}
+
+.icon-column:hover {
+    transform: translateY(-3px);
+}
+
+.icon-column:active {
+    transform: translateY(0);
+}
+
+.photo-column-product {
+    width: 7.5vw;
+    height: 7.5vw;
+}
+
+.div-cost-name-product {
+    display: flex;
+    position: relative;
+    width: max-content;
+    flex-direction: column;
+}
+
+.div-name-product {
+    display: flex;
+    position: relative;
+    height: max-content;
+
+    width: 20.208vw;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.938vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 0.5vw;
+}
+
+.div-cost-product {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 1.875vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.div-for-row-blocks-in-big {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 44.427vw;
+    height: 33.281vw;
+}
+
+.div-for-rows {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 30.5vw;
+}
+
+.div-row {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 14.2vw;
+    height: 100%;
+    border-radius: 0.521vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+    padding: 0 0 1vw 1vw;
+}
+
+.photo-row-product {
+    display: flex;
+    position: relative;
+    margin-left: auto;
+
+    width: 11.25vw;
+    height: 19.688vw;
+    top: 3.5vw;
+}
+
+.div-name-product-column {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 1.146vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+/* Список товаров в ряд с рулеткой */
+
+.div-for-list-product {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    width: 79.792vw;
+    height: 22.448vw;
+    bottom: 3.5vw;
+}
+
+.head-text-more-list {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.25vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin-bottom: 1.5vw;
+}
+
+.list-product {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 19.531vw;
+}
+
+.icon-list-product {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 14.063vw;
+    height: 100%;
+}
+
+.icon-for-list-product-photo {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+    width: 14.063vw;
+    height: 14.063vw;
+    border-radius: 1.042vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.list-product-photo {
+    width: 12.083vw;
+    height: 10.938vw;
+}
+
+.text-list-product {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.938vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.list-cost-product {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 1.875vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.currency {
+    color: rgba(45, 45, 45, 1);
+    vertical-align: super;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 0.938vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+.bi-chevron-left,
+.bi-chevron-right {
+    color: rgba(210, 210, 210, 1);
+    width: max-content;
+    height: max-content;
+    cursor: pointer;
+
+    font-size: 2vw;
+    margin-top: 5.5vw;
+}
+
+.bi-chevron-left:hover,
+.bi-chevron-right:hover {
+    color: rgba(175, 165, 165, 0.781);
+}
+
+/* Баннер */
+
+.div-banner {
+    background-image: url("/banner.png");
+    background-size: cover; 
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 79.792vw;
+    height: 14.688vw;
+    bottom: 2vw;
+    padding: 0 8vw 0 8vw;
+}
+
+.banner-text-button {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 2.083vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    gap: 1vw;
+    text-shadow: 0px 0.208vw 0.208vw rgba(0, 0, 0, 0.25);
+}
+
+.banner-button {
+    border: none;
+    outline: none;
+    color: white;
+    background-color: rgba(255, 169, 90, 1);
+
+    border-radius: 3.177vw;
+    width: 25vw;
+    height: 4.427vw;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 1.563vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-shadow: 0px 0.208vw 0.208vw rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.banner-button:hover {
+    transform: translateY(-3px);
+}
+
+.banner-button:active {
+    transform: translateY(0);
+}
+
+.banner-name {
+    color: rgba(255, 255, 255, 1);
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 2.5vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-shadow: 0px 0.208vw 0.208vw rgba(0, 0, 0, 0.25);
+}
+
+/* Для средних блочков */
+
+.div-for-middle-blocks {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+
+    width: 79.792vw;
+    height: 23.958vw;
+    bottom: 1vw;
+}
+
+.middle-block-chevron {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    width: 19.167vw;
+    height: 100%;
+    border-radius: 1.042vw;
+
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.middle-block {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    width: 19.167vw;
+    height: 100%;
+    border-radius: 1.042vw;
+    padding: 1.5vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.middle-block-photo {
+    width: 16.042vw;
+    height: 18.75vw;
+}
+
+.middle-block-photo-chevron {
+    width: 10.833vw;
+    height: 13.281vw;
+}
+
+.div-with-chevron {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 13.281vw;
+}
+
+.block-for-chevron {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    height: 3.958vw;
+    width: 3.958vw;
+    border-radius: 1.042vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.left, 
+.right {
+    margin-top: 0;
+}
+
+.head-text-middle-block {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.25vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+
+    margin: 1.5vw;
+}
+
+.div-name-product-middle-block {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.938vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    margin: 0.5vw 1.5vw 1.5vw 1.5vw;
+}
+
+/* Последние блочки */
+
+.div-for-list-product-viewed {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    width: 79.792vw;
+}
+
+.list-product-product-viewed {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 13.333vw;
+}
+
+.icon-list-product-viewed {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 13.021vw;
+    height: 13.333vw;
+    border-radius: 1.042vw;
+    padding: 1vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.list-product-photo-viewed {
+    width: 7.292vw;
+    height: 7.292vw;
+}
+
+.name-product-viewed {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 0.938vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+}
+
+/*recommendations */
+
+.div-recommendations {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    gap: 0.25vw;
+    margin: 6vw 0 2.5vw 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 1.25vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+.button-recommendations {
+    background-color: rgba(255, 169, 90, 1);
+    color: white;
+    border: none;
+    outline: none;
+
+    text-shadow: 0px 0.208vw 0.208vw rgba(0, 0, 0, 0.25);
+    border-radius: 2.552vw;
+    width: 20.104vw;
+    height: 2.5vw;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.25vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+
+}
+
+.div-customer-text {
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    gap: 0.25vw;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 0.729vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+.div-start-here {
+    color: rgba(255, 169, 90, 1);
+    cursor: pointer;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 0.729vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+.div-start-here:hover {
+    color: rgb(228, 178, 132);
+}
