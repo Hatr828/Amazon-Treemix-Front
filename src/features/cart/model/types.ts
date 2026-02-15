@@ -5,4 +5,5 @@ export type CartItem = {
   price: number,
   title: string,
   image: string,
+  is_in_stock: boolean,
 }
