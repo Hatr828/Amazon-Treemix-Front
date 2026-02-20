@@ -4,6 +4,69 @@ import "./CatalogProduct.css"
 import "../HomePage/HomePage.css"
 import { useState } from "react";
 
+// Категории
+type FilterSection =
+  | {
+      title: string;
+      type: "links";
+      items: string[];
+    }
+  | {
+      title: string;
+      type: "checkbox";
+      items: string[];
+    }
+  | {
+      title: string;
+      type: "rating";
+    }
+  | {
+      title: string;
+      type: "price";
+      min: number;
+      max: number;
+};
+
+const filters: FilterSection[] = [
+  {
+    title: "Department",
+    type: "links",
+    items: [
+      "Computers",
+      "Computer Accessories & Peripherals",
+      "Computer Components",
+      "Computers & Tablets",
+      "Data Storage",
+      "Laptop Accessories",
+    ],
+  },
+  {
+    title: "Climate Pledge Friendly",
+    type: "checkbox",
+    items: ["Climate Pledge Friendly"],
+  },
+  {
+    title: "Amazon Certified",
+    type: "checkbox",
+    items: ["Auto Replenishment", "Works with Alexa"],
+  },
+  {
+    title: "Featured Brands",
+    type: "checkbox",
+    items: ["TAKAGI", "HP", "Seagate", "Roku", "Apple"],
+  },
+  {
+    title: "Avg. Customer Review",
+    type: "rating",
+  },
+  {
+    title: "Price",
+    type: "price",
+    min: 0,
+    max: 59999,
+  },
+];
+
 // пример будущего массива идущего с БД
 const products = [
   { img: "/example1-product.png", name: "Tablet Xiaomi Mi Pad 5 6/256Gb" },
@@ -17,6 +80,22 @@ const products = [
 ]; 
 
 export function CatalogProduct() {
+
+    // Для вкладок
+    const [selectedRating, setSelectedRating] = useState<number | null>(null);
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(59999);
+    
+    // Открытие/закрытие вкладки
+    const [openSections, setOpenSections] = useState<number[]>([]);
+
+    const toggleSection = (index: number) => {
+        setOpenSections(prev =>
+            prev.includes(index)
+            ? prev.filter(i => i !== index)
+            : [...prev, index]
+        );
+    };
 
     // Логика карусели
     const [startIndex, setStartIndex] = useState(0);
@@ -41,12 +120,95 @@ export function CatalogProduct() {
         );
     }
 
+    //Пагинация
+    const itemsPerPage = 20;
+    const totalItems = 99;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const changePage = (page: number) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    const visiblePages = 3;
+
+    let startPage = Math.max(currentPage - 1, 1);
+    let endPage = startPage + visiblePages - 1;
+
+    if (endPage > totalPages) {
+        endPage = totalPages;
+        startPage = Math.max(endPage - visiblePages + 1, 1);
+    }
+
+    ///
+
     return(
         <div>
             <div className="div-categoryProd-block">
+                {/* Левая часть */}
                 <div className="left-part-categoryProd">
-                    <hr className="hr-leftpart-Prod"></hr>
-                    Department
+                    {filters.map((section, index) => (
+                        <div key={index}>
+                            <hr className="hr-leftpart-Prod" /> 
+                            <div className="div-category-name">
+                                {section.title}
+                                <i className={`bi ${ openSections.includes(index) ? "bi-chevron-up" : "bi-chevron-down"} chevDowm`}  
+                                onClick={() => toggleSection(index)}></i>
+                            </div>
+                            {openSections.includes(index) && (
+                                <>
+                                    {/* LINKS */}
+                                    {section.type === "links" && section.items.map((item, i) => (
+                                        <div key={i} className="text-category-name">
+                                            {item}
+                                        </div>
+                                    ))}
+
+                                    {/* CHECKBOX */}
+                                    {section.type === "checkbox" && section.items.map((item, i) => (
+                                        <label key={i} className="text-check-category-name">
+                                            <input type="checkbox" className="chBox"/>
+                                            {item}
+                                        </label>
+                                    ))}
+
+                                    {/* RATING */}
+                                    {section.type === "rating" && (
+
+                                        <div className="text-check-category-name">
+                                            <RatingStarsChoice selectedRating={selectedRating} onSelect={(value) =>
+                                                setSelectedRating(selectedRating === value ? null : value)} />
+                                            & Up
+                                        </div>
+                                        
+                                    )}
+
+                                    {/* PRICE */}
+                                    {section.type === "price" && (
+                                    <div className="price-filter">
+                                        <div className="price-inputs">
+                                            <input type="number" value={minPrice} onChange={(e) => setMinPrice(Number(e.target.value))}/>
+                                                <span style={{fontSize: "1vw"}}>-</span>
+                                            <input type="number" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))}/>
+                                            <button className="price-btn">GO</button>
+                                        </div>
+                                        <div className="slider">
+                                            <div className="slider-track" style={{ left: `${(minPrice / section.max) * 100}%`,
+                                                right: `${100 - (maxPrice / section.max) * 100}%`,}}/>
+                                            <input type="range" min={section.min} max={section.max} value={minPrice} onChange={(e) =>
+                                                setMinPrice(Math.min(Number(e.target.value), maxPrice - 1))} className="thumb"/>
+                                            <input type="range" min={section.min} max={section.max} value={maxPrice} onChange={(e) =>
+                                                setMaxPrice(Math.max(Number(e.target.value), minPrice + 1))} className="thumb"/>
+                                        </div>
+                                    </div>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    ))}
+                    <hr className="hr-leftpart-Prod" />
                 </div>
                 {/* Правая часть*/}
                 <div className="right-part-categoryProd">
@@ -54,12 +216,16 @@ export function CatalogProduct() {
                     <div className="right-part-description-categoryProd">
                         Shop art supplies including painting, drawing, crafting, scrapbooking, fabric and jewelry making
                     </div>
-                    <div>
-                        26 <span style={{ fontSize: "0.938vw" }}>Item selected</span>
+                    <div className="div-item-sortBy">
+                        <div>
+                            26 <span style={{ fontSize: "0.938vw" }}>Item selected</span>
+                        </div>
+                        <SortBy />
                     </div>
                     {/* Списки товаров */}
                     <div className="div-for-blocks-Product">
-                        {[...Array(20)].map((_, index) => (
+                        {[...Array(totalItems)].slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                        .map((_, index) => (         
                             <div key={index} className="block-Product-categoryProd">
                                 <div className="div-for-sale-favourite">
                                     <div className="sale-icon">SALE</div>
@@ -88,7 +254,30 @@ export function CatalogProduct() {
                     </div>
                     {/* Кнопочки стр */}
                     <div className="div-for-page-history">
+                        <button className="page-btn" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>
+                            <i className="bi bi-chevron-left"></i>
+                        </button>
+                        {Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map((page) => (
+                            <button key={page} className={`page-btn ${currentPage === page ? "active" : ""}`}
+                            onClick={() => changePage(page)}>
+                                {page}
+                            </button>
+                        ))}
+                        {endPage < totalPages && (
+                            <>
+                            <button className="page-btn dots" disabled>
+                                ...
+                            </button>
 
+                            <button className="page-btn" onClick={() => changePage(totalPages)}>
+                                {totalPages}
+                            </button>
+                            </>
+                        )}
+                        <button className="page-btn" disabled={currentPage === totalPages}
+                        onClick={() => changePage(currentPage + 1)}>
+                            <i className="bi bi-chevron-right"></i>
+                        </button>
                     </div>
                     <div className="div-for-help">
                         NEED HELP?
@@ -97,7 +286,7 @@ export function CatalogProduct() {
                         </div>
                     </div>
                 </div>
-                {/* Низ */}
+            {/* Низ */}
             </div>
             <div style={{display: "flex", width: "100%", justifyContent:"center", marginTop: "10vw"}}>
                 <div className="div-list-categoryProd">
@@ -106,7 +295,7 @@ export function CatalogProduct() {
                         <div className="text-more">More →</div>
                     </div>
                     <div className="list-product">
-                        <i className="bi bi-chevron-left" onClick={prevSlide}></i>
+                        <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
                         {visibleItems.map((product, index) => (
                             <div className="icon-list-product" key={index}>
                                 <div className="icon-for-list-product-photo">
@@ -120,7 +309,7 @@ export function CatalogProduct() {
                                 </div>
                             </div>
                             ))}
-                        <i className="bi bi-chevron-right" onClick={nextSlide}></i>
+                        <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
                     </div>
                 </div>
             </div>
@@ -166,6 +355,67 @@ function RatingStars({
                             </svg>
                         </div>
                     </div>
+                );
+            })}
+        </div>
+    );
+}
+
+function SortBy() {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("Featured");
+
+  const options = [
+    "Featured",
+    "Price: Low to High",
+    "Price: High to Low",
+    "Avg. Customer Review",
+    "Newest Arrivals",
+  ];
+
+  const handleSelect = (option: string) => {
+    setSelected(option);
+    setOpen(false);
+  };
+
+  return (
+    <div className="sort-container">
+      <button className="sort-button" onClick={() => setOpen(!open)}>
+        <span className="sort-label">Sort by:</span>
+        <span className="sort-selected">{selected}</span>
+        <span className="sort-arrow">▾</span>
+      </button>
+      {open && (
+        <div className="sort-menu">
+          {options.map((option, index) => (
+            <div key={index} className={`sort-item ${
+                selected === option ? "active" : "" 
+                }`} onClick={() => handleSelect(option)}>
+              {option}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function RatingStarsChoice({
+    selectedRating,
+    onSelect,
+    }: {
+        selectedRating: number | null;
+        onSelect: (value: number) => void;
+    }) {
+    return (
+        <div style={{ display: "flex", cursor: "pointer", gap: "0.25vw"}}>
+            {[1, 2, 3, 4, 5].map((star) => {
+                const active = selectedRating !== null && star <= selectedRating;
+                return (
+                    <span key={star} onClick={() => onSelect(star)}
+                    style={{ color: active ? "#f5a623" : "#ccc",fontSize: "1.542vw",}}>
+                        ★
+                    </span>
                 );
             })}
         </div>

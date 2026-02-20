@@ -444,8 +444,8 @@
     letter-spacing: 0%;
 }
 
-.bi-chevron-left,
-.bi-chevron-right {
+.chevLeft,
+.chevRight {
     color: rgba(210, 210, 210, 1);
     width: max-content;
     height: max-content;
@@ -599,7 +599,10 @@
 
 .left, 
 .right {
+    cursor: pointer;
+
     margin-top: 0;
+    font-size: 2vw;
 }
 
 .head-text-middle-block {
@@ -608,7 +611,6 @@
     font-size: 1.25vw;
     line-height: 120%;
     letter-spacing: 0%;
-
     margin: 1.5vw;
 }
 

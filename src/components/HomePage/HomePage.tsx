@@ -132,7 +132,7 @@ export function HomePage() {
                     <div className="text-more">More →</div>
                 </div>
                 <div className="list-product">
-                    <i className="bi bi-chevron-left" onClick={prevSlide}></i>
+                    <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
                     {visibleItems.map((product, index) => (
                         <div className="icon-list-product" key={index}>
                             <div className="icon-for-list-product-photo">
@@ -146,7 +146,7 @@ export function HomePage() {
                             </div>
                         </div>
                         ))}
-                    <i className="bi bi-chevron-right" onClick={nextSlide}></i>
+                    <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
                 </div>
             </div>
             {/*  */}
@@ -182,7 +182,7 @@ export function HomePage() {
                     Last viewed
                 </div>
                 <div className="list-product-product-viewed">
-                    <i className="bi bi-chevron-left" onClick={prevSlide}></i>
+                    <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
                     {visibleItems.map((product, index) => (
                         <div className="icon-list-product-viewed" key={index}>
                             <img src={product.img} className="list-product-photo-viewed" />
@@ -191,7 +191,7 @@ export function HomePage() {
                             </div>
                         </div>
                     ))}
-                    <i className="bi bi-chevron-right" onClick={nextSlide}></i>
+                    <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
                 </div>
             </div>
             {/*  */}
