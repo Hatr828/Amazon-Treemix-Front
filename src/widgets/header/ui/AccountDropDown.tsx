@@ -1,4 +1,6 @@
-﻿import React, { useState, useRef, useEffect } from "react";
+﻿"use client";
+
+import React, { useState, useRef, useEffect } from "react";
 import "@/widgets/header/css/header.css";
 import "@/widgets/header/css/dropdown.css";
 
