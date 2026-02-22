@@ -1,195 +1,183 @@
-﻿
-
-.dropdownWrapper {
-    z-index: 10;
+﻿.dropdownWrapper {
+  z-index: 10;
 }
-
 
 .searchDropdownMenu {
-    position: absolute;
-    top: calc(100% + 15px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 250px;
-    background: #F8F8F8;
-    border-radius: 18px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-    padding: 20px 0;
-    z-index: 999;
-    animation: slideInDown 0.25s ease-out;
-    transform-origin: top center;
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  background: #f8f8f8;
+  border-radius: 18px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 20px 0;
+  z-index: 999;
+  animation: slideInDown 0.25s ease-out;
+  transform-origin: top center;
 }
 
-
 .searchDropdownArrow {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid white;
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
 }
 
 .searchDropdownList {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .searchDropdownItem {
-    padding: 12px 20px;
-    color: #49516D;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: Roboto, sans-serif;
+  padding: 12px 20px;
+  color: #49516d;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: Roboto, sans-serif;
 }
 
 .searchDropdownItem:hover {
-    background: #EFEFEF;
-    box-shadow: 0px 2px 4px 0px #00000033;
-
+  background: #efefef;
+  box-shadow: 0px 2px 4px 0px #00000033;
 }
 
 @keyframes slideInDown {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-10px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0) scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
 }
-
 
 /*/////////////////////*/
 
-
-
 .accDropdownMenu {
-    position: absolute;
-    top: calc(100% + 15px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 450px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    padding: 25px;
-    animation: accShowUp 0.2s ease-out forwards;
-    backface-visibility: hidden;
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: 25px;
+  animation: accShowUp 0.2s ease-out forwards;
+  backface-visibility: hidden;
 }
-
 
 .accDropdownArrow {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid white;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
 }
 
-
 .accAuthSection {
-    text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
 }
 
 .accSigninBtn {
-    background: linear-gradient(144.29deg, #FFDB5A -0.18%, #FF825A 101.85%);
-    border: none;
-    padding: 10px 60px;
-    border-radius: 20px;
-    font-weight: bold;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(255, 182, 90, 0.3);
+  background: linear-gradient(144.29deg, #ffdb5a -0.18%, #ff825a 101.85%);
+  border: none;
+  padding: 10px 60px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 182, 90, 0.3);
 }
 
 .accNewCustomer {
-    margin-top: 10px;
-    color: #666;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 12px;
-    line-height: 1.2;
-    letter-spacing: 0;
+  margin-top: 10px;
+  color: #666;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0;
 }
 
 .accNewCustomer a {
-    color: #007185;
-    text-decoration: none;
+  color: #007185;
+  text-decoration: none;
 }
 
-
 .accColumns {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .accColumn {
-    flex: 1;
+  flex: 1;
 }
 
 .accColumn h3 {
-    font-weight: bold;
-    color: #828282;
-    margin-bottom: 12px;
-    font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #828282;
+  margin-bottom: 12px;
+  font-family: "Roboto", sans-serif;
 
-    font-style: normal;
-    font-size: 14px;
-    line-height: 1.2;
-    letter-spacing: 0;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0;
 }
 
 .accColumn ul {
-    list-style: none;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 12px;
-    line-height: 1.9;
-    letter-spacing: 0;
+  list-style: none;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.9;
+  letter-spacing: 0;
 }
 
 .accColumn li {
-    font-size: 13px;
-    color: #555;
-    padding: 3px 0;
-    cursor: pointer;
+  font-size: 13px;
+  color: #555;
+  padding: 3px 0;
+  cursor: pointer;
 }
 
 .accColumn li:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .accDivider {
-    width: 1px;
-    background-color: #eee;
-    margin: 0 20px;
+  width: 1px;
+  background-color: #eee;
+  margin: 0 20px;
 }
 
-
 @keyframes accShowUp {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }

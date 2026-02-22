@@ -102,6 +102,30 @@
   margin: 6px 0 8px;
 }
 
+.errorBox {
+  border-radius: 10px;
+  border: 1px solid rgba(183, 67, 67, 0.25);
+  background: rgba(183, 67, 67, 0.08);
+  padding: 8px 10px;
+  font-size: 11px;
+  color: rgba(120, 37, 37, 0.9);
+}
+
+.errorTitle {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.errorList {
+  margin: 6px 0 0;
+  padding-left: 16px;
+}
+
+.errorItem {
+  margin: 0;
+}
+
 .primaryBtn {
   height: 46px;
   border-radius: 10px;
