@@ -1,1 +1,3 @@
-// тут страница корзины 
+import {CartPage} from './ui/Cart'
+
+export default CartPage;

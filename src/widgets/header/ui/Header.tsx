@@ -1,13 +1,18 @@
-﻿// import { useHeader } from '../model/useHeader';
+﻿'use client'
 import '@/widgets/header/css/header.css'
 import {SearchDropdown} from "@/widgets/header/ui/SearchDropDown";
 import {AccountDropdown} from "@/widgets/header/ui/AccountDropDown";
 import Image from 'next/image';
+import { useCart } from "@/app/cart/misc/CartContext";
+import Link from "next/link";
 
 
 
 export function Header() {
-    // const {user, onLogout, menuItems} = useHeader();
+
+    const {items} = useCart();
+    const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0)
+
     return (
         <header>
             <div className='headerTopSection'>
@@ -60,7 +65,7 @@ export function Header() {
                         <span> & Orders</span>
                     </span>
                 </button>
-                <button className='cartButton'>
+                <Link href="/cart" className='cartButton'>
                     <div className="cart">
                         <Image
                           className="cart-icon"
@@ -69,9 +74,9 @@ export function Header() {
                           width='26'
                           height='23'
                         />
-                        <span className="cart-badge">2</span>
+                        <span className="cart-badge">{cartItemsCount}</span>
                     </div>
-                </button>
+                </Link>
             </div>
             <div className='headerBottomSection'>
                 <button className='buttonMore'>
@@ -85,7 +90,7 @@ export function Header() {
                 </button>
                 <div className='linksGroup'>
                     <a href="">
-                        <p>Today's Deals</p>
+                        <p>Today&#39;s Deals</p>
                     </a>
                     <a href="">
                         <p>Customer Service</p>

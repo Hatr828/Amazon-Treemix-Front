@@ -6,4 +6,6 @@ export type CartItem = {
   title: string,
   image: string,
   is_in_stock: boolean,
+  rating: number,
+  selected: boolean
 }
