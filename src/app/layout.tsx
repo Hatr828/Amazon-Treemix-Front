@@ -1,4 +1,6 @@
 import "./globals.css";
+import { CartProvider } from "@/app/cart/misc/CartContext";
+import { Header } from "@/widgets/header";
 
 export default function RootLayout({
   children,
@@ -7,6 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <head>
         {/* Bootstrap CSS */}
         <link
@@ -26,7 +29,16 @@ export default function RootLayout({
           defer
         ></script>
       </head>
-      <body>{children}</body>
+        
+    <CartProvider>
+      {/*TODO: rework for redux*/}
+
+      <body>
+        <Header/>
+        {children}
+      </body>
+
+    </CartProvider>
     </html>
   );
 }

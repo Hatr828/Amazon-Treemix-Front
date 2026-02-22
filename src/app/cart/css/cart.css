@@ -1,0 +1,220 @@
+.proceed_to_checkout {
+    background-color: #F8F8F8;
+    border-radius: 10px;
+    filter: drop-shadow(0 2px 4px #00000033);
+
+    display: flex;
+    flex-direction: column;
+    height: 10vw;
+    width: 20vw;
+}
+
+.cart_title1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+
+.items_counter {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: #828282;
+}
+
+.select_all_items {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+
+.proceed_to_checkout h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    line-height: 1.5;
+    letter-spacing: 0;
+
+    padding: 11px 0 12px 20px;
+}
+.proceed_to_checkout button {
+    background-color: #7C9BC0;
+    border-radius: 20px;
+    width: 275px;
+    height: 48px;
+    margin-top: auto;
+    margin-bottom: 28px;
+    border-color: #00000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 4px #00000033;
+    align-self: center;
+    justify-self: center;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0;
+    color: white;
+}
+
+.order_contains_a_gift {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0;
+}
+
+.order_contains_a_gift_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.items_selector_wrapper {
+    margin-bottom: 51px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 54vw;
+}
+
+.items_wrapper {
+    width: 54vw;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.cart_wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10vw;
+}
+
+.select_all_items_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.subtotal_recently_viewid_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.55vw;
+}
+
+
+.super_mega_wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 5vw;
+}
+.cart_subtotal_wrapper {
+    width: 54vw;
+}
+
+.recently_viewed {
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    filter: drop-shadow(0 2px 4px #00000033);
+    width: 20vw;
+    height: auto;
+    padding: 10px 12px 21px 20px;
+}
+
+.recently_viewed h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+    line-height: 150%;
+    letter-spacing: 0;
+}
+
+.recently_viewed_list {
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+}
+
+.sign_in_footer button {
+    background-color: #FFA95A;
+    border: none;
+    border-radius: 49px;
+    display: inline-block;
+    padding: 0;
+    width: 20vw;
+    height: 2.5vw;
+}
+
+.sign_in_footer {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: 0;
+    text-align: center;
+    color: #333333;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 46px 0;
+    gap: 10px;
+}
+
+.sign_in_footer_button_text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: 0;
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 4px #00000033;
+}
+.new_customer {
+    display: flex;
+    flex-direction: row;
+}
+
+.new_customer span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 130%;
+    letter-spacing: 0;
+    text-align: center;
+    color: #333333;
+}
+
+.new_customer a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 130%;
+    letter-spacing: 0;
+    text-align: center;
+    color: #FFA95A;
+}
