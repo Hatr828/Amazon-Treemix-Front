@@ -1,14 +1,12 @@
-'use client'
-import '@/app/cart/css/cart_item.css'
-import '@/app/cart/css/cart.css'
-import Image from 'next/image';
+"use client";
+import "@/app/cart/css/cart_item.css";
+import "@/app/cart/css/cart.css";
+import Image from "next/image";
 import { ItemCard } from "@/app/cart/lib/ItemCard";
 import { RecentlyViewedItemCard } from "@/app/cart/lib/RecentlyViewedItemCard";
 import { useCart } from "@/app/cart/misc/CartContext";
 
-
-export function CartPage () {
-
+export function CartPage() {
   const {
     items,
     addToCart,
@@ -17,16 +15,15 @@ export function CartPage () {
     toggleItem,
     cartCount,
     selectAll,
-    recentlyItems
+    recentlyItems,
   } = useCart();
 
-  const selectedQuantity = items.filter(item => item.selected).length;
+  const selectedQuantity = items.filter((item) => item.selected).length;
   const calcSubtotal = items.reduce(
-    (total, item) => item.selected ? total + item.price * item.quantity : total,
-    0
+    (total, item) => (item.selected ? total + item.price * item.quantity : total),
+    0,
   );
-  const isAllSelected = items.every(item => item.selected);
-
+  const isAllSelected = items.every((item) => item.selected);
 
   return (
     <div className="cart_wrapper">
@@ -63,7 +60,9 @@ export function CartPage () {
 
         <div className="subtotal_recently_viewid_wrapper">
           <div className="proceed_to_checkout">
-            <h2>Subtotal ({selectedQuantity} items): ${calcSubtotal}</h2>
+            <h2>
+              Subtotal ({selectedQuantity} items): ${calcSubtotal}
+            </h2>
 
             <div className="order_contains_a_gift_wrapper">
               <label
@@ -109,8 +108,13 @@ export function CartPage () {
 
       <div className="sign_in_footer">
         <span>See personalized recommendations</span>
-        <button><span className='sign_in_footer_button_text'>Sign in</span></button>
-        <div className="new_customer"><span>New Customer?</span><a href="">Start here.</a></div>
+        <button>
+          <span className="sign_in_footer_button_text">Sign in</span>
+        </button>
+        <div className="new_customer">
+          <span>New Customer?</span>
+          <a href="">Start here.</a>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,294 @@
+.account-page {
+  min-height: 100vh;
+  background: #f2f3f7;
+  padding: 32px clamp(24px, 9vw, 96px) 56px;
+  color: #2b2f3a;
+  font-family: Arial;
+  overflow-x: hidden;
+}
+
+.account-scale {
+  width: calc(100% / 1.2);
+  margin: 0 auto;
+  transform: scale(1.2);
+  transform-origin: top center;
+}
+
+.account-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  column-gap: 40px;
+  align-items: start;
+}
+
+.account-side {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.account-profile {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e5e7ee;
+  box-shadow: 0 1px 3px rgba(26, 31, 44, 0.08);
+}
+
+.account-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid #e3b54f;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.account-avatar img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.account-profile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 3px;
+}
+
+.account-profile-name {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.account-profile-email {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.15;
+  color: #6b7280;
+}
+
+.account-menu {
+  margin-top: 22px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 10px 10px 16px;
+  border: 1px solid #e5e7ee;
+  box-shadow: 0 1px 3px rgba(26, 31, 44, 0.08);
+}
+
+.account-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.account-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px;
+  font-size: 11px;
+  color: #3f4654;
+  font-weight: 500;
+  line-height: 1.15;
+  min-height: 30px;
+  cursor: default;
+}
+
+.account-menu-item span {
+  white-space: nowrap;
+}
+
+.account-menu-item.is-active {
+  background: transparent;
+  color: inherit;
+  font-weight: 500;
+}
+
+.account-menu-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.account-delete {
+  display: block;
+  margin: 22px auto 0;
+  width: 162px;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #7f9cc2;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(63, 84, 120, 0.24);
+}
+
+.account-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-title {
+  margin: 0;
+  font-size: 39px;
+  font-weight: 500;
+  line-height: 1.1;
+  color: #2b2f3a;
+}
+
+.account-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7ee;
+  box-shadow: 0 1px 3px rgba(26, 31, 44, 0.08);
+  padding: 18px 22px 20px;
+  min-height: 340px;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-row {
+  display: flex;
+  gap: 12px;
+}
+
+.account-field {
+  width: 100%;
+}
+
+.account-field-compact {
+  width: clamp(132px, 15vw, 170px);
+  flex: 0 0 auto;
+}
+
+.account-field label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.15;
+}
+
+.account-field input {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: #f4f5f7;
+  padding: 7px 9px;
+  font-size: 11px;
+  line-height: 1.15;
+  color: #2b2f3a;
+}
+
+.account-phone,
+.account-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #f4f5f7;
+  padding: 7px 9px;
+}
+
+.account-phone input,
+.account-date input {
+  border: none;
+  background: transparent;
+  padding: 0;
+  flex: 1;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.15;
+}
+
+.account-flag {
+  width: 16px;
+  height: 12px;
+  border-radius: 2px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.account-flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.account-code {
+  font-size: 11px;
+  color: #4b5563;
+  line-height: 1;
+}
+
+.account-field-date .account-date {
+  width: 96px;
+  padding-right: 6px;
+}
+
+.account-field-date .account-date input {
+  flex: 0 0 auto;
+  width: 62px;
+}
+
+.account-date-icon {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #ebeef5;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.account-date-icon img {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.account-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 26px;
+}
+
+.account-save {
+  border: none;
+  border-radius: 999px;
+  background: #7f9cc2;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 8px 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(63, 84, 120, 0.24);
+}

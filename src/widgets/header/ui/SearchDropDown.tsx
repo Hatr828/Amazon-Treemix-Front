@@ -31,10 +31,7 @@ export const SearchDropdown: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
@@ -58,11 +55,7 @@ export const SearchDropdown: React.FC = () => {
       ref={dropdownRef}
       style={{ position: "relative", display: "flex", height: "100%" }}
     >
-      <button
-        type="button"
-        className="searchFormButton"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <button type="button" className="searchFormButton" onClick={() => setIsOpen(!isOpen)}>
         All
       </button>
 
@@ -72,11 +65,7 @@ export const SearchDropdown: React.FC = () => {
 
           <ul className="searchDropdownList">
             {categories.map((cat, i) => (
-              <li
-                key={i}
-                className="searchDropdownItem"
-                onClick={() => handleCategoryClick(cat)}
-              >
+              <li key={i} className="searchDropdownItem" onClick={() => handleCategoryClick(cat)}>
                 {cat}
               </li>
             ))}

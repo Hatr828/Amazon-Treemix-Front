@@ -1,3 +1,3 @@
-import {CartPage} from './ui/Cart'
+import { CartPage } from "./ui/Cart";
 
 export default CartPage;
