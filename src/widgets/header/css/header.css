@@ -15,9 +15,10 @@
 .headerBottomSection {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   background-color: #9ea5b8;
-  padding: 0 5%;
+  padding: 0 2.5vw;
   height: 60px;
 }
 
@@ -73,7 +74,7 @@
   border: 2px solid rgba(0, 0, 0, 0);
   border-radius: 14px;
   background-color: rgba(255, 255, 255, 0.2);
-  margin-right: 10%;
+  cursor: pointer;
 }
 
 /*//////////////*/
@@ -85,12 +86,12 @@
   justify-content: center;
   height: 50px;
   width: 50px;
+  background: none;
 }
 
 .cart-icon {
   width: 60%;
   height: 60%;
-  background: #6b708b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,15 +123,15 @@
 .buttonMore {
   background: none;
   border: none;
-  margin-left: 10%;
 }
 
 .linksGroup {
   width: 100%;
+  padding: 0 15.5vw;
   display: flex;
-  margin: 0 50px;
-  padding: 0 5%;
   white-space: nowrap;
+  text-decoration: none;
+  justify-content: space-between;
 }
 
 .linksGroup * {
@@ -143,6 +144,7 @@
   line-height: 1.5;
   letter-spacing: 0;
   text-shadow: 0px 2px 4px 0px #00000033;
+  text-decoration: none;
 }
 
 .searchForm {
