@@ -32,7 +32,7 @@ export function ErrorPage() {
                         New Customer?
                         <div className="div-start-here">
                             Start here.
-                        </div>
+                        </div>ц
                     </div>
                 </div>
             </div>
