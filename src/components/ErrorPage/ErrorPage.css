@@ -1,0 +1,79 @@
+.div-for-ErrorPage {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.div-for-errorText {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(206, 203, 203);
+
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+    font-size: 15vw;
+    letter-spacing: 0%;
+    text-shadow: -0.208vw 0.208vw 0.312vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.div-for-down-errorText {
+    display: flex;
+    position: relative;
+
+    font-weight: 400;
+    font-size: 3.125vw;
+    letter-spacing: 0%;
+    text-shadow: -0.208vw 0.208vw 0.312vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.div-buttons-errorPage {
+    display: flex;
+    position: relative;
+    justify-content: center;
+
+    margin: 5vw 0;
+    gap: 1vw;
+}
+
+.button-homePage {
+    outline: none;
+    background: white;
+    border: 0.208vw solid rgba(255, 130, 90, 1);
+    color: rgba(255, 130, 90, 1);
+
+    width: 23.698vw;
+    height: 3.49vw;
+    border-radius: 1.042vw;
+    font-weight: 500;
+    font-size: 1.875vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+.button-homePage:hover {
+    background-color: rgb(231, 225, 225);
+}
+
+.button-tryAgain {
+    border: none;
+    outline: none;
+    color: white;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 219, 90, 1) 0%,
+        rgba(255, 130, 90, 1) 100%
+    );
+
+    width: 23.698vw;
+    height: 3.49vw;
+    border-radius: 1.042vw;
+    font-weight: 500;
+    font-size: 1.875vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    text-align: center;
+}
