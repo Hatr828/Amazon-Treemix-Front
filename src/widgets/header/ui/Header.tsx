@@ -2,9 +2,11 @@
 import "@/widgets/header/css/header.css";
 import { SearchDropdown } from "@/widgets/header/ui/SearchDropDown";
 import { AccountDropdown } from "@/widgets/header/ui/AccountDropDown";
+import { useRouter } from "next/navigation";
 
 export function Header() {
   // const {user, onLogout, menuItems} = useHeader();
+  const router = useRouter();
   return (
     <header>
       <div className="headerTopSection">
@@ -261,7 +263,7 @@ export function Header() {
           <a href="">
             <p>Today's Deals</p>
           </a>
-          <a href="">
+          <a onClick={() => router.push("/customService")} style={{cursor: "pointer"}}>
             <p>Customer Service</p>
           </a>
           <a href="">

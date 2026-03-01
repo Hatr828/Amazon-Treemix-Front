@@ -1,0 +1,23 @@
+.div-dear-text {
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.302vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+}
+
+.div-description-text {
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 1.042vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    margin-top: 2vw;
+}
+
+.div-for-icon-service {
+    display: flex;
+    position: relative;
+    
+    width: 54.427vw;
+}
