@@ -74,7 +74,7 @@ export function Header() {
                           width='26'
                           height='23'
                         />
-                        <span className="cart-badge">{cartItemsCount}</span>
+                        <span className="cart-badge">{cartItemsCount > 99 ? "99+" : cartItemsCount}</span>
                     </div>
                 </Link>
             </div>

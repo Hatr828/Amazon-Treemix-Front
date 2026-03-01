@@ -146,12 +146,13 @@
 }
 
 .recently_viewed_list {
-    padding-top: 24px;
+    padding: 24px 0 0 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
     list-style: none;
 }
+
 
 .sign_in_footer button {
     background-color: #FFA95A;

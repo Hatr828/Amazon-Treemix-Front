@@ -97,16 +97,20 @@
     justify-content: center;
 }
 .cart-badge {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background: linear-gradient(144.29deg, #ffdb5a -0.18%, #ff825a 101.85%);
-  color: white;
-  font-weight: bold;
-  border-radius: 50%;
-  padding: 4px 7px;
-  font-size: 14px;
-  box-shadow: -4px 4px 6px 0px #0000001a inset;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -15px;
+    right: -15px;
+    background: linear-gradient(144.29deg, #ffdb5a -0.18%, #ff825a 101.85%);
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    box-shadow: -4px 4px 6px 0px #0000001a inset;
 }
 
 .cart-badge * {
@@ -145,6 +149,7 @@
     letter-spacing: 0;
     text-shadow: 0px 2px 4px 0px #00000033;
     text-decoration: none;
+    margin: 0;
 }
 
 .searchForm {

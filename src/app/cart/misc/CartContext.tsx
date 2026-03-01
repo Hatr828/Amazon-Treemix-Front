@@ -1,6 +1,6 @@
 "use client"
 import { createContext, useContext, useState, ReactNode } from "react";
-import { CartItem } from "@/app/cart/misc/types";
+import {CartItem, CartItemAddition} from "@/app/cart/misc/types";
 
 type CartContextType = {
   items: CartItem[];
@@ -14,6 +14,7 @@ type CartContextType = {
   isAllSelected: boolean;
   cartCount: number;
   recentlyItems: CartItem[];
+  toggleItemAddition: (itemId: string, additionId: string) => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -77,6 +78,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       is_in_stock: true,
       rating: 4,
       selected: false,
+      additions: [
+          {id: '1', name: 'Installing licensed Windows', price: 20},
+          {id: '2', name: 'Antivirus ESET Internet Security (2 PCs) license for 1 year Basic', price: 20}
+      ],
     },
     {
       id: '2',
@@ -139,6 +144,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
+
+  const toggleItemAddition = (itemId: string, additionId: string) => {
+    setItems(prev =>
+        prev.map(item => {
+          if (item.id !== itemId) return item;
+
+          return {
+            ...item,
+            additions: item.additions?.map(addition =>
+                addition.id === additionId
+                    ? { ...addition, checked: !addition.checked }
+                    : addition
+            )
+          };
+        })
+    );
+  };
+
   const selectAll = () => {
     setItems(prev => {
       const allSelected = prev.every(item => item.selected);
@@ -173,13 +196,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     0
   );
 
-  const calcSubtotal = items.reduce(
-    (total, item) =>
-      item.selected
-        ? total + item.price * item.quantity
-        : total,
-    0
-  );
+  const calcSubtotal = items.reduce((total, item) => {
+    if (!item.selected) return total;
+
+    const additionsTotal =
+        item.additions?.reduce((sum, addition) =>
+                addition.checked ? sum + addition.price : sum
+            , 0) || 0;
+
+    return total + (item.price + additionsTotal) * item.quantity;
+  }, 0);
 
   const selectedQuantity = items.filter(item => item.selected).length;
 
@@ -203,6 +229,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         isAllSelected,
         cartCount,
         recentlyItems,
+        toggleItemAddition,
       }}
     >
       {children}

@@ -4,17 +4,29 @@
     filter: drop-shadow(0 2px 4px #00000033);
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     padding: 14px 28px;
-    aspect-ratio: 1047 / 212;
     width: 54vw;
+
+
+    min-height: 212px;
+    align-items: stretch;
 }
 
-.title_addition_container {
+.delete_button {
+    display: flex;
+    height: calc(1.5em * 2);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.card_content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
+    width: 100%;
 }
+
 .delete_price_container {
     display: inline-flex;
     align-items: flex-end;
@@ -28,17 +40,20 @@
     align-items: flex-start;
 }
 
-.additions_container {
-
+.addition_price {
+    justify-self: flex-end;
 }
+
 .quantity_container {
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     gap: 15px;
     padding-right: 3vw;
+    margin-left: auto;
+    height: 100%;
 }
 .quantity_container span {
     font-family: 'Roboto', sans-serif;
@@ -67,17 +82,12 @@
     letter-spacing: 0;
 }
 .product_title {
+    display: block;
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-style: normal;
     font-size: 18px;
     line-height: 1.5;
-    letter-spacing: 0;
-}
-.delete_button {
-    background: none;
-    border: none;
-    cursor: pointer;
+    max-height: 1.5em;
+    overflow-wrap: break-word;
 }
 .price {
     display: inline-flex;
@@ -111,11 +121,11 @@
     background: none;
     border: none;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     flex-direction: row;
     gap: 18px;
     cursor: pointer;
-
+    height: 100%;
 }
 
 .additions_list {
@@ -127,15 +137,16 @@
     letter-spacing: 0;
     list-style: none;
 
-    margin-top: 45px;
-    
+    margin-top: 16px;
+
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .additions_list li {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
     align-items: center;
 }
 
@@ -151,7 +162,7 @@
     display: inline-flex;
     align-items: flex-start;
     padding: 0;
-    gap: 4px;
+
 
     position: relative;
     color: #888;
@@ -203,7 +214,7 @@
     cursor: pointer;
     width: 18px;
     height: 18px;
-    margin-right: 20px;
+    margin-right: 1vw;
 }
 
 .checkbox_icons {
@@ -246,6 +257,7 @@
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 0;
+    text-decoration-line: none;
 
     color: #49516D;
 }
@@ -253,6 +265,7 @@
 .is_a_gift {
     display: flex;
     align-items: center;
+    padding-top: 16px;
 
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
@@ -263,22 +276,27 @@
 }
 
 .image_wrapper {
-    height: 10vw;
-    width: auto;
+    flex-shrink: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
+    width: 10.42vw;
+    padding-right: 2.08vw;
 }
 
 .image_wrapper img {
-    height: 100%;
-    width: auto;
+
+    width: 100%;
+    height: auto;
     object-fit: contain;
     display: block;
+    margin-right: 0;
 }
 
 .title_delete_container {
     display: flex;
     justify-content: space-between;
-    flex-grow: 1;
+    flex-direction: row;
+    padding-bottom: 1.5em;
 }

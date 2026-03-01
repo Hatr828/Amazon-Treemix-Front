@@ -17,14 +17,12 @@ export function CartPage () {
     toggleItem,
     cartCount,
     selectAll,
-    recentlyItems
+    recentlyItems,
+    calcSubtotal,
   } = useCart();
 
   const selectedQuantity = items.filter(item => item.selected).length;
-  const calcSubtotal = items.reduce(
-    (total, item) => item.selected ? total + item.price * item.quantity : total,
-    0
-  );
+
   const isAllSelected = items.every(item => item.selected);
 
 
