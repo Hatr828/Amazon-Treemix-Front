@@ -1,0 +1,160 @@
+/* DELIVERY */
+
+.text-looking-div {
+    display: "flex";
+    text-align: center;
+
+    font-size: 0.938vw; 
+    font-Weight: 400; 
+    width: 41.569vw;
+    margin-top: 1vw;
+}
+
+.div-visit-contact {
+    cursor: pointer;
+    color: rgb(121, 160, 197);
+
+    font-weight: 500;
+    font-size: 0.938vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+}
+
+.div-visit-contact:hover {
+    color: rgb(134, 176, 214);
+}
+
+.div-for-icon-text-i {
+    display: flex;
+    position: relative;
+
+    font-weight: 500;
+    font-size: 1.302vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    gap: 2vw;
+    margin-left: 16.5vw;
+    margin-top: 2vw;
+}
+
+.div-for-icon-i {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
+    width: 3.125vw;
+    height: 3.125vw;
+    border-radius: 0.521vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.icon-in-pages {
+    color: rgba(126, 140, 189, 1);
+    font-size: 1.85vw;
+}
+
+.div-for-search-text {
+    display: flex;
+    align-items: center;
+
+    
+    font-weight: 500;
+    font-size: 1.042vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    margin-left: 21.5vw;
+    margin-top: 4vw;
+    gap: 2vw;
+}
+
+.input-delivery {
+    border: none;
+    outline: none;
+
+    font-size: 0.9vw;
+    padding: 1vw;
+    width: 18.75vw;
+    height: 2.188vw;
+    border-radius: 1.302vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.searchIconnn {
+    position: absolute;
+    cursor: pointer;
+    width: auto;
+    
+    right: 0.75vw;
+    top: 55%;
+    transform: translateY(-50%);
+    height: 1.1vw;
+}
+
+/* INTERNATIONAL */
+
+.div-for-pick {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 2vw;
+    padding: 1.60vw;
+    border-radius: 1.042vw;
+    width: 59.01vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    font-size: 1.146vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+}
+
+.div-pick {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    font-weight: 500;
+    font-size: 0.938vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+    width: 100%;
+    height: 3.229vw;
+    border-radius: 1.042vw;
+    padding-left: 1vw;
+    padding-right: 2vw;
+    box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+}
+
+.div-pick:hover {
+    background: linear-gradient(
+        90deg,
+        rgba(126, 140, 189, 1) 0%,
+        rgba(206, 154, 215, 1) 100%
+    );
+    color: white;
+}
+
+.text-description-service {
+    font-weight: 400;
+    font-size: 0.938vw;
+    line-height: 130%;
+    letter-spacing: 0%;
+}
+
+.need-help-button {
+    border: none;
+    outline: none;
+    background-color: rgba(124, 155, 192, 1);
+    color: white;
+
+    width: 12.5vw;
+    height: 2.5vw;
+    margin-top: 4vw;
+    border-radius: 1.042vw;
+    font-weight: 500;
+    font-size: 1.042vw;
+    line-height: 120%;
+    letter-spacing: 0%;
+    text-shadow: 0px 0.208vw 0.208vw rgba(0, 0, 0, 0.25);
+}

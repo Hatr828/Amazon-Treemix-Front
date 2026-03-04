@@ -1,17 +1,18 @@
-﻿'use client'
+'use client'
 import '@/widgets/header/css/header.css'
 import {SearchDropdown} from "@/widgets/header/ui/SearchDropDown";
 import {AccountDropdown} from "@/widgets/header/ui/AccountDropDown";
 import Image from 'next/image';
 import { useCart } from "@/app/cart/misc/CartContext";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
 
 
 export function Header() {
 
     const {items} = useCart();
     const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0)
+    const router = useRouter();
 
     return (
         <header>
@@ -92,7 +93,7 @@ export function Header() {
                     <a href="">
                         <p>Today&#39;s Deals</p>
                     </a>
-                    <a href="">
+                    <a onClick={() => router.push("/customService")} style={{cursor: "pointer"}}>
                         <p>Customer Service</p>
                     </a>
                     <a href="">
