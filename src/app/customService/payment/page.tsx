@@ -5,20 +5,20 @@ import "../../../components/HomePage/HomePage.css"
 import Footer from "@/components/Footer/Footer"
 import { Header } from "@/widgets/header"
 import SupportTree from "../SupportTree"
-import { internationalTree } from "../data"
+import { paymentTree } from "../data"
 
-export default function international() {
+export default function payment() {
     return (
         <div>
             <Header />
             <div className="div-for-icon-text-i">
                 <div className="div-for-icon-i">
-                    <i className="bi bi-globe icon-in-pages"></i>
+                    <i className="bi bi-credit-card icon-in-pages"></i>
                 </div>
-                International shopping
+                Payment
             </div>
             <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                <SupportTree tree={internationalTree} />
+                <SupportTree tree={paymentTree} />
             </div>
             <div style={{display:"flex", justifyContent:"center"}}>
                 <div className="div-recommendations">

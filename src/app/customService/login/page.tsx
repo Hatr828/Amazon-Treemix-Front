@@ -5,20 +5,20 @@ import "../../../components/HomePage/HomePage.css"
 import Footer from "@/components/Footer/Footer"
 import { Header } from "@/widgets/header"
 import SupportTree from "../SupportTree"
-import { internationalTree } from "../data"
+import { loginTree } from "../data"
 
-export default function international() {
+export default function login() {
     return (
         <div>
             <Header />
             <div className="div-for-icon-text-i">
                 <div className="div-for-icon-i">
-                    <i className="bi bi-globe icon-in-pages"></i>
+                    <i className="bi bi-person icon icon-in-pages"></i>
                 </div>
-                International shopping
+                Login, address
             </div>
             <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                <SupportTree tree={internationalTree} />
+                <SupportTree tree={loginTree} />
             </div>
             <div style={{display:"flex", justifyContent:"center"}}>
                 <div className="div-recommendations">
