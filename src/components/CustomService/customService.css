@@ -82,3 +82,32 @@
     transform: translateY(-50%);
     height: 1.25vw;
 }
+
+.search-results{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0.4vw;
+    margin-top: 0.3vw;
+    padding: 0.3vw 0;
+    box-shadow: 0 0.313vw 1.042vw rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.search-item{
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+.search-item:hover{
+    background: linear-gradient(
+        90deg,
+        rgba(126, 140, 189, 1) 0%,
+        rgba(206, 154, 215, 1) 100%
+    );
+    color: white;
+}

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import "./customService.css"
-import "../HomePage/HomePage.css"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import "./customService.css";
+import "../HomePage/HomePage.css";
 
 import {
     internationalTree,
@@ -12,52 +13,61 @@ import {
     securityTree,
     giftTree,
     SupportNode
-} from "@/app/customService/data"
+} from "@/app/customService/data";
 
-function searchTree(node: SupportNode, query: string): SupportNode[] {
-    let results: SupportNode[] = []
+type SearchResult = SupportNode & {
+    category: string;
+};
 
-    if (node.title.toLowerCase().includes(query.toLowerCase())) {
-        results.push(node)
+function searchTree(
+    node: SupportNode,
+    query: string,
+    category: string
+    ): SearchResult[] {
+        let results: SearchResult[] = [];
+
+        if (node.title.toLowerCase().includes(query.toLowerCase())) {
+            results.push({ ...node, category });
+        }
+
+        if (node.children) {
+            node.children.forEach((child) => {
+            results.push(...searchTree(child, query, category));
+        });
     }
-
-    if (node.children) {
-        node.children.forEach(child => {
-            results.push(...searchTree(child, query))
-        })
-    }
-
-    return results
+    return results;
 }
 
 
 export default function CustomService() {
 
-    const [search, setSearch] = useState("")
-    const [results, setResults] = useState<SupportNode[]>([])
+    const router = useRouter();
+
+    const [search, setSearch] = useState("");
+    const [results, setResults] = useState<SearchResult[]>([]);
 
     const allTrees = [
-        internationalTree,
-        paymentTree,
-        loginTree,
-        securityTree,
-        giftTree
-    ]
+        { tree: internationalTree, category: "international" },
+        { tree: paymentTree, category: "payment" },
+        { tree: loginTree, category: "login" },
+        { tree: securityTree, category: "security" },
+        { tree: giftTree, category: "gift" }
+    ];
 
     useEffect(() => {
         if (!search.trim()) {
-            setResults([])
-            return
+            setResults([]);
+            return;
         }
 
-        let found: SupportNode[] = []
+        let found: SearchResult[] = [];
 
-        allTrees.forEach(tree => {
-            found.push(...searchTree(tree, search))
-        })
+        allTrees.forEach(({ tree, category }) => {
+            found.push(...searchTree(tree, search, category));
+    });
 
-        setResults(found)
-    }, [search])
+    setResults(found);
+    }, [search]);
 
     const categories = [
         { id: "delivery", title: "A delivery, order or return", icon: "bi bi-cart icon" },
@@ -100,13 +110,13 @@ export default function CustomService() {
                         </svg>
                         {results.length > 0 && (
                             <div className="search-results">
-                                {results.map(item => (
+                                {results.slice(0,3).map(item => (
                                     <div key={item.id} className="search-item">
-                                        <div style={{ fontWeight: 600 }}>
+                                        <div style={{ fontWeight: 600 }} onClick={() => router.push(`/customService/${item.category}?node=${item.id}`)}>
                                             {item.title}
                                         </div>
                                         {item.answer && (
-                                            <div style={{ fontSize: "14px", opacity: 0.7 }}>
+                                            <div style={{ fontSize: "1vw", opacity: 0.7 }}>
                                                 {item.answer}
                                             </div>
                                         )}
