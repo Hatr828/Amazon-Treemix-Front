@@ -3,6 +3,7 @@
 import "./CatalogProduct.css";
 import "../HomePage/HomePage.css";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Категории
 type FilterSection =
@@ -67,6 +68,16 @@ const filters: FilterSection[] = [
   },
 ];
 
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .slice(0, 60);
+}
+
 // пример будущего массива идущего с БД
 const products = [
   { img: "/example1-product.png", name: "Tablet Xiaomi Mi Pad 5 6/256Gb" },
@@ -80,6 +91,26 @@ const products = [
 ];
 
 export function CatalogProduct() {
+
+  //query
+  const router = useRouter();
+  const [selectedDepartments, setSelectedDepartments] = useState<string[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
+  const applyFilters = () => {
+    const params = new URLSearchParams();
+
+    selectedDepartments.forEach((d) => params.append("department", slugify(d)));
+    selectedBrands.forEach((b) => params.append("brand", slugify(b)));
+
+    if (selectedRating) params.set("rating", selectedRating.toString());
+
+    params.set("minPrice", minPrice.toString());
+    params.set("maxPrice", maxPrice.toString());
+
+    router.push(`?${params.toString()}`);
+  };
+
   // Для вкладок
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [minPrice, setMinPrice] = useState(0);
@@ -147,17 +178,16 @@ export function CatalogProduct() {
               <hr className="hr-leftpart-Prod" />
               <div className="div-category-name">
                 {section.title}
-                <i
-                  className={`bi ${openSections.includes(index) ? "bi-chevron-up" : "bi-chevron-down"} chevDowm`}
-                  onClick={() => toggleSection(index)}
-                ></i>
+                <i className={`bi ${openSections.includes(index) ? "bi-chevron-up" : "bi-chevron-down"} chevDowm`}
+                  onClick={() => toggleSection(index)}/>
               </div>
               {openSections.includes(index) && (
                 <>
                   {/* LINKS */}
                   {section.type === "links" &&
                     section.items.map((item, i) => (
-                      <div key={i} className="text-category-name">
+                      <div key={i} className="text-category-name" onClick={() => {setSelectedDepartments((prev) =>
+                        prev.includes(item) ? prev.filter((d) => d !== item) : [...prev, item]);}}>
                         {item}
                       </div>
                     ))}
@@ -166,7 +196,8 @@ export function CatalogProduct() {
                   {section.type === "checkbox" &&
                     section.items.map((item, i) => (
                       <label key={i} className="text-check-category-name">
-                        <input type="checkbox" className="chBox" />
+                        <input type="checkbox" className="chBox" checked={selectedBrands.includes(item)}
+                          onChange={() => {setSelectedBrands((prev) => prev.includes(item) ? prev.filter((b) => b !== item) : [...prev, item]);}} />
                         {item}
                       </label>
                     ))}
@@ -174,12 +205,8 @@ export function CatalogProduct() {
                   {/* RATING */}
                   {section.type === "rating" && (
                     <div className="text-check-category-name">
-                      <RatingStarsChoice
-                        selectedRating={selectedRating}
-                        onSelect={(value) =>
-                          setSelectedRating(selectedRating === value ? null : value)
-                        }
-                      />
+                      <RatingStarsChoice selectedRating={selectedRating} onSelect={(value) =>
+                          setSelectedRating(selectedRating === value ? null : value)}/>
                       & Up
                     </div>
                   )}
@@ -188,47 +215,23 @@ export function CatalogProduct() {
                   {section.type === "price" && (
                     <div className="price-filter">
                       <div className="price-inputs">
-                        <input
-                          type="number"
-                          value={minPrice}
-                          onChange={(e) => setMinPrice(Number(e.target.value))}
-                        />
+                        <input type="number" value={minPrice} onChange={(e) => setMinPrice(Number(e.target.value))}/>
                         <span style={{ fontSize: "1vw" }}>-</span>
-                        <input
-                          type="number"
-                          value={maxPrice}
-                          onChange={(e) => setMaxPrice(Number(e.target.value))}
-                        />
-                        <button className="price-btn">GO</button>
+                        <input type="number" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))}/>
                       </div>
                       <div className="slider">
-                        <div
-                          className="slider-track"
-                          style={{
+                        <div className="slider-track" style={{
                             left: `${(minPrice / section.max) * 100}%`,
                             right: `${100 - (maxPrice / section.max) * 100}%`,
-                          }}
-                        />
-                        <input
-                          type="range"
-                          min={section.min}
-                          max={section.max}
-                          value={minPrice}
-                          onChange={(e) =>
+                          }}/>
+                        <input type="range" min={section.min} max={section.max} value={minPrice} onChange={(e) =>
                             setMinPrice(Math.min(Number(e.target.value), maxPrice - 1))
                           }
-                          className="thumb"
-                        />
-                        <input
-                          type="range"
-                          min={section.min}
-                          max={section.max}
-                          value={maxPrice}
-                          onChange={(e) =>
+                          className="thumb"/>
+                        <input type="range" min={section.min} max={section.max} value={maxPrice} onChange={(e) =>
                             setMaxPrice(Math.max(Number(e.target.value), minPrice + 1))
                           }
-                          className="thumb"
-                        />
+                          className="thumb"/>
                       </div>
                     </div>
                   )}
@@ -237,6 +240,7 @@ export function CatalogProduct() {
             </div>
           ))}
           <hr className="hr-leftpart-Prod" />
+          <button className="price-btn" onClick={applyFilters}>GO</button>
         </div>
         {/* Правая часть*/}
         <div className="right-part-categoryProd">
@@ -284,20 +288,12 @@ export function CatalogProduct() {
           </div>
           {/* Кнопочки стр */}
           <div className="div-for-page-history">
-            <button
-              className="page-btn"
-              disabled={currentPage === 1}
-              onClick={() => changePage(currentPage - 1)}
-            >
-              <i className="bi bi-chevron-left"></i>
+            <button className="page-btn" disabled={currentPage === 1} onClick={() => changePage(currentPage - 1)}>
+              <i className="bi bi-chevron-left" />
             </button>
             {Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map(
               (page) => (
-                <button
-                  key={page}
-                  className={`page-btn ${currentPage === page ? "active" : ""}`}
-                  onClick={() => changePage(page)}
-                >
+                <button key={page} className={`page-btn ${currentPage === page ? "active" : ""}`} onClick={() => changePage(page)}>
                   {page}
                 </button>
               ),
@@ -313,11 +309,7 @@ export function CatalogProduct() {
                 </button>
               </>
             )}
-            <button
-              className="page-btn"
-              disabled={currentPage === totalPages}
-              onClick={() => changePage(currentPage + 1)}
-            >
+            <button className="page-btn" disabled={currentPage === totalPages} onClick={() => changePage(currentPage + 1)}>
               <i className="bi bi-chevron-right"></i>
             </button>
           </div>
@@ -385,26 +377,11 @@ function RatingStars({
         return (
           <div key={index} style={{ position: "relative", width: size, height: size }}>
             {/* Пустая звезда */}
-            <svg
-              viewBox="0 0 24 24"
-              width={size}
-              height={size}
-              fill="none"
-              stroke="#FFA41C"
-              strokeWidth="1.5"
-            >
+            <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="#FFA41C" strokeWidth="1.5">
               <path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l7.1-1.01L12 2z" />
             </svg>
             {/* Закрашенная часть */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: `${fillPercent}%`,
-                overflow: "hidden",
-              }}
-            >
+            <div style={{ position: "absolute", top: 0, left: 0, width: `${fillPercent}%`, overflow: "hidden"}}>
               <svg viewBox="0 0 24 24" width={size} height={size} fill="#FFA41C">
                 <path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l7.1-1.01L12 2z" />
               </svg>
@@ -443,11 +420,7 @@ function SortBy() {
       {open && (
         <div className="sort-menu">
           {options.map((option, index) => (
-            <div
-              key={index}
-              className={`sort-item ${selected === option ? "active" : ""}`}
-              onClick={() => handleSelect(option)}
-            >
+            <div key={index} className={`sort-item ${selected === option ? "active" : ""}`} onClick={() => handleSelect(option)}>
               {option}
             </div>
           ))}
@@ -469,11 +442,7 @@ export function RatingStarsChoice({
       {[1, 2, 3, 4, 5].map((star) => {
         const active = selectedRating !== null && star <= selectedRating;
         return (
-          <span
-            key={star}
-            onClick={() => onSelect(star)}
-            style={{ color: active ? "#f5a623" : "#ccc", fontSize: "1.542vw" }}
-          >
+          <span key={star} onClick={() => onSelect(star)} style={{ color: active ? "#f5a623" : "#ccc", fontSize: "1.542vw" }}>
             ★
           </span>
         );
