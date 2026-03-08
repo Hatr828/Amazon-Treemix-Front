@@ -1,21 +1,38 @@
 ﻿export type ProductType = {
+  id: string;
+  title: string;
+  price: number;
+  rating: number;
+  ratings: number;
+  reviews?: Reviews[];
+  images: string[];
+  videoid: string;
+  platform: string;
+  storename: string;
+  description: string;
+  IsInStock: boolean;
+  about: string;
+  fromTheManufacturer?: ManufacturerContent;
+  videos?: {
+    id: string,
+    name: string
+    author: string,
+    video: string,
+    date: string,
+  }[];
+  productQuestions?: ProductQuestion[];
+  productSpecifications?: {
     id: string;
-    title: string;
-    price: number;
-    rating: number;
-    ratings: number;
-    reviews?: Reviews[];
-    images: string[];
-    videoid: string;
-    platform: string;
-    storename: string;
+    name: string;
     description: string;
-    IsInStock: boolean;
-    about: string;
-    fromTheManufacturer?: ManufacturerContent;
-    videos?: string[];
-    productQuestions?: ProductQuestion[];
-    productSpecifications?: string[];
+  }[];
+  documents: {
+    id: string,
+    name: string,
+    download_link: string,
+    extension: string,
+  }[],
+
 };
 
 export type ProductQuestion = {

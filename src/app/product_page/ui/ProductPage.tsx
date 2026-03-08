@@ -3,6 +3,7 @@ import Image from 'next/image';
 import {useState} from "react";
 import {MoreToConsiderItemCard} from "@/app/product_page/ui/MoreToConsiderItemCard";
 import {ManufacturerBlock} from "@/app/product_page/ui/ManufacturerBlock";
+import "@/app/product_page/css/product_page.css"
 
 export function CartPage () {
     const exampleProduct: ProductType = {
@@ -54,6 +55,73 @@ export function CartPage () {
     `
         },
         videos: ["", ""],
+        productSpecifications: [
+            {
+                id: "asin",
+                name: "ASIN",
+                description: "B074NBSF9N",
+            },
+            {
+                id: "release_date",
+                name: "Release date",
+                description: "September 25, 2017",
+            },
+            {
+                id: "customer_reviews",
+                name: "Customer Reviews",
+                description: "4.5 out of 5 stars, 9,600 ratings",
+            },
+            {
+                id: "best_sellers_rank",
+                name: "Best Sellers Rank",
+                description: "#633 in Video Games (See Top 100 in Video Games); #45 in PC Game Headsets",
+            },
+            {
+                id: "pricing",
+                name: "Pricing",
+                description: "The strikethrough price is the List Price. Savings represents a discount off the List Price.",
+            },
+            {
+                id: "product_dimensions",
+                name: "Product Dimensions",
+                description: "9.2 x 8.25 x 4.65 inches; 12 Ounces",
+            },
+            {
+                id: "binding",
+                name: "Binding",
+                description: "Personal Computers",
+            },
+            {
+                id: "item_model_number",
+                name: "Item model number",
+                description: "HX-HSCA-RD/AM",
+            },
+            {
+                id: "is_discontinued",
+                name: "Is Discontinued By Manufacturer",
+                description: "No",
+            },
+            {
+                id: "item_weight",
+                name: "Item Weight",
+                description: "12 ounces",
+            },
+            {
+                id: "manufacturer",
+                name: "Manufacturer",
+                description: "Kingston Technology Company, Inc.",
+            },
+            {
+                id: "country_of_origin",
+                name: "Country of Origin",
+                description: "China",
+            },
+            {
+                id: "date_first_available",
+                name: "Date First Available",
+                description: "August 22, 2017",
+            },
+        ],
         productQuestions: [
             {
                 id: "q1",
@@ -78,6 +146,7 @@ export function CartPage () {
             }
         ]
     };
+
 
     const exampleMoreToConsiderItem: MoreToConsiderItem = {
         id: "hyperx-cloud-orbit-s-black",
@@ -106,10 +175,9 @@ export function CartPage () {
     return(
     <div>
         <div className="image_title_buy_container">
-            {/*TODO: сделать через мап*/}
             <div className="images_container">
                 {exampleProduct.images.map((image, index) => (
-                    <div className="selected_image_wrapper">
+                    <div key={"image-" + index} className="selected_image_wrapper">
                         <div className="image_container">
                             <Image src={image} alt={`Image ${index + 1}`} width={75} height={75}/>
                         </div>
@@ -217,6 +285,43 @@ export function CartPage () {
         <h3>Product Description</h3>
         <p>{exampleProduct.description}</p>
 
+
+        <div className="Specs_warranty_container"></div>
+
+        <h3>Product Description</h3>
+        <table>
+            <tbody>
+                {exampleProduct.productSpecifications?.map((item, index) => (
+                    <tr key={"productSpecifications" + item.id}>
+                        <td>{item.name}</td>
+                        <td>{item.description}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+
+        <h3>Warranty & Support</h3>
+        <p>Product Warranty: For warranty information about this product,<a href="#">please click here</a> (PDF).</p>
+
+        <h3>Feedback</h3>
+        <p>Would you like to <a href="#">tell us about a lower price?</a></p>
+
+        <h3>Product guides and documents</h3>
+        <table>
+            <tbody>
+            {exampleProduct.documents?.map((item, index) => (
+              <tr key={"productSpecifications" + item.id}>
+                  <td>{item.name}</td>
+                  <td><a href={item.download_link}>{item.extension}</a></td>
+              </tr>
+            ))}
+            </tbody>
+        </table>
+
+        <h3>Videos</h3>
+        <button><img src="./product_page/to_the_left.svg" alt=""/></button>
+        {exampleProduct.videos.map(())}
+        <button><img src="./product_page/to_the_right.svg" alt=""/></button>
     </div>
     )
 }
