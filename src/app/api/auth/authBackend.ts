@@ -1,6 +1,8 @@
 import { getEnv, getEnvNumber } from "@/infra/config/env";
 import { NextResponse } from "next/server";
 
+console.log("API BASE:", process.env.NEXT_PUBLIC_AMZN_API_BASE);
+
 const BASE_URL = getEnv("NEXT_PUBLIC_AMZN_API_BASE").trim();
 const TIMEOUT_MS = getEnvNumber("NEXT_PUBLIC_AMZN_API_TIMEOUT_MS");
 

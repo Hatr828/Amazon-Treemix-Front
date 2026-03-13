@@ -3,37 +3,39 @@
 import "./HomePage.css";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-// пример будущего массива идущего с БД
-const products = [
-  { img: "/example1-product.png", name: "Tablet Xiaomi Mi Pad 5 6/256Gb" },
-  { img: "/example2-product.png", name: "Tablet Samsung Galaxy Tab S8" },
-  { img: "/example3-product.png", name: "Tablet Apple iPad Air" },
-  { img: "/example1-product.png", name: "Tablet Lenovo Tab P11" },
-  { img: "/example2-product.png", name: "Tablet Huawei MatePad" },
-  { img: "/example3-product.png", name: "Tablet Microsoft Surface" },
-  { img: "/example3-product.png", name: "Tablet Microsoft Surface" },
-  { img: "/example3-product.png", name: "Tablet Microsoft Surface" },
-];
+import { HomeProductDto } from "@/infra/openapi/amzn.dto";
 
 export function HomePage() {
+
+  const [products, setProducts] = useState<HomeProductDto[]>([]);
+
+  useEffect(() => {
+    fetch("/api/home")
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data.products ?? []);
+      });
+  }, []);
+
   const [startIndex, setStartIndex] = useState(0);
 
   const visibleCount = 5;
 
   const nextSlide = () => {
+    if (products.length === 0) return;
     setStartIndex((prev) => (prev + 1) % products.length);
   };
 
   const prevSlide = () => {
+    if (products.length === 0) return;
     setStartIndex((prev) => (prev - 1 + products.length) % products.length);
   };
 
-  const visibleItems = [];
-
-  for (let i = 0; i < visibleCount; i++) {
-    visibleItems.push(products[(startIndex + i) % products.length]);
-  }
+  const visibleItems = products.length > 0
+    ? Array.from({ length: Math.min(visibleCount, products.length) }, (_, i) =>
+        products[(startIndex + i) % products.length]
+      )
+    : [];
 
   return (
     <div className="main-div-homePage">
@@ -122,15 +124,15 @@ export function HomePage() {
         </div>
         <div className="list-product">
           <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
-          {visibleItems.map((product, index) => (
-            <div className="icon-list-product" key={index}>
+          {visibleItems.map((product) => (
+            <div className="icon-list-product" key={product.id}>
               <div className="icon-for-list-product-photo">
-                <img src={product.img} className="list-product-photo" />
+                <img src={product.image?.url ?? "/example1-product.png"} className="list-product-photo" />
               </div>
               <div className="text-list-product">
-                {product.name}
+                {product.title}
                 <div className="list-cost-product">
-                  <span className="currency">$</span>530
+                  <span className="currency">$</span>{product.price.original}
                 </div>
               </div>
             </div>
@@ -168,10 +170,10 @@ export function HomePage() {
         <div className="head-text-more-list">Last viewed</div>
         <div className="list-product-product-viewed">
           <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
-          {visibleItems.map((product, index) => (
-            <div className="icon-list-product-viewed" key={index}>
-              <img src={product.img} className="list-product-photo-viewed" />
-              <div className="name-product-viewed">{product.name}</div>
+          {visibleItems.map((product) => (
+            <div className="icon-list-product-viewed" key={product.id}>
+              <img src={product.image?.url ?? "/example1-product.png"} className="list-product-photo-viewed" />
+              <div className="name-product-viewed">{product.title}</div>
             </div>
           ))}
           <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
@@ -246,15 +248,8 @@ const MainPhotoSlider = () => {
   return (
     <div className="main-photo-homePage">
       <AnimatePresence mode="wait">
-        <motion.img
-          key={images[index]}
-          src={images[index]}
-          className="main-photo-homePage"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        />
+        <motion.img key={images[index]} src={images[index]} className="main-photo-homePage"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}/>
       </AnimatePresence>
     </div>
   );
