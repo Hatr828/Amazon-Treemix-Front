@@ -19,21 +19,29 @@ export interface AuthResponseDto {
   user?: UserResponseDto;
 }
 
-export interface HomeProductDto {
+export interface BrandDto {
   /** @format uuid */
   id?: string;
-  /** @format double */
-  rating?: number;
-  price?: PriceDto;
-  image?: ImageDto;
+  name?: string | null;
+}
+
+export interface CategoryDto {
+  /** @format uuid */
+  id?: string;
   name?: string | null;
 }
 
 export interface HomeResponseDto {
-  products?: HomeProductDto[] | null;
+  products?: ProductCardDto[] | null;
 }
 
 export interface ImageDto {
+  url?: string | null;
+  /** @format int32 */
+  sortOrder?: number | null;
+}
+
+export interface ImageUrlDto {
   url?: string | null;
 }
 
@@ -64,6 +72,46 @@ export interface PriceDto {
   current?: number;
   /** @format double */
   original?: number;
+}
+
+export interface ProductCardDto {
+  /** @format uuid */
+  id?: string;
+  /** @format double */
+  rating?: number;
+  price?: PriceDto;
+  image?: ImageUrlDto;
+  title?: string | null;
+}
+
+export interface ProductCardDtoPagedResult {
+  items?: ProductCardDto[] | null;
+  /** @format int32 */
+  page?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalItems?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+export interface ProductDetailsDto {
+  /** @format uuid */
+  id?: string;
+  title?: string | null;
+  description?: string | null;
+  /** @format double */
+  rating?: number;
+  /** @format int32 */
+  ratingCount?: number;
+  price?: PriceDto;
+  primaryImage?: ImageUrlDto;
+  images?: ImageDto[] | null;
+  category?: CategoryDto;
+  brand?: BrandDto;
 }
 
 export interface RefreshRequestDto {
@@ -140,7 +188,10 @@ export interface FullRequestParams extends Omit<RequestInit, "body"> {
   cancelToken?: CancelToken;
 }
 
-export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<
+  FullRequestParams,
+  "body" | "method" | "query" | "path"
+>;
 
 export interface ApiConfig<SecurityDataType = unknown> {
   baseUrl?: string;
@@ -151,7 +202,8 @@ export interface ApiConfig<SecurityDataType = unknown> {
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown> extends Response {
+export interface HttpResponse<D extends unknown, E extends unknown = unknown>
+  extends Response {
   data: D;
   error: E;
 }
@@ -171,7 +223,8 @@ export class HttpClient<SecurityDataType = unknown> {
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
-  private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
+  private customFetch = (...fetchParams: Parameters<typeof fetch>) =>
+    fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
     credentials: "same-origin",
@@ -204,7 +257,9 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected toQueryString(rawQuery?: QueryParamsType): string {
     const query = rawQuery || {};
-    const keys = Object.keys(query).filter((key) => "undefined" !== typeof query[key]);
+    const keys = Object.keys(query).filter(
+      (key) => "undefined" !== typeof query[key],
+    );
     return keys
       .map((key) =>
         Array.isArray(query[key])
@@ -229,7 +284,9 @@ export class HttpClient<SecurityDataType = unknown> {
         ? JSON.stringify(input)
         : input,
     [ContentType.Text]: (input: any) =>
-      input !== null && typeof input !== "string" ? JSON.stringify(input) : input,
+      input !== null && typeof input !== "string"
+        ? JSON.stringify(input)
+        : input,
     [ContentType.FormData]: (input: any) => {
       if (input instanceof FormData) {
         return input;
@@ -251,7 +308,10 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(
+    params1: RequestParams,
+    params2?: RequestParams,
+  ): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -264,7 +324,9 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (
+    cancelToken: CancelToken,
+  ): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -314,10 +376,18 @@ export class HttpClient<SecurityDataType = unknown> {
         ...requestParams,
         headers: {
           ...(requestParams.headers || {}),
-          ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+          ...(type && type !== ContentType.FormData
+            ? { "Content-Type": type }
+            : {}),
         },
-        signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
-        body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
+        signal:
+          (cancelToken
+            ? this.createAbortSignal(cancelToken)
+            : requestParams.signal) || null,
+        body:
+          typeof body === "undefined" || body === null
+            ? null
+            : payloadFormatter(body),
       },
     ).then(async (response) => {
       const r = response as HttpResponse<T, E>;
@@ -355,8 +425,91 @@ export class HttpClient<SecurityDataType = unknown> {
  * @title AMZN API
  * @version Swag v1
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown,
+> extends HttpClient<SecurityDataType> {
   admin = {
+    /**
+     * No description
+     *
+     * @tags AdminBrands
+     * @name BrandsList
+     * @request GET:/Admin/Brands
+     * @secure
+     */
+    brandsList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/Admin/Brands`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdminBrands
+     * @name BrandsCreateList
+     * @request GET:/Admin/Brands/Create
+     * @secure
+     */
+    brandsCreateList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/Admin/Brands/Create`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdminBrands
+     * @name BrandsCreateCreate
+     * @request POST:/Admin/Brands/Create
+     * @secure
+     */
+    brandsCreateCreate: (
+      query: {
+        /**
+         * @minLength 0
+         * @maxLength 128
+         */
+        Name: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/Admin/Brands/Create`,
+        method: "POST",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdminBrands
+     * @name BrandsDeleteCreate
+     * @request POST:/Admin/Brands/Delete
+     * @secure
+     */
+    brandsDeleteCreate: (
+      query?: {
+        /** @format uuid */
+        id?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/Admin/Brands/Delete`,
+        method: "POST",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
     /**
      * No description
      *
@@ -393,6 +546,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 4000
          */
         Description?: string;
+        /** @format uuid */
+        BrandId: string;
         /** @format uuid */
         CategoryId: string;
         /**
@@ -434,7 +589,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/auth/register
      * @secure
      */
-    authRegisterCreate: (data: RegisterRequestDto, params: RequestParams = {}) =>
+    authRegisterCreate: (
+      data: RegisterRequestDto,
+      params: RequestParams = {},
+    ) =>
       this.request<AuthResponseDto, any>({
         path: `/api/auth/register`,
         method: "POST",
@@ -520,6 +678,103 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<HomeResponseDto, any>({
         path: `/api/home`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name ProductsDetail
+     * @request GET:/api/products/{id}
+     * @secure
+     */
+    productsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<ProductDetailsDto, any>({
+        path: `/api/products/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name ProductsList
+     * @request GET:/api/products
+     * @secure
+     */
+    productsList: (
+      query?: {
+        /** @format uuid */
+        CategoryId?: string;
+        BrandIds?: string[];
+        /**
+         * @format double
+         * @min 0
+         * @max 999999999
+         */
+        MaxPrice?: number;
+        /**
+         * @format double
+         * @min 0
+         * @max 999999999
+         */
+        MinPrice?: number;
+        /**
+         * @format double
+         * @min 0
+         * @max 5
+         */
+        MinRating?: number;
+        Sort?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Page?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 100
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ProductCardDtoPagedResult, any>({
+        path: `/api/products`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name ProductsBrandsList
+     * @request GET:/api/products/brands
+     * @secure
+     */
+    productsBrandsList: (
+      query?: {
+        /** @format uuid */
+        categoryId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<BrandDto[], any>({
+        path: `/api/products/brands`,
         method: "GET",
         query: query,
         secure: true,
