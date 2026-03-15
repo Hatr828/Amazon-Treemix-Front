@@ -1,8 +1,8 @@
 .account-page {
   min-height: 100vh;
-  background: #f2f3f7;
+  background: #f0f0f2;
   padding: 32px clamp(24px, 9vw, 96px) 56px;
-  color: #2b2f3a;
+  color: #37383f;
   font-family: Arial;
   overflow-x: hidden;
 }
@@ -15,7 +15,7 @@
 }
 
 .account-shell {
-  max-width: 1120px;
+  max-width: 1110px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr);
@@ -31,13 +31,13 @@
 
 .account-profile {
   background: #ffffff;
-  border-radius: 14px;
-  padding: 10px 12px;
+  border-radius: 12px;
+  padding: 10px 12px 9px;
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid #e5e7ee;
-  box-shadow: 0 1px 3px rgba(26, 31, 44, 0.08);
+  border: 1px solid #dcdee5;
+  box-shadow: 0 1px 2px rgba(26, 31, 44, 0.08);
 }
 
 .account-avatar {
@@ -67,56 +67,75 @@
 .account-profile-name {
   margin: 0;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1.15;
+  color: #343842;
 }
 
 .account-profile-email {
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.15;
-  color: #6b7280;
+  color: #525866;
 }
 
 .account-menu {
   margin-top: 22px;
   background: #ffffff;
   border-radius: 14px;
-  padding: 10px 10px 16px;
-  border: 1px solid #e5e7ee;
-  box-shadow: 0 1px 3px rgba(26, 31, 44, 0.08);
+  padding: 14px 0 16px;
+  border: 1px solid #dcdee5;
+  box-shadow: 0 1px 2px rgba(26, 31, 44, 0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 358px;
 }
 
 .account-menu-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 6px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0;
 }
 
 .account-menu-item {
+  min-height: 32px;
+}
+
+.account-menu-link {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 6px;
+  padding: 7px 14px;
   font-size: 11px;
-  color: #3f4654;
+  color: #3f4047;
   font-weight: 500;
-  line-height: 1.15;
-  min-height: 30px;
-  cursor: default;
+  line-height: 1.3;
+  border-radius: 0;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  min-height: 32px;
+  cursor: pointer;
 }
 
-.account-menu-item span {
-  white-space: nowrap;
+.account-menu-link span {
+  white-space: normal;
 }
 
 .account-menu-item.is-active {
-  background: transparent;
-  color: inherit;
+  color: #1f2937;
+}
+
+.account-menu-item.is-active .account-menu-link {
+  background: #ececef;
+  color: #2f3138;
   font-weight: 500;
+}
+
+.account-menu-item:not(.is-active) .account-menu-link:hover {
+  background: #f4f4f6;
 }
 
 .account-menu-icon {
@@ -124,45 +143,281 @@
   height: 16px;
   display: block;
   flex-shrink: 0;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .account-delete {
   display: block;
-  margin: 22px auto 0;
-  width: 162px;
+  margin: auto auto 10px;
+  width: 130px;
   border: none;
   border-radius: 999px;
-  padding: 8px 14px;
-  background: #7f9cc2;
+  padding: 8px 12px;
+  background: #7698c2;
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 11px;
   cursor: pointer;
-  box-shadow: 0 5px 12px rgba(63, 84, 120, 0.24);
+  box-shadow: 0 4px 8px rgba(63, 84, 120, 0.2);
 }
 
 .account-main {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .account-title {
   margin: 0;
-  font-size: 39px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.1;
-  color: #2b2f3a;
+  color: #31333a;
 }
 
 .account-card {
   background: #ffffff;
   border-radius: 14px;
-  border: 1px solid #e5e7ee;
-  box-shadow: 0 1px 3px rgba(26, 31, 44, 0.08);
+  border: 1px solid #dcdee5;
+  box-shadow: 0 1px 2px rgba(26, 31, 44, 0.08);
   padding: 18px 22px 20px;
   min-height: 340px;
+}
+
+.account-placeholder {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #4b5563;
+}
+
+.account-main-messages {
+  gap: 10px;
+}
+
+.account-title-messages {
+  margin-top: 2px;
+}
+
+.account-card-messages {
+  min-height: 366px;
+  padding: 20px 20px 16px;
+}
+
+.account-message-tabs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-message-tab {
+  border: 0;
+  background: transparent;
+  color: #3f4047;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 0;
+}
+
+.account-message-tab.is-active {
+  height: 24px;
+  min-width: 112px;
+  border: 1px solid #b3a6d9;
+  border-radius: 999px;
+  color: #a195cf;
+  background: #f6f6fb;
+  font-weight: 600;
+  padding: 0 10px;
+}
+
+.account-message-divider {
+  width: 1px;
+  height: 24px;
+  background: #cfcfd5;
+}
+
+.account-message-empty {
+  margin: 10px 0 0;
+  border-radius: 6px;
+  background: #f1f1f3;
+  color: #44454b;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 8px 10px;
+}
+
+.account-main-empty {
+  gap: 10px;
+}
+
+.account-card-empty {
+  min-height: 112px;
+  padding: 22px 26px 14px;
+}
+
+.account-empty-text {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #3f4047;
+  max-width: 690px;
+}
+
+.account-empty-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.account-empty-button {
+  border: none;
+  border-radius: 999px;
+  background: #7698c2;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1;
+  min-height: 32px;
+  min-width: 170px;
+  padding: 8px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(63, 84, 120, 0.2);
+}
+
+.account-main-gift {
+  gap: 10px;
+}
+
+.account-card-gift {
+  min-height: 362px;
+  padding: 20px 22px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.account-gift-balance-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.account-gift-balance-label {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #2d313a;
+}
+
+.account-gift-balance-value {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 400;
+  color: #3d3f46;
+}
+
+.account-gift-actions-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.account-gift-button {
+  border: none;
+  border-radius: 999px;
+  min-height: 32px;
+  padding: 8px 14px;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(63, 84, 120, 0.2);
+}
+
+.account-gift-button-primary {
+  min-width: 184px;
+  background: #7698c2;
+  color: #ffffff;
+}
+
+.account-gift-button-muted {
+  min-width: 174px;
+  background: #f0f0f2;
+  color: #7d7f85;
+}
+
+.account-gift-subtitle {
+  margin: 16px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #2f3138;
+}
+
+.account-gift-text {
+  margin: 12px 0 0;
+  font-size: 11px;
+  line-height: 1.3;
+  color: #3f4047;
+}
+
+.account-gift-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 2px 0 0;
+  width: fit-content;
+  color: #7698c2;
+  font-size: 11px;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.account-gift-icon {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.account-gift-actions-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.account-gift-save {
+  border: none;
+  border-radius: 999px;
+  min-height: 32px;
+  min-width: 92px;
+  padding: 8px 16px;
+  background: #7698c2;
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(63, 84, 120, 0.2);
+}
+
+.account-main-orders {
+  gap: 10px;
+}
+
+.account-card-orders {
+  min-height: 56px;
+  padding: 18px 24px;
+}
+
+.account-orders-text {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.3;
+  color: #3f4047;
 }
 
 .account-form {
