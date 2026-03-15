@@ -4,11 +4,9 @@
   price: number;
   rating: number;
   ratings: number;
-  reviews?: Reviews[];
+  reviews?: [Reviews[], Reviews[]];
   images: string[];
-  videoid: string;
   platform: string;
-  storename: string;
   description: string;
   IsInStock: boolean;
   about: string;
@@ -25,6 +23,7 @@
     id: string;
     name: string;
     description: string;
+    rating?: number;
   }[];
   documents: {
     id: string,
@@ -32,7 +31,7 @@
     download_link: string,
     extension: string,
   }[],
-
+  mentionTags: string[];
 };
 
 export type ProductQuestion = {
@@ -59,9 +58,12 @@ export type ManufacturerContent = {
 export type Reviews = {
     id: string;
     rating: number;
+    title: string;
     text: string;
+    editedText?: string;
     authorName: string;
     createdAt: string;
+    isVerifiedPurchase: boolean;
     images?: string[];
     videos?: string[];
     helpfulMarks: number;

@@ -1,16 +1,24 @@
 import { ProductType } from "@/app/product_page/types/product_page_types";
 
-export function VideoWrapper (video: ProductType["videos"]) {
-  return(
-    <div>
-      <div className="video_container">
-        {video?.date && <div className="date_container">{formatDate(video?.date)}</div>}
-      </div>
+type Video = NonNullable<ProductType["videos"]>[number]
 
-      <span>{video?.name}</span>
-      <div className="name_container">{video?.author}</div>
-    </div>
-  )
+type Props = {
+    video: Video
+}
+
+export function VideoWrapper({ video }: Props) {
+    return (
+        <div>
+            <div className="video_container">
+                {video.date && (
+                    <div className="date_container">{formatDate(video.date)}</div>
+                )}
+            </div>
+
+            <span>{video.name}</span>
+            <div className="name_container">{video.author}</div>
+        </div>
+    )
 }
 
 function formatDate(dateString: string) {
