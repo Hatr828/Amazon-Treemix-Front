@@ -4,98 +4,41 @@ import "./CatalogProduct.css";
 import "../HomePage/HomePage.css";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { RatingStarsChoice } from "./RatingStarsChoice";
 import { SortBy } from "./SortBy";
 import { RatingStars } from "./RatingStars";
+import { HomeProductDto } from "@/infra/openapi/amzn.dto";
+import { FilterSectionComponent } from "./FilterSection";
+import { filters } from "./filtersData";
 
-// Категории
-type FilterSection =
-  | {
-      title: string;
-      type: "links";
-      items: string[];
-    }
-  | {
-      title: string;
-      type: "checkbox";
-      items: string[];
-    }
-  | {
-      title: string;
-      type: "rating";
-    }
-  | {
-      title: string;
-      type: "price";
-      min: number;
-      max: number;
-    };
+const ALL_DEPARTMENTS_ID = "cad1fe32-d2cc-4487-8cbc-909c09c9b401";
 
-const filters: FilterSection[] = [
-  {
-    title: "Department",
-    type: "links",
-    items: [
-      "Computers",
-      "Computer Accessories & Peripherals",
-      "Computer Components",
-      "Computers & Tablets",
-      "Data Storage",
-      "Laptop Accessories",
-    ],
-  },
-  {
-    title: "Climate Pledge Friendly",
-    type: "checkbox",
-    items: ["Climate Pledge Friendly"],
-  },
-  {
-    title: "Amazon Certified",
-    type: "checkbox",
-    items: ["Auto Replenishment", "Works with Alexa"],
-  },
-  {
-    title: "Featured Brands",
-    type: "checkbox",
-    items: ["TAKAGI", "HP", "Seagate", "Roku", "Apple"],
-  },
-  {
-    title: "Avg. Customer Review",
-    type: "rating",
-  },
-  {
-    title: "Price",
-    type: "price",
-    min: 0,
-    max: 999,
-  },
-];
+export function CatalogProduct({ slug }: { slug: string[] }) {
 
-// function slugify(text: string) {
-//   return text
-//     .toLowerCase()
-//     .trim()
-//     .replace(/\s+/g, "-")
-//     .replace(/[^a-z0-9-]/g, "")
-//     .replace(/-+/g, "-")
-//     .slice(0, 60);
-// }
-
-export function CatalogProduct() {
+  const categoryId = slug?.[slug.length - 1];
 
   //query
   const [products, setProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [subCategories, setSubCategories] = useState<any[]>([]);
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
   const [brands, setBrands] = useState<any[]>([])
   const searchParams = useSearchParams();
 
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [hasPreviousPage, setHasPreviousPage] = useState(false);
-  const [hasNextPage, setHasNextPage] = useState(false);
+  const [hasPreviousPage] = useState(false);
+  const [hasNextPage] = useState(false);
 
   const router = useRouter();
   const [selectedDepartments, setSelectedDepartments] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
+  // Находим категорию по id
+  const currentCategory = categories.find(
+    (cat) => cat.id === categoryId
+  );
+
+  const isAllDepartments = categoryId === ALL_DEPARTMENTS_ID;
 
   const applyFilters = () => {
     const params = new URLSearchParams();
@@ -104,46 +47,88 @@ export function CatalogProduct() {
 
     if (selectedRating) params.set("MinRating", selectedRating.toString());
 
+    if (selectedSubCategory) {
+      params.set("SubCategory", selectedSubCategory);
+    }
+
+    if (categoryId && !isAllDepartments) {
+      params.set("CategoryId", categoryId);
+    }
+
     params.set("MinPrice", minPrice.toString());
     params.set("MaxPrice", maxPrice.toString());
 
     router.push(`?${params.toString()}`);
   };
 
+  //вывод категории
   useEffect(() => {
+
     const loadProducts = async () => {
       try {
-        const response = await fetch(`/api/catalog?${searchParams.toString()}`);
+        const params = new URLSearchParams(searchParams.toString());
 
-        if (!response.ok) {
-          throw new Error("Failed to load catalog");
+        if (categoryId && !isAllDepartments) {
+          params.set("CategoryId", categoryId);
         }
 
+        const response = await fetch(`/api/catalog?${params.toString()}`);
         const data = await response.json();
 
         setProducts(data.items);
-        setCurrentPage(data.page);
-        setTotalPages(data.totalPages);
-        setHasPreviousPage(data.hasPreviousPage);
-        setHasNextPage(data.hasNextPage);
-
       } catch (error) {
         console.error(error);
       }
     };
 
     loadProducts();
-  }, [searchParams]);
+  }, [searchParams, categoryId, isAllDepartments]);
 
+  //запрос подкатегории
+  useEffect(() => {
+    if (!categoryId || isAllDepartments) return;
+
+    const loadSubCategories = async () => {
+      try {
+        const res = await fetch(`/api/categories/${categoryId}/subcategories`);
+        if (!res.ok) throw new Error("Failed to fetch subcategories");
+        const data = await res.json();
+        setSubCategories(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadSubCategories();
+  }, [categoryId, isAllDepartments]);
+
+  const dynamicFilters = [
+    {
+      title: "Subcategories",
+      type: "links" as const,
+      items: subCategories.map((sub) => sub.name),
+    },
+    ...filters,
+  ];
+
+  //вывод бренды
   useEffect(() => {
     const loadBrands = async () => {
-      const res = await fetch("/api/catalog/brands")
-      const data = await res.json()
-      setBrands(data)
-    }
+      try {
+        let url = "/api/catalog/brands";
+        if (categoryId && !isAllDepartments) {
+          url += `?categoryId=${categoryId}`;
+        }
+        const res = await fetch(url);
+        const data = await res.json();
+        setBrands(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    loadBrands()
-  }, [])
+    loadBrands();
+  }, [searchParams, categoryId, isAllDepartments]);
 
   // Для вкладок
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
@@ -160,23 +145,35 @@ export function CatalogProduct() {
   };
 
   // Логика карусели
+  const [produc, setProduc] = useState<HomeProductDto[]>([]);
+  
+  useEffect(() => {
+    fetch("/api/home")
+      .then(res => res.json())
+      .then(data => {
+        setProduc(data.products ?? []);
+      });
+  }, []);
+
   const [startIndex, setStartIndex] = useState(0);
 
   const visibleCount = 6;
 
   const nextSlide = () => {
+    if (produc.length === 0) return;
     setStartIndex((prev) => (prev + 1) % products.length);
   };
 
   const prevSlide = () => {
+    if (produc.length === 0) return;
     setStartIndex((prev) => (prev - 1 + products.length) % products.length);
   };
 
-  const visibleItems = [];
-
-  for (let i = 0; i < visibleCount; i++) {
-    visibleItems.push(products[(startIndex + i) % products.length]);
-  }
+  const visibleItems = products.length > 0
+    ? Array.from({ length: Math.min(visibleCount, products.length) }, (_, i) =>
+        products[(startIndex + i) % products.length]
+      )
+    : [];
 
   //Пагинация
   const changePage = (page: number) => {
@@ -193,96 +190,27 @@ export function CatalogProduct() {
     endPage = totalPages;
     startPage = Math.max(endPage - visiblePages + 1, 1);
   }
-  ///
-
+  
   return (
     <div>
       <div className="div-categoryProd-block">
         {/* Левая часть */}
         <div className="left-part-categoryProd">
-          {filters.map((section, index) => (
-            <div key={index}>
-              <hr className="hr-leftpart-Prod" />
-              <div className="div-category-name">
-                {section.title}
-                <i className={`bi ${openSections.includes(index) ? "bi-chevron-up" : "bi-chevron-down"} chevDowm`}
-                  onClick={() => toggleSection(index)}/>
-              </div>
-              {openSections.includes(index) && (
-                <>
-                  {/* LINKS */}
-                  {section.type === "links" &&
-                    section.items.map((item, i) => (
-                      <div key={i} className="text-category-name" onClick={() => {setSelectedDepartments((prev) =>
-                        prev.includes(item) ? prev.filter((d) => d !== item) : [...prev, item]);}}>
-                        {item}
-                      </div>
-                    ))}
-                  {/* CHECKBOX */}
-                  {section.type === "checkbox" && (
-                    <>
-                      {section.title === "Featured Brands" ? brands.map((brand) => (
-                            <label key={brand.id} className="text-check-category-name">
-                              <input type="checkbox" className="chBox"checked={selectedBrands.includes(brand.id)}
-                                onChange={() => setSelectedBrands((prev) => prev.includes(brand.id)
-                                  ? prev.filter((b) => b !== brand.id) : [...prev, brand.id]
-                                )}/>
-                              {brand.name}
-                            </label>
-                          ))
-                        : section.items.map((item, i) => (
-                            <label key={i} className="text-check-category-name">
-                              <input type="checkbox" className="chBox" checked={selectedBrands.includes(item)} onChange={() =>
-                                  setSelectedBrands((prev) => prev.includes(item)
-                                    ? prev.filter((b) => b !== item) : [...prev, item]
-                                  )}/>
-                              {item}
-                            </label>
-                          ))}
-                    </>
-                  )}
-                  {/* RATING */}
-                  {section.type === "rating" && (
-                    <div className="text-check-category-name">
-                      <RatingStarsChoice selectedRating={selectedRating} onSelect={(value) =>
-                          setSelectedRating(selectedRating === value ? null : value)}/>
-                      & Up
-                    </div>
-                  )}
-                  {/* PRICE */}
-                  {section.type === "price" && (
-                    <div className="price-filter">
-                      <div className="price-inputs">
-                        <input type="number" value={minPrice} onChange={(e) => setMinPrice(Number(e.target.value))}/>
-                        <span style={{ fontSize: "1vw" }}>-</span>
-                        <input type="number" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))}/>
-                      </div>
-                      <div className="slider">
-                        <div className="slider-track" style={{
-                            left: `${(minPrice / section.max) * 100}%`,
-                            right: `${100 - (maxPrice / section.max) * 100}%`,
-                          }}/>
-                        <input type="range" min={section.min} max={section.max} value={minPrice} onChange={(e) =>
-                            setMinPrice(Math.min(Number(e.target.value), maxPrice - 1))
-                          }
-                          className="thumb"/>
-                        <input type="range" min={section.min} max={section.max} value={maxPrice} onChange={(e) =>
-                            setMaxPrice(Math.max(Number(e.target.value), minPrice + 1))
-                          }
-                          className="thumb"/>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
+          {dynamicFilters.map((section, index) => (
+            <FilterSectionComponent key={index} section={section} index={index} openSections={openSections} toggleSection={toggleSection}
+              selectedDepartments={selectedDepartments} setSelectedDepartments={setSelectedDepartments} selectedBrands={selectedBrands}
+              setSelectedBrands={setSelectedBrands} selectedRating={selectedRating} setSelectedRating={setSelectedRating} minPrice={minPrice}
+              setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} brands={brands} 
+              selectedSubCategory={selectedSubCategory} setSelectedSubCategory={setSelectedSubCategory}/>
           ))}
           <hr className="hr-leftpart-Prod" />
-          <button className="price-btn" onClick={applyFilters}>GO</button>
+          <button className="price-btn" onClick={applyFilters}>
+            GO
+          </button>
         </div>
         {/* Правая часть*/}
         <div className="right-part-categoryProd">
-          All Departments
+          {currentCategory ? currentCategory.name : "All Departments"}
           <div className="right-part-description-categoryProd">
             Shop art supplies including painting, drawing, crafting, scrapbooking, fabric and
             jewelry making
@@ -361,7 +289,7 @@ export function CatalogProduct() {
           </div>
         {/* Низ */}
       </div>
-      {/* <div style={{ display: "flex", width: "100%", justifyContent: "center", marginTop: "10vw" }}>
+      <div style={{ display: "flex", width: "100%", justifyContent: "center", marginTop: "10vw" }}>
         <div className="div-list-categoryProd">
           <div className="head-text-more-list">
             Smart home products inspired by your shopping trends
@@ -369,15 +297,15 @@ export function CatalogProduct() {
           </div>
           <div className="list-product">
             <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
-            {visibleItems.map((product, index) => (
-              <div className="icon-list-product" key={index}>
+            {visibleItems.map((product) => (
+              <div className="icon-list-product" key={product.id}>
                 <div className="icon-for-list-product-photo">
-                  <img src={product.img} className="list-product-photo" />
+                  <img src={product.image?.url ?? "/example1-product.png"} className="list-product-photo" />
                 </div>
                 <div className="text-list-product">
-                  {product.name}
+                  {product.title}
                   <div className="list-cost-product">
-                    <span className="currency">$</span>530
+                    <span className="currency">$</span>{product.price.original}
                   </div>
                 </div>
               </div>
@@ -385,7 +313,7 @@ export function CatalogProduct() {
             <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
           </div>
         </div>
-      </div> */}
+      </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="div-recommendations">
           See personalized recommendations

@@ -10,43 +10,26 @@ export const SearchDropdown: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const categories = [
-    "All Departments",
-    "Arts & Crafts",
-    "Baby",
-    "Beauty & Personal Care",
-    "Computers",
-    "Home & Kitchen",
-    "Men's Fasion",
-    "Smart Home",
-    "Sports & Outdoors",
-    "Tools & Home Improvement",
-    "Women's Fasion",
-  ];
-
-  // Маршруты категорий
-  const categoryRoutes: Record<string, string> = {
-    "All Departments": "/catalog",
-  };
+  const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+    const loadCategories = async () => {
+      try {
+        const res = await fetch("/api/categories/root");
+
+        const data = await res.json();
+        setCategories(data);
+      } catch (error) {
+        console.error(error);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    loadCategories();
   }, []);
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (id: string) => {
     setIsOpen(false);
-
-    const route = categoryRoutes[category];
-    if (route) {
-      router.push(route);
-    }
+    router.push(`/catalog/${id}`);
   };
 
   return (
@@ -62,11 +45,10 @@ export const SearchDropdown: React.FC = () => {
       {isOpen && (
         <div className="searchDropdownMenu">
           <div className="searchDropdownArrow" />
-
           <ul className="searchDropdownList">
-            {categories.map((cat, i) => (
-              <li key={i} className="searchDropdownItem" onClick={() => handleCategoryClick(cat)}>
-                {cat}
+            {categories.map((cat) => (
+              <li key={cat.id} className="searchDropdownItem" onClick={() => handleCategoryClick(cat.id)}>
+                {cat.name}
               </li>
             ))}
           </ul>
