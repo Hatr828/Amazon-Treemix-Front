@@ -2,13 +2,13 @@
 
 import "./CatalogProduct.css";
 import "../HomePage/HomePage.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { SortBy } from "./SortBy";
-import { RatingStars } from "./RatingStars";
+import { SortBy, SortOption } from "./SortBy";
 import { HomeProductDto } from "@/infra/openapi/amzn.dto";
 import { FilterSectionComponent } from "./FilterSection";
 import { filters } from "./filtersData";
+import { ProductCard } from "./ProductCard";
 
 const ALL_DEPARTMENTS_ID = "cad1fe32-d2cc-4487-8cbc-909c09c9b401";
 
@@ -23,6 +23,9 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
   const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
   const [brands, setBrands] = useState<any[]>([])
   const searchParams = useSearchParams();
+
+  // Сортировка
+  const [selectedSort, setSelectedSort] = useState<SortOption>("Featured");
 
   const [totalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,74 +45,130 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
 
   const applyFilters = () => {
     const params = new URLSearchParams();
-
     selectedBrands.forEach((b) => params.append("BrandIds", b));
-
-    if (selectedRating) params.set("MinRating", selectedRating.toString());
-
-    if (selectedSubCategory) {
-      params.set("SubCategory", selectedSubCategory);
+    if (selectedRating) {
+      params.set("MinRating", selectedRating.toString());
     }
-
-    if (categoryId && !isAllDepartments) {
+    if (selectedSubCategory) {
+      params.set("CategoryId", selectedSubCategory);
+    } else if (categoryId && !isAllDepartments) {
       params.set("CategoryId", categoryId);
     }
-
     params.set("MinPrice", minPrice.toString());
     params.set("MaxPrice", maxPrice.toString());
-
     router.push(`?${params.toString()}`);
   };
-
   //вывод категории
   useEffect(() => {
-
     const loadProducts = async () => {
       try {
         const params = new URLSearchParams(searchParams.toString());
-
-        if (categoryId && !isAllDepartments) {
+        if (!params.get("CategoryId") && categoryId && !isAllDepartments) {
           params.set("CategoryId", categoryId);
         }
-
         const response = await fetch(`/api/catalog?${params.toString()}`);
         const data = await response.json();
-
-        setProducts(data.items);
+        setProducts(data.items ?? []);
       } catch (error) {
         console.error(error);
       }
     };
-
     loadProducts();
   }, [searchParams, categoryId, isAllDepartments]);
 
-  //запрос подкатегории
   useEffect(() => {
-    if (!categoryId || isAllDepartments) return;
-
-    const loadSubCategories = async () => {
+    const loadCategories = async () => {
       try {
-        const res = await fetch(`/api/categories/${categoryId}/subcategories`);
-        if (!res.ok) throw new Error("Failed to fetch subcategories");
+        const res = await fetch("/api/categories/root");
+        if (!res.ok) throw new Error("Failed to fetch categories");
         const data = await res.json();
-        setSubCategories(data);
+        setCategories(data);
       } catch (error) {
         console.error(error);
       }
     };
+    loadCategories();
+  }, []);
+  //запрос подкатегории
+  useEffect(() => {
+    const loadSubCategories = async () => {
+      try {
+        if (isAllDepartments) {
+          const rootRes = await fetch("/api/categories/root");
+          if (!rootRes.ok) throw new Error("Failed to fetch root categories");
 
+          const rootCategories = await rootRes.json();
+
+          const subCategoryResponses = await Promise.all(
+            rootCategories.map((category: any) =>
+              fetch(`/api/categories?parentId=${category.id}`)
+            )
+          );
+          for (const res of subCategoryResponses) {
+            if (!res.ok) {
+              throw new Error("Failed to fetch subcategories");
+            }
+          }
+          const subCategoryArrays = await Promise.all(
+            subCategoryResponses.map((res) => res.json())
+          );
+
+          const allSubCategories = subCategoryArrays.flat();
+
+          setSubCategories(allSubCategories);
+        } else if (categoryId) {
+          const res = await fetch(`/api/categories?parentId=${categoryId}`);
+          if (!res.ok) throw new Error("Failed to fetch subcategories");
+          const data = await res.json();
+          setSubCategories(data);
+        } else {
+          setSubCategories([]);
+        }
+      } catch (error) {
+        console.error(error);
+        setSubCategories([]);
+      }
+    };
     loadSubCategories();
   }, [categoryId, isAllDepartments]);
 
   const dynamicFilters = [
     {
-      title: "Subcategories",
+      title: "Department",
       type: "links" as const,
-      items: subCategories.map((sub) => sub.name),
+      items: subCategories.map((sub) => ({
+        id: sub.id,
+        name: sub.name,
+      })),
     },
     ...filters,
   ];
+
+  // Для сортировки
+  const sortedProducts = useMemo(() => {
+    const sorted = [...products];
+
+    switch (selectedSort) {
+      case "Price: Low to High":
+        return sorted.sort((a, b) => a.price.current - b.price.current);
+
+      case "Price: High to Low":
+        return sorted.sort((a, b) => b.price.current - a.price.current);
+
+      case "Avg. Customer Review":
+        return sorted.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+
+      case "Newest Arrivals":
+        return sorted.sort(
+          (a, b) =>
+            new Date(b.createdAt ?? 0).getTime() - new Date(a.createdAt ?? 0).getTime()
+        );
+
+      case "Featured":
+      default:
+        return sorted;
+    }
+  }, [products, selectedSort]);
 
   //вывод бренды
   useEffect(() => {
@@ -219,36 +278,13 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
             <div>
               {products.length} <span style={{ fontSize: "0.938vw" }}>Item selected</span>
             </div>
-            <SortBy />
+            <SortBy selectedSort={selectedSort} onChange={setSelectedSort} />
           </div>
           {/* Списки товаров */}
           <div className="div-for-blocks-Product">
-            {products.map((product) => (
-                <div key={product.id} className="block-Product-categoryProd">
-                  <div className="div-for-sale-favourite">
-                    <div className="sale-icon">SALE</div>
-                    <div className="favourite-icon">
-                      <i className="bi bi-heart"></i>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-                    <img src={product.image?.url ?? "/example1-product.png"} className="img-Product-categoryProd" />
-                  </div>
-                  <div className="text-Product-categoryProd">
-                    {product.title}
-                  </div>
-                  <div className="rating-stars">
-                    <RatingStars rating={product.rating} />
-                  </div>
-                  <div className="price-Product-categoryProd">
-                    <span className="currency-categoryProd">$</span>{product.price.current}
-                    <div className="sale-categoryProd">
-                      <span className="currency-categoryProdd">$</span>{product.price.original}
-                    </div>
-                  </div>
-                  <div className="ship-to-text">Ship to USA</div>
-                </div>
-              ))}
+            {sortedProducts.map((product) => (
+              <ProductCard key={product.id} product={product} variant="catalog" />
+            ))}
           </div>
           {/* Кнопочки стр */}
           {totalPages > 1 && ( <>

@@ -1,8 +1,13 @@
+export type FilterLinkItem = {
+  id: string;
+  name: string;
+};
+
 export type FilterSection =
   | {
       title: string;
       type: "links";
-      items: string[];
+      items: FilterLinkItem[];
     }
   | {
       title: string;

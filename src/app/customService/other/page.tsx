@@ -3,7 +3,7 @@
 import "../customServ.css"
 import "../../../components/HomePage/HomePage.css"
 import SupportTree from "../SupportTree"
-import { internationalTree } from "../data"
+import { somethingElseTree } from "../data"
 
 export default function other() {
     return (
@@ -15,7 +15,7 @@ export default function other() {
                 Something else
             </div>
             <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                <SupportTree tree={internationalTree} />
+                <SupportTree tree={somethingElseTree} />
             </div>
             <div style={{display:"flex", justifyContent:"center"}}>
                 <div className="div-recommendations">

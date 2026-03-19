@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import "./CatalogProduct.css";
 import { FilterSection } from "./filtersData";
 import { RatingStarsChoice } from "./RatingStarsChoice";
 
@@ -68,15 +69,19 @@ export const FilterSectionComponent = ({
         <>
           {/* LINKS */}
           {section.type === "links" &&
-            section.items.map((item, i) => (
+            section.items.map((item) => (
               <div
-                key={i}
-                className={`text-category-name ${selectedSubCategory === item ? "active" : ""}`}
-                onClick={() => setSelectedSubCategory(item)}
+                key={item.id}
+                className={`text-category-name ${
+                  selectedSubCategory === item.id ? "active" : ""
+                }`}
+                onClick={() =>
+                  setSelectedSubCategory((prev) => (prev === item.id ? null : item.id))
+                }
               >
-                {item}
+                {item.name}
               </div>
-          ))}
+           ))}
 
           {/* CHECKBOX */}
           {section.type === "checkbox" && (

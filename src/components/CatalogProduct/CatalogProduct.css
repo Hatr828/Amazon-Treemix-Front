@@ -51,6 +51,10 @@
   letter-spacing: 0%;
 }
 
+.active {
+  color: #7e8cbd;
+}
+
 .text-check-category-name {
   display: flex;
   position: relative;
@@ -206,7 +210,6 @@
   display: flex;
   position: relative;
   flex-wrap: wrap;
-  justify-content: space-between;
 
   gap: 1vw;
   margin-top: 3vw;

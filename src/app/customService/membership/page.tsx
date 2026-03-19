@@ -3,7 +3,7 @@
 import "../customServ.css"
 import "../../../components/HomePage/HomePage.css"
 import SupportTree from "../SupportTree"
-import { internationalTree } from "../data"
+import { membershipsTree } from "../data"
 
 export default function membership() {
     return (
@@ -15,7 +15,7 @@ export default function membership() {
                 Memberships, subscriptions or communications
             </div>
             <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                <SupportTree tree={internationalTree} />
+                <SupportTree tree={membershipsTree} />
             </div>
             <div style={{display:"flex", justifyContent:"center"}}>
                 <div className="div-recommendations">
