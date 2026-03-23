@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "./customService.css";
 import "../HomePage/HomePage.css";
+import "../HomePage/mobHomePage.css";
+import "./mobcustomService.css"
 
 import {
     internationalTree,
