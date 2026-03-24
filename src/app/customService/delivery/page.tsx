@@ -2,6 +2,7 @@
 
 import "../customServ.css"
 import "../../../components/HomePage/HomePage.css"
+import "../../../components/HomePage/mobHomePage.css";
 
 export default function delivery() {
   return (

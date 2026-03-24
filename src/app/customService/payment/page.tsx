@@ -2,6 +2,7 @@
 
 import "../customServ.css"
 import "../../../components/HomePage/HomePage.css"
+import "../../../components/HomePage/mobHomePage.css";
 import SupportTree from "../SupportTree"
 import { paymentTree } from "../data"
 
