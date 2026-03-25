@@ -2,6 +2,8 @@
 
 import "./CatalogProduct.css";
 import "../HomePage/HomePage.css";
+import "../HomePage/mobHomePage.css";
+import "./mobCatalog.css";
 import { useState, useEffect, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SortBy, SortOption } from "./SortBy";
@@ -216,7 +218,21 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
 
   const [startIndex, setStartIndex] = useState(0);
 
-  const visibleCount = 6;
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVisibleCount(2);
+      } else {
+        setVisibleCount(6);
+      }
+      setStartIndex(0);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const nextSlide = () => {
     if (produc.length === 0) return;
@@ -276,7 +292,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
           </div>
           <div className="div-item-sortBy">
             <div>
-              {products.length} <span style={{ fontSize: "0.938vw" }}>Item selected</span>
+              {products.length} <span className="text-item-mob">Item selected</span>
             </div>
             <SortBy selectedSort={selectedSort} onChange={setSelectedSort} />
           </div>

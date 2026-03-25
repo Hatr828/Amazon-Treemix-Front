@@ -206,6 +206,10 @@
   letter-spacing: 0%;
 }
 
+.text-item-mob {
+  font-size: 0.938vw;
+}
+
 .div-for-blocks-Product {
   display: flex;
   position: relative;
