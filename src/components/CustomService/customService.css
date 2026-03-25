@@ -58,6 +58,16 @@
     font-size: 2.75vw;
 }
 
+.text-des-mob {
+    font-size: 0.938vw;
+}
+
+.div-customServ {
+    display: flex; 
+    justify-content: center;
+    width: 100%;
+}
+
 .input-service {
     border: none;
     outline: none;

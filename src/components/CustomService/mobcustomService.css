@@ -5,7 +5,7 @@
     }
 
     .div-description-text {
-        font-size: 1.285vw;
+        font-size: 1.585vw;
         margin-top: 2vw;
     }
 
@@ -28,12 +28,16 @@
         font-size: 5.5vw;
     }
 
+    .text-des-mob {
+        font-size: 1.88vw;
+    }
+
     .input-service {
         padding-right: 5vw;
         font-size: 1.8vw;
         margin-top: 2vw;
         padding: 2vw;
-        width: 68.427vw;
+        width: 85.427vw;
         height: 4.2vw;
         border-radius: 2.5vw;
         box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);

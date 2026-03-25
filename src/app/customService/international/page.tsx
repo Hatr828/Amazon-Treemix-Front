@@ -3,6 +3,7 @@
 import "../customServ.css"
 import "../../../components/HomePage/HomePage.css"
 import "../../../components/HomePage/mobHomePage.css";
+import "../mobPageServ.css"
 import SupportTree from "../SupportTree"
 import { internationalTree } from "../data"
 
