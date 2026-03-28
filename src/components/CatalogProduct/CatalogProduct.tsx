@@ -265,6 +265,19 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
     endPage = totalPages;
     startPage = Math.max(endPage - visiblePages + 1, 1);
   }
+
+  const resetFilters = () => {
+    // сброс state
+    setSelectedBrands([]);
+    setSelectedDepartments([]);
+    setSelectedSubCategory(null);
+    setSelectedRating(null);
+    setMinPrice(0);
+    setMaxPrice(999);
+
+    // сброс URL
+     router.push(window.location.pathname);
+  };
   
   return (
     <div>
@@ -292,7 +305,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
           </div>
           <div className="div-item-sortBy">
             <div>
-              {products.length} <span className="text-item-mob">Item selected</span>
+              {products.length} <span className="text-item-mob">Item selected  <button className="button-reset" onClick={resetFilters}>Reset</button></span>
             </div>
             <SortBy selectedSort={selectedSort} onChange={setSelectedSort} />
           </div>
