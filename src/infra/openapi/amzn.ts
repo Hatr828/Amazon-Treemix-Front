@@ -31,6 +31,16 @@ export interface CategoryDto {
   name?: string | null;
 }
 
+export interface CategoryListItemDto {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  parentId?: string | null;
+  name?: string | null;
+  imageUrl?: string | null;
+  hasChildren?: boolean;
+}
+
 export interface HomeResponseDto {
   products?: ProductCardDto[] | null;
 }
@@ -653,6 +663,47 @@ export class Api<
       this.request<MeResponseDto, any>({
         path: `/api/auth/me`,
         method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Categories
+     * @name CategoriesRootList
+     * @request GET:/api/categories/root
+     * @secure
+     */
+    categoriesRootList: (params: RequestParams = {}) =>
+      this.request<CategoryListItemDto[], any>({
+        path: `/api/categories/root`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Categories
+     * @name CategoriesList
+     * @request GET:/api/categories
+     * @secure
+     */
+    categoriesList: (
+      query?: {
+        /** @format uuid */
+        parentId?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<CategoryListItemDto[], any>({
+        path: `/api/categories`,
+        method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,

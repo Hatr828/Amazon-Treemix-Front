@@ -1,0 +1,217 @@
+@media (max-width: 768px) {
+    .left-part-categoryProd {
+        margin-top: 4vw;
+        gap: 0.5vw;
+        width: 36vw;
+    }
+
+    .hr-leftpart-Prod {
+        width: 25.4vw;
+        border: 2px solid rgb(211, 182, 182);
+    }
+
+    .div-category-name {
+        width: 25.4vw;
+        font-size: 1.88vw;
+        text-shadow: -0.408vw 0.408vw 0.612vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-category-name {
+        margin-top: 1vw;
+        margin-left: 2vw;
+        font-size: 1.46vw;
+    }
+
+    .text-check-category-name {
+        gap: 1vw;
+        margin-top: 2vw;
+        font-size: 1.46vw;
+    }
+
+    .chevDowm {
+        font-size: 1.4vw;
+    }
+
+    .chBox {
+        width: 1.88vw;
+        height: 1.88vw;
+        border-radius: 2vw;
+    }
+
+    /* Для цены */
+
+    .price-inputs {
+        gap: 1vw;
+        margin-bottom: 1.3vw;
+        margin-top: 1.3vw;
+    }
+
+    .price-inputs input {
+        width: 7.29vw;
+        padding: 0.612vw 0;
+        border-radius: 3.23vw;
+        font-size: 1.46vw;
+    }
+
+    .price-btn {
+        width: 82.5%;
+        padding: 0.612vw 2vw;
+        border-radius: 2.042vw;
+        font-size: 1.46vw;
+        text-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .slider {
+        height: 0.404vw;
+    }
+
+    .slider input[type="range"] {
+        height: 0.404vw;
+    }
+
+    .slider input[type="range"]::-webkit-slider-thumb {
+        width: 1.88vw;
+        height: 1.88vw;
+    }
+
+    .slider input[type="range"]::-moz-range-thumb {
+        width: 1.88vw;
+        height: 1.88vw;
+    }
+
+    /* Правая часть */
+
+    .right-part-categoryProd {
+        margin-top: 5.5vw;
+        width: 58.74vw;
+        font-size: 2.5vw;
+    }
+
+    .right-part-description-categoryProd {
+        margin-top: 0.5vw;
+        margin-bottom: 4.5vw;
+        font-size: 1.46vw;
+    }
+
+    .div-for-blocks-Product {
+        gap: 2vw;
+        margin-top: 6vw;
+    }
+
+    .text-item-mob {
+        font-size: 2vw;
+    }
+
+    /* Фильтры сортировки */
+
+    .sort-button {
+        gap: 0.8vw;
+        border-radius: 2vw;
+        padding: 0.2vw 3vw;
+        font-size: 1.88vw;
+        text-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+        box-shadow: -0.408vw 0.408vw 0.612vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .sort-label {
+        opacity: 1.8;
+    }
+
+    .sort-arrow {
+        margin-left: 0.4vw;
+    }
+
+    .sort-menu {
+        width: 23.6vw;
+        border-radius: 2vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .sort-item {
+        padding: 0.3vw 2vw;
+        font-size: 1.6vw;
+    }
+
+    .sort-item.active {
+        border-radius: 1.6vw;
+    }
+
+    .block-Product-categoryProd {
+        padding: 2vw;
+        width: 28.115vw;
+        height: 48vw;
+        border-radius: 1vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .sale-icon {
+        width: 8.115vw;
+        height: 4.031vw;
+        border-radius: 1vw;
+        font-size: 1.88vw;
+        box-shadow: -0.408vw 0.408vw 0.612vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .favourite-icon {
+        font-size: 2.3vw;
+        width: 4.083vw;
+        height: 4.083vw;
+        border-radius: 1vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .img-Product-categoryProd {
+        margin: 3vw 0 3vw 0;
+        width: 20.365vw;
+        height: 18vw;
+    }
+
+    .text-Product-categoryProd {
+        font-size: 1.88vw;
+    }
+
+    .price-Product-categoryProd {
+        margin-top: 2vw;
+        font-size: 3.75vw;
+    }
+
+    .currency-categoryProd {
+        font-size: 1.88vw;
+    }
+
+    .ship-to-text {
+        margin-top: 1vw;
+        font-size: 1.3vw;
+    }
+
+    .sale-categoryProd {
+        margin-left: 1vw;
+        font-size: 1.88vw;
+    }
+
+    .currency-categoryProdd {
+        font-size: 1.266vw;
+    }
+
+    .div-for-page-history {
+        margin: 6vw 0;
+        gap: 1vw;
+    }
+
+    .page-btn {
+        width: 8vw;
+        height: 8vw;
+        border-radius: 2.042vw;
+        font-size: 2.5vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .div-for-help {
+        gap: 0.5vw;
+        font-size: 2.5vw;
+    }
+
+    .div-visit-contact {
+        font-size: 1.46vw;
+    }
+}

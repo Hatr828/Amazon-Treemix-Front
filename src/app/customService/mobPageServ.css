@@ -1,0 +1,86 @@
+@media (max-width: 768px) {
+    /* DELIVERY */
+
+    .text-looking-div {
+        font-size: 1.87vw; 
+        width: 41.569vw;
+        margin-top: 2vw;
+    }
+
+    .div-visit-contact {
+        font-size: 1.87vw;
+    }
+
+    .div-for-icon-text-i {
+        font-size: 2.6vw;
+        gap: 4vw;
+        margin-top: 4vw;
+        margin-left: 2.5vw;
+    }
+
+    .div-for-icon-i {
+        width: 6.25vw;
+        height: 6.25vw;
+        border-radius: 1vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-in-pages {
+        font-size: 3.7vw;
+    }
+
+    .div-for-search-text {
+        font-size: 2.08vw;
+        margin-left: 13vw;
+        margin-top: 4vw;
+        gap: 2vw;
+    }
+
+    .input-delivery {
+        font-size: 1.8vw;
+        padding: 2vw;
+        width: 37.5vw;
+        height: 4.36vw;
+        border-radius: 1.302vw;
+        box-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .searchIconnn {
+        right: 1.5vw;
+        top: 55%;
+        height: 2.2vw;
+    }
+
+    /* INTERNATIONAL */
+
+    .div-for-pick {
+        margin-top: 4vw;
+        padding: 3.2vw;
+        border-radius: 2.08vw;
+        width: 79.01vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+        font-size: 2.3vw;
+    }
+
+    .div-pick {
+        font-size: 1.875vw;
+        height: 6.5vw;
+        border-radius: 2.042vw;
+        padding-left: 2vw;
+        padding-right: 4vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-description-service {
+        font-size: 1.875vw;
+    }
+
+    .need-help-button {
+        width: 25vw;
+        height: 5vw;
+        margin-top: 8vw;
+        border-radius: 2.042vw;
+        font-size: 2.042vw;
+        text-shadow: 0px 0.408vw 0.408vw rgba(0, 0, 0, 0.25);
+    }
+}

@@ -51,6 +51,10 @@
   letter-spacing: 0%;
 }
 
+.active {
+  color: #7e8cbd;
+}
+
 .text-check-category-name {
   display: flex;
   position: relative;
@@ -202,15 +206,34 @@
   letter-spacing: 0%;
 }
 
+.text-item-mob {
+  font-size: 0.938vw;
+}
+
 .div-for-blocks-Product {
   display: flex;
   position: relative;
   flex-wrap: wrap;
-  justify-content: space-between;
 
   gap: 1vw;
   margin-top: 3vw;
   width: 100%;
+}
+
+.button-reset {
+  background-color: rgba(179, 179, 179, 1);
+  color: white;
+  border: none;
+  outline: none;
+
+  margin-left: 1vw;
+  padding: 0.15vw 1.25vw;
+  border-radius: 2.656vw;
+  font-size: 0.938vw;
+  line-height: 130%;
+  letter-spacing: 0%;
+  text-shadow: 0px 0.104vw 0.208vw 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -0.208vw 0.208vw 0.312vw 0px rgba(0, 0, 0, 0.2);
 }
 
 /* Фильтры сортировки */

@@ -1,0 +1,319 @@
+@media (max-width: 768px) {
+    /* Большие блочки */
+    .div-for-big-blocks {
+        flex-wrap: wrap;
+
+        gap: 2vw;
+    }
+
+    .div-big-block {
+        width: 38.5vw;
+        height: 48vw;
+        padding: 2.5vw;
+        border-radius: 2vw;
+    }
+
+    .photo-div-big-block {
+        width: 32vw;
+        height: 37.5vw;
+    }
+
+    .head-text-more {
+        font-size: 2.5vw;
+        margin-bottom: 1.4vw;
+    }
+
+    .text-more {
+        font-size: 1.4vw;
+    }
+
+    .div-for-special-big-block {
+        width: 38.2vw;
+        height: 48vw;
+        gap: 1.2vw;
+    }
+
+    .div-pre-big-block {
+        width: 38.4vw;
+        height: 30.4vw;
+        border-radius: 2vw;
+        padding: 7vw;
+        font-size: 2.5vw;
+        text-shadow: 0px 0.408vw 0.408vw rgba(0, 0, 0, 0.25);
+    }
+
+    .div-pre-sign-block {
+        width: 38.4vw;
+        height: 16.35vw;
+        border-radius: 2vw;
+        padding: 4vw;
+        gap: 1vw;
+        font-size: 2.5vw;
+        text-shadow: 0px 0.408vw 0.408vw rgba(0, 0, 0, 0.25);
+    }
+
+    .button-pre-sign-block {
+        padding: 0.5vw 3.5vw 0.5vw 3.5vw;
+        border-radius: 5vw;
+        font-size: 1.86vw;
+    }
+
+    /* Маленькие блочки в большом */
+    .div-for-small-blocks-in-big {
+        flex-wrap: wrap;
+        gap: 2vw;
+    }
+
+    .photo-div-for-small-blocks-in-big {
+        width: 11vw;
+        height: 10vw;
+    }
+
+    .div-big-for-small-icon {
+        gap: 1.66vw;
+    }
+
+    .div-for-small-icon {
+        border-radius: 1vw;
+        width: 15.8vw;
+        height: 15.8vw;
+        font-size: 1.25vw;
+        padding: 2vw;
+        gap: 0.5vw;
+        box-shadow: 0px 0.404vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Блоки в колонку и в ряд */
+    .div-for-column-row {
+        flex-wrap: wrap;
+        gap: 1vw;
+        bottom: 4.5vw;
+    }
+    
+    .div-for-column-blocks-in-big {
+        width: 78.792vw;
+        height: 66.073vw;
+    }
+
+    .head-text-more-column {
+        font-size: 2.5vw;
+        margin-bottom: 1.4vw;
+        padding: 0 0 0 3vw;
+    }
+
+    .div-column {
+        height: 18vw;
+        gap: 3vw;
+    }
+
+    .icon-column {
+        width: 18vw;
+        height: 18vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+        border-radius: 1vw;
+    }
+
+    .photo-column-product {
+        width: 15vw;
+        height: 15vw;
+    }
+
+    .div-name-product {
+        width: 40.408vw;
+        font-size: 1.8vw;
+        margin-bottom: 1vw;
+    }
+
+    .div-cost-product {
+        font-size: 3.75vw;
+    }
+
+    .div-for-row-blocks-in-big {
+        margin-top: 1.5vw;
+        margin-bottom: 1.5vw;
+        width: 78.792vw;
+        height: 66.073vw;
+    }
+
+    .div-for-rows {
+        height: 61vw;
+    }
+
+    .div-row {
+        width: 24.4vw;
+        border-radius: 1.021vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+        padding: 0 0 2vw 2vw;
+    }
+
+    .photo-row-product {
+        width: 22.5vw;
+        height: 39.5vw;
+        top: 7vw;
+    }
+
+    .div-name-product-column {
+        font-size: 2.246vw;
+    }
+
+    /* Список товаров в ряд с рулеткой */
+
+    .div-for-list-product {
+        width: 78.792vw;
+        height: 44.848vw;
+    }
+
+    .head-text-more-list {
+        font-size: 2.5vw;
+        margin-bottom: 3vw;
+    }
+
+    .list-product {
+        height: 39vw;
+    }
+
+    .icon-list-product {
+        width: 28.063vw;
+    }
+
+    .icon-for-list-product-photo {
+        width: 28.063vw;
+        height: 28.063vw;
+        border-radius: 2.042vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .list-product-photo {
+        width: 24.083vw;
+        height: 22vw;
+    }
+
+    .text-list-product {
+        font-size: 1.85vw;
+    }
+
+    .list-cost-product {
+        font-size: 3.75vw;
+    }
+
+    .currency {
+        font-size: 1.85vw;
+    }
+
+    .chevLeft,
+    .chevRight {
+        font-size: 4vw;
+        margin-top: 11vw;
+        margin-right: 1vw;
+    }
+
+    /* Для средних блочков */
+
+    .div-for-middle-blocks {
+        flex-wrap: wrap;
+
+        height: 100%;
+        gap: 1vw;
+        margin-bottom: 2vw;
+        margin-top: 2vw;
+    }
+
+    .middle-block-chevron {
+        width: 38.4vw;
+        height: 46.958vw;
+        border-radius: 2vw;
+
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .middle-block {
+        width: 38.4vw;
+        border-radius: 2vw;
+        padding: 3vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .middle-block-photo {
+        width: 32vw;
+        height: 35vw;
+    }
+
+    .middle-block-photo-chevron {
+        width: 21.6vw;
+        height: 26.6vw;
+    }
+
+    .div-with-chevron {
+        height: 26.6vw;
+    }
+
+    .block-for-chevron {
+        height: 8vw;
+        width: 8vw;
+        border-radius: 2vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .left,
+    .right {
+        font-size: 4vw;
+    }
+
+    .head-text-middle-block {
+        font-size: 2.5vw;
+        margin: 3vw;
+    }
+
+    .div-name-product-middle-block {
+        font-size: 1.8vw;
+        margin: 1vw 3vw 3vw 3vw;
+    }
+
+    /*recommendations */
+
+    .div-recommendations {
+        gap: 0.5vw;
+        margin: 6vw 0 2.5vw 0;
+        font-size: 2.5vw;
+    }
+
+    .button-recommendations {
+        text-shadow: 0px 0.408vw 0.408vw rgba(0, 0, 0, 0.25);
+        border-radius: 5vw;
+        width: 40vw;
+        height: 5vw;
+        font-size: 2.5vw;
+    }
+
+    .div-customer-text {
+        gap: 0.5vw;
+        font-size: 1.45vw;
+    }
+
+    .div-start-here {
+        font-size: 1.45vw;
+    }
+
+    /* Последние блочки */
+
+    .list-product-product-viewed {
+        height: 26.666vw;
+    }
+
+    .icon-list-product-viewed {
+        width: 26.042vw;
+        height: 26.666vw;
+        border-radius: 1.042vw;
+        padding: 2vw;
+        box-shadow: 0px 0.204vw 0.408vw 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .list-product-photo-viewed {
+        width: 14.6vw;
+        height: 14.6vw;
+    }
+
+    .name-product-viewed {
+        font-size: 1.86vw;
+    }
+}  

@@ -1,6 +1,7 @@
 "use client";
 
 import "./HomePage.css";
+import "./mobHomePage.css";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HomeProductDto } from "@/infra/openapi/amzn.dto";
@@ -19,7 +20,23 @@ export function HomePage() {
 
   const [startIndex, setStartIndex] = useState(0);
 
-  const visibleCount = 5;
+  const [visibleCount, setVisibleCount] = useState(5);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVisibleCount(2);
+      } else {
+        setVisibleCount(5);
+      }
+      setStartIndex(0);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const nextSlide = () => {
     if (products.length === 0) return;
