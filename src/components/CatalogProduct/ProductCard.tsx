@@ -20,10 +20,7 @@ interface ProductCardProps {
   variant?: "catalog" | "slider";
 }
 
-export function ProductCard({
-  product,
-  variant = "catalog",
-}: ProductCardProps) {
+export function ProductCard({ product, variant = "catalog" }: ProductCardProps) {
   const hasDiscount = product.price.current !== product.price.original;
 
   if (variant === "slider") {
@@ -72,10 +69,7 @@ export function ProductCard({
         <RatingStars rating={product.rating} />
       </div>
 
-      <ProductPrice
-        current={product.price.current}
-        original={product.price.original}
-      />
+      <ProductPrice current={product.price.current} original={product.price.original} />
 
       <div className="ship-to-text">Ship to USA</div>
     </div>

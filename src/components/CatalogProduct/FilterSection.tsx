@@ -17,7 +17,7 @@ interface Props {
 
   selectedSubCategory: string | null;
   setSelectedSubCategory: React.Dispatch<React.SetStateAction<string | null>>;
-  
+
   selectedBrands: string[];
   setSelectedBrands: React.Dispatch<React.SetStateAction<string[]>>;
 
@@ -72,16 +72,14 @@ export const FilterSectionComponent = ({
             section.items.map((item) => (
               <div
                 key={item.id}
-                className={`text-category-name ${
-                  selectedSubCategory === item.id ? "active" : ""
-                }`}
+                className={`text-category-name ${selectedSubCategory === item.id ? "active" : ""}`}
                 onClick={() =>
                   setSelectedSubCategory((prev) => (prev === item.id ? null : item.id))
                 }
               >
                 {item.name}
               </div>
-           ))}
+            ))}
 
           {/* CHECKBOX */}
           {section.type === "checkbox" && (
@@ -97,7 +95,7 @@ export const FilterSectionComponent = ({
                           setSelectedBrands((prev) =>
                             prev.includes(brand.id)
                               ? prev.filter((b) => b !== brand.id)
-                              : [...prev, brand.id]
+                              : [...prev, brand.id],
                           )
                         }
                       />
@@ -112,9 +110,7 @@ export const FilterSectionComponent = ({
                         checked={selectedBrands.includes(item)}
                         onChange={() =>
                           setSelectedBrands((prev) =>
-                            prev.includes(item)
-                              ? prev.filter((b) => b !== item)
-                              : [...prev, item]
+                            prev.includes(item) ? prev.filter((b) => b !== item) : [...prev, item],
                           )
                         }
                       />
@@ -129,9 +125,7 @@ export const FilterSectionComponent = ({
             <div className="text-check-category-name">
               <RatingStarsChoice
                 selectedRating={selectedRating}
-                onSelect={(value) =>
-                  setSelectedRating(selectedRating === value ? null : value)
-                }
+                onSelect={(value) => setSelectedRating(selectedRating === value ? null : value)}
               />
               & Up
             </div>
@@ -166,9 +160,7 @@ export const FilterSectionComponent = ({
                   min={section.min}
                   max={section.max}
                   value={minPrice}
-                  onChange={(e) =>
-                    setMinPrice(Math.min(Number(e.target.value), maxPrice - 1))
-                  }
+                  onChange={(e) => setMinPrice(Math.min(Number(e.target.value), maxPrice - 1))}
                   className="thumb"
                 />
                 <input
@@ -176,9 +168,7 @@ export const FilterSectionComponent = ({
                   min={section.min}
                   max={section.max}
                   value={maxPrice}
-                  onChange={(e) =>
-                    setMaxPrice(Math.max(Number(e.target.value), minPrice + 1))
-                  }
+                  onChange={(e) => setMaxPrice(Math.max(Number(e.target.value), minPrice + 1))}
                   className="thumb"
                 />
               </div>

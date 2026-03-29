@@ -6,11 +6,7 @@ interface ProductPriceProps {
   className?: string;
 }
 
-export function ProductPrice({
-  current,
-  original,
-  className = "",
-}: ProductPriceProps) {
+export function ProductPrice({ current, original, className = "" }: ProductPriceProps) {
   const hasDiscount = current !== original;
 
   return (

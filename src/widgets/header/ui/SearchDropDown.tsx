@@ -47,7 +47,11 @@ export const SearchDropdown: React.FC = () => {
           <div className="searchDropdownArrow" />
           <ul className="searchDropdownList">
             {categories.map((cat) => (
-              <li key={cat.id} className="searchDropdownItem" onClick={() => handleCategoryClick(cat.id)}>
+              <li
+                key={cat.id}
+                className="searchDropdownItem"
+                onClick={() => handleCategoryClick(cat.id)}
+              >
                 {cat.name}
               </li>
             ))}
