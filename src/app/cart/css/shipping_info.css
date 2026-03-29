@@ -1,0 +1,47 @@
+﻿.shipping-wrapper {
+    width: 1047px;
+    height: 586px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shipping-container {
+    width: 1047px;
+    height: 586px;
+
+    background: #f8f8f8;
+    border-radius: 20px;
+    padding: 40px 50px;
+    filter: drop-shadow(0 2px 4px #00000033);
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    margin: 40px auto;
+
+}
+
+.shipping-title {
+    font-size: 22px;
+    font-weight: 500;
+    color: #333;
+}
+
+.shipping-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.shipping-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.shipping-text {
+    font-size: 14px;
+    color: #777;
+}

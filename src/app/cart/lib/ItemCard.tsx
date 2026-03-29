@@ -18,8 +18,11 @@ export function ItemCard({
   const [isOpen, setIsOpen] = useState(false);
   const { toggleItemAddition } = useCart();
 
+  const [isOpen, setIsOpen] = useState(false);
+  const {toggleItemAddition} = useCart()
+
   const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpen(prev => !prev);
   };
 
   return (
@@ -101,39 +104,39 @@ export function ItemCard({
               {item.price}
             </span>
           </div>
+
+        {isOpen && item.additions &&(
+            <ul className="additions_list">
+                {item.additions.map((addition, index) => (
+                    <li key={`${item.id}-addition-${index}`}>
+                        <label className="checkbox_wrapper">
+                            <input
+                                type="checkbox"
+                                className="checkbox_input"
+                                checked={addition.checked || false}
+                                onChange={() => toggleItemAddition(item.id, addition.id)}
+                            />
+                            <div className="checkbox_icons">
+                                <img
+                                    src="/cart_item_checkbox_unchecked.svg"
+                                    className="icon_unchecked"
+                                    alt="unchecked"
+                                />
+                                <img
+                                    src="/cart_item_checkbox_checked.svg"
+                                    className="icon_checked"
+                                    alt="checked"
+                                />
+                            </div>
+                        </label>
+                        {addition.name}
+                        <span className='addition_price'>${addition.price}</span>
+                    </li>
+                ))}
+            </ul>
+        )}
         </div>
 
-        {isOpen && item.additions && (
-          <ul className="additions_list">
-            {item.additions.map((addition, index) => (
-              <li key={`${item.id}-addition-${index}`}>
-                <label className="checkbox_wrapper">
-                  <input
-                    type="checkbox"
-                    className="checkbox_input"
-                    checked={addition.checked || false}
-                    onChange={() => toggleItemAddition(item.id, addition.id)}
-                  />
-                  <div className="checkbox_icons">
-                    <img
-                      src="/cart_item_checkbox_unchecked.svg"
-                      className="icon_unchecked"
-                      alt="unchecked"
-                    />
-                    <img
-                      src="/cart_item_checkbox_checked.svg"
-                      className="icon_checked"
-                      alt="checked"
-                    />
-                  </div>
-                </label>
-                {addition.name}
-                <span className="addition_price">${addition.price}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
     </div>
-  );
+  )
 }

@@ -11,7 +11,7 @@ export function Header() {
   const { items } = useCart();
   const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0);
   const router = useRouter();
-
+  
   return (
     <header>
       <div className="headerTopSection">

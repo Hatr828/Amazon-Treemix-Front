@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
-import { CartItem, CartItemAddition } from "@/app/cart/misc/types";
+import {CartItem, CartItemAddition} from "@/app/cart/misc/types";
 
 type CartContextType = {
   items: CartItem[];
@@ -81,12 +81,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       rating: 4,
       selected: false,
       additions: [
-        { id: "1", name: "Installing licensed Windows", price: 20 },
-        {
-          id: "2",
-          name: "Antivirus ESET Internet Security (2 PCs) license for 1 year Basic",
-          price: 20,
-        },
+          {id: '1', name: 'Installing licensed Windows', price: 20},
+          {id: '2', name: 'Antivirus ESET Internet Security (2 PCs) license for 1 year Basic', price: 20}
       ],
     },
     {
@@ -157,6 +153,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
+
+  const toggleItemAddition = (itemId: string, additionId: string) => {
+    setItems(prev =>
+        prev.map(item => {
+          if (item.id !== itemId) return item;
+
+          return {
+            ...item,
+            additions: item.additions?.map(addition =>
+                addition.id === additionId
+                    ? { ...addition, checked: !addition.checked }
+                    : addition
+            )
+          };
+        })
+    );
+  };
+
   const selectAll = () => {
     setItems((prev) => {
       const allSelected = prev.every((item) => item.selected);
@@ -178,7 +192,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
-  const cartCount = items.reduce((total, item) => total + item.quantity, 0);
+  const cartCount = items.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const calcSubtotal = items.reduce((total, item) => {
+    if (!item.selected) return total;
+
+    const additionsTotal =
+        item.additions?.reduce((sum, addition) =>
+                addition.checked ? sum + addition.price : sum
+            , 0) || 0;
+
+    return total + (item.price + additionsTotal) * item.quantity;
+  }, 0);
 
   const calcSubtotal = items.reduce((total, item) => {
     if (!item.selected) return total;
