@@ -153,24 +153,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     );
   };
 
-
-  const toggleItemAddition = (itemId: string, additionId: string) => {
-    setItems(prev =>
-        prev.map(item => {
-          if (item.id !== itemId) return item;
-
-          return {
-            ...item,
-            additions: item.additions?.map(addition =>
-                addition.id === additionId
-                    ? { ...addition, checked: !addition.checked }
-                    : addition
-            )
-          };
-        })
-    );
-  };
-
   const selectAll = () => {
     setItems((prev) => {
       const allSelected = prev.every((item) => item.selected);
@@ -196,17 +178,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     (total, item) => total + item.quantity,
     0
   );
-
-  const calcSubtotal = items.reduce((total, item) => {
-    if (!item.selected) return total;
-
-    const additionsTotal =
-        item.additions?.reduce((sum, addition) =>
-                addition.checked ? sum + addition.price : sum
-            , 0) || 0;
-
-    return total + (item.price + additionsTotal) * item.quantity;
-  }, 0);
 
   const calcSubtotal = items.reduce((total, item) => {
     if (!item.selected) return total;
