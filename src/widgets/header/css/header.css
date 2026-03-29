@@ -1,4 +1,4 @@
-﻿﻿header {
+﻿header {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -13,20 +13,18 @@
   height: 90px;
 }
 .headerBottomSection {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #9EA5B8;
-    padding: 0 2.5vw;
-    height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #9ea5b8;
+  padding: 0 2.5vw;
+  height: 60px;
 }
-
 .geoMarker {
   display: flex;
   flex-direction: row;
 }
-
 .headerButton {
   display: flex;
   align-items: center;
@@ -38,7 +36,6 @@
   padding: 10px 14px;
   height: 50px;
 }
-
 .headerText {
   display: flex;
   flex-direction: column;
@@ -54,7 +51,6 @@
   letter-spacing: 0;
   text-shadow: 0px 2px 4px 0px #00000033;
 }
-
 .headerText > span:last-child {
   font-family: Roboto, sans-serif;
   font-weight: 900;
@@ -64,55 +60,50 @@
   letter-spacing: 0;
   text-shadow: 0px 2px 4px 0px #00000033;
 }
-
 .headerIcon {
   display: flex;
   align-items: center;
 }
-
 .cartButton {
-    border: 2px solid rgba(0,0,0,0);
-    border-radius: 14px;
-    background-color: rgba(255, 255, 255, .2);
-    cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
-/*//////////////*/
-
+/*//////////////*
 .cart {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 50px;
-    background: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  background: none;
 }
-
 .cart-icon {
-    width: 60%;
-    height: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 60%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cart-badge {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: -15px;
-    right: -15px;
-    background: linear-gradient(144.29deg, #ffdb5a -0.18%, #ff825a 101.85%);
-    color: white;
-    font-weight: bold;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
-    box-shadow: -4px 4px 6px 0px #0000001a inset;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -15px;
+  right: -15px;
+  background: linear-gradient(144.29deg, #ffdb5a -0.18%, #ff825a 101.85%);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  box-shadow: -4px 4px 6px 0px #0000001a inset;
 }
-
 .cart-badge * {
   font-family: Roboto, sans-serif;
   font-weight: 900;
@@ -123,35 +114,31 @@
   text-align: center;
   box-shadow: 0px 2px 4px 0px #00000033;
 }
-
 .buttonMore {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }
-
 .linksGroup {
-    width: 100%;
-    padding: 0 15.5vw;
-    display: flex;
-    white-space: nowrap;
-    text-decoration: none;
-    justify-content: space-between;
+  width: 100%;
+  padding: 0 15.5vw;
+  display: flex;
+  white-space: nowrap;
+  text-decoration: none;
+  justify-content: space-between;
 }
-
 .linksGroup * {
-    padding: 0 5%;
-    color: white;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 17px;
-    line-height: 1.5;
-    letter-spacing: 0;
-    text-shadow: 0px 2px 4px 0px #00000033;
-    text-decoration: none;
-    margin: 0;
+  padding: 0 5%;
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-shadow: 0px 2px 4px 0px #00000033;
+  text-decoration: none;
+  margin: 0;
 }
-
 .searchForm {
   display: flex;
   align-items: center;
@@ -161,7 +148,6 @@
   border-radius: 26px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 .searchFormButton {
   height: 100%;
   width: 80px;
@@ -179,7 +165,6 @@
   letter-spacing: 0;
   text-shadow: 0 2px 4px #00000033;
 }
-
 .form {
   background: #f8f8f8;
   border-radius: 26px;
@@ -188,7 +173,6 @@
   height: 100%;
   align-items: center;
 }
-
 .formInput {
   flex: 1;
   height: 100%;
@@ -197,7 +181,6 @@
   padding: 0 15px;
   background: transparent;
 }
-
 .formSubmitButton {
   height: 55%;
   background: transparent;
@@ -208,7 +191,6 @@
   justify-content: center;
   padding-right: 15px;
 }
-
 .mainLogo {
   width: 109px;
   height: 62px;

@@ -12,7 +12,11 @@ export function RatingStarsChoice({
       {[1, 2, 3, 4, 5].map((star) => {
         const active = selectedRating !== null && star <= selectedRating;
         return (
-          <span key={star} onClick={() => onSelect(star)} style={{ color: active ? "#f5a623" : "#ccc", fontSize: "1.542vw" }}>
+          <span
+            key={star}
+            onClick={() => onSelect(star)}
+            style={{ color: active ? "#f5a623" : "#ccc", fontSize: "1.542vw" }}
+          >
             ★
           </span>
         );

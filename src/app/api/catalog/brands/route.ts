@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { errorResponse } from "../../auth/authBackend"
+import { errorResponse } from "../../auth/authBackend";
 
 const BASE_URL = process.env.NEXT_PUBLIC_AMZN_API_BASE!;
 

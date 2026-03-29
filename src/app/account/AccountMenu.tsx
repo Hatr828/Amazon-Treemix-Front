@@ -24,7 +24,6 @@ const menuItems = [
     icon: "/icons/question.png",
     label: "Digital Services and Device Support",
   },
-  { href: "/account/messages", icon: "/icons/message.png", label: "Your Messages" },
 ];
 
 export default function AccountMenu() {
@@ -45,14 +44,13 @@ export default function AccountMenu() {
           const isActive = isItemActive(item.href);
 
           return (
-            <li
-              key={item.label}
-              className={`account-menu-item${isActive ? " is-active" : ""}`}
-            >
+            <li key={item.label} className={`account-menu-item${isActive ? " is-active" : ""}`}>
               <Link
                 href={item.href}
                 className="account-menu-link"
                 aria-current={isActive ? "page" : undefined}
+                aria-label={item.label}
+                title={item.label}
               >
                 <Image
                   src={item.icon}

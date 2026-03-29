@@ -19,11 +19,13 @@ export default function GiftCardPage() {
         </div>
 
         <p className="account-gift-subtitle">Your Gift Card Balance:</p>
-        <p className="account-gift-text">Auto-Reload on a schedule or when your balance gets low.</p>
+        <p className="account-gift-text">
+          Auto-Reload on a schedule or when your balance gets low.
+        </p>
         <button type="button" className="account-gift-link">
           Set up Auto-Reload
         </button>
-        
+
         <div className="account-gift-actions-bottom">
           <button type="button" className="account-gift-save">
             Save

@@ -1,31 +1,20 @@
 import { useState } from "react";
 import "./CatalogProduct.css";
 
-export type SortOption =
-  | "Price: Low to High"
-  | "Price: High to Low"
-  | "Avg. Customer Review"
-  | "Newest Arrivals"
-  | "Featured";
-
-type SortByProps = {
-  selectedSort: SortOption;
-  onChange: (option: SortOption) => void;
-};
-
-export function SortBy({ selectedSort, onChange }: SortByProps) {
+export function SortBy() {
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("Featured");
 
-  const options: SortOption[] = [
+  const options = [
+    "Featured",
     "Price: Low to High",
     "Price: High to Low",
     "Avg. Customer Review",
     "Newest Arrivals",
-    "Featured",
   ];
 
-  const handleSelect = (option: SortOption) => {
-    onChange(option);
+  const handleSelect = (option: string) => {
+    setSelected(option);
     setOpen(false);
   };
 
@@ -33,16 +22,15 @@ export function SortBy({ selectedSort, onChange }: SortByProps) {
     <div className="sort-container">
       <button className="sort-button" onClick={() => setOpen(!open)}>
         <span className="sort-label">Sort by:</span>
-        <span className="sort-selected">{selectedSort}</span>
+        <span className="sort-selected">{selected}</span>
         <span className="sort-arrow">▾</span>
       </button>
-
       {open && (
         <div className="sort-menu">
           {options.map((option, index) => (
             <div
               key={index}
-              className={`sort-item ${selectedSort === option ? "active" : ""}`}
+              className={`sort-item ${selected === option ? "active" : ""}`}
               onClick={() => handleSelect(option)}
             >
               {option}
