@@ -4,6 +4,7 @@ import styles from "./Footer.module.css";
 
 type FooterLink = { label: string; href: string };
 type FooterColumn = { title: string; links: FooterLink[] };
+type MobileFooterLink = FooterLink & { fullRow?: boolean };
 
 const columns: FooterColumn[] = [
   {
@@ -49,6 +50,18 @@ const columns: FooterColumn[] = [
   },
 ];
 
+const mobileLinks: MobileFooterLink[] = [
+  { label: "Your Lists", href: "#" },
+  { label: "Your Orders", href: "#" },
+  { label: "Find a Gift", href: "#" },
+  { label: "Gift Cards & Registry", href: "#" },
+  { label: "Browsing History", href: "#" },
+  { label: "Your Account", href: "#" },
+  { label: "Returns", href: "#" },
+  { label: "Sell products on Treemix", href: "#" },
+  { label: "Customer Service", href: "#", fullRow: true },
+];
+
 export default function Footer() {
   const onBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -80,6 +93,22 @@ export default function Footer() {
               </section>
             ))}
           </div>
+
+          <ul className={styles.mobileLinks} aria-label="Footer quick links">
+            {mobileLinks.map((link) => {
+              const itemClassName = link.fullRow
+                ? `${styles.mobileItem} ${styles.mobileItemFull}`
+                : styles.mobileItem;
+
+              return (
+                <li key={link.label} className={itemClassName}>
+                  <a className={styles.mobileLink} href={link.href}>
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </nav>
     </footer>
