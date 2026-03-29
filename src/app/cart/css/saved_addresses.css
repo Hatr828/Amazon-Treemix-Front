@@ -1,0 +1,121 @@
+﻿.address-wrapper {
+    width: 1047px;
+    height: 929px;
+    margin: 40px auto;
+}
+
+.address-container {
+    width: 1047px;
+    height: 929px;
+    margin: 40px auto;
+    background: #e9e9e9;
+    border-radius: 20px;
+    filter: drop-shadow(0 2px 4px #00000033);
+    padding: 40px 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.address-title {
+    font-size: 26px;
+    color: #333;
+}
+
+.address-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.address-card {
+    height: 110px;
+    background: #efefef;
+    border-radius: 16px;
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.address-card.active {
+    background: #e3e3e3;
+}
+
+.address-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.address-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.address-checkbox input {
+    display: none;
+}
+
+.checkmark {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #496B94;
+    border-radius: 5px;
+    background: transparent;
+    position: relative;
+    transition: 0.2s;
+}
+
+.address-checkbox input:checked + .checkmark {
+    background: #496B94;
+}
+
+.address-checkbox input:checked + .checkmark::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    top: 4px;
+    left: 8px;
+}
+
+.address-info {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.address-edit {
+    width: 90px;
+    height: 38px;
+    border-radius: 20px;
+    border: none;
+    background: #e6e6e6;
+    filter: drop-shadow(0 2px 4px #00000033);
+    cursor: pointer;
+}
+
+.address-add {
+    margin-top: auto;
+    width: 195px;
+    height: 48px;
+    border: none;
+    border-radius: 20px;
+    background: #7C9BC0;
+    font-size: 15px;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px #00000033);
+}
+
+.address-add span {
+    filter: drop-shadow(0 2px 4px #00000033);
+    color: #fff;
+}

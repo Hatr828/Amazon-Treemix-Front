@@ -1,0 +1,39 @@
+﻿.proceed_to_checkout {
+    background-color: #F8F8F8;
+    border-radius: 10px;
+    filter: drop-shadow(0 2px 4px #00000033);
+
+    display: flex;
+    flex-direction: column;
+    height: 10vw;
+    width: 20vw;
+
+    margin-top: 220px;
+}
+
+.proceed_to_checkout h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    padding: 11px 0 12px 20px;
+}
+
+.proceed_to_checkout button {
+    background-color: #7C9BC0;
+    border-radius: 20px;
+    width: 275px;
+    height: 48px;
+    margin-top: auto;
+    margin-bottom: 28px;
+    border: none;
+    color: white;
+}
+
+.order_contains_a_gift_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.order_contains_a_gift {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}

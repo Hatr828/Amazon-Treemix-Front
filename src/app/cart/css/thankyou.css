@@ -1,0 +1,84 @@
+﻿.thankyou-page {
+    width: 100%;
+    height: 100vh;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.thankyou-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.thankyou-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.thankyou-title {
+    font-size: 48px;
+    font-weight: 500;
+    background: linear-gradient(90deg, #7E8CBD, #CE9AD7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.thankyou-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-primary {
+    width: 180px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    background: #7C9BC0;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px #00000033);
+}
+
+.btn-secondary {
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    background: #e0e0e0;
+    color: #666;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.plants-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 80px 40px;
+}
+
+.plant.left {
+    width: 140px;
+    height: 180px;
+}
+
+.plant.center {
+    width: 90px;
+    height: 120px;
+}
+
+.plant.right {
+    width: 140px;
+    height: 180px;
+}
+
+.plant svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
