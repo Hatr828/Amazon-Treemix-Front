@@ -215,3 +215,40 @@
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
   margin-left: 10%;
 }
+
+/*Search*/
+
+.searchForm {
+  position: relative;
+}
+
+.search-suggestions {
+  position: absolute;
+  background: white;
+
+  top: 105%;
+  left: 0;
+  width: 100%;
+  border: 0.1vw solid #ddd;
+  z-index: 1000;
+  border-radius: 1vw;
+}
+
+.search-suggestion-item {
+  padding: 0.8vw;
+  cursor: pointer;
+}
+
+.search-suggestion-item:hover {
+  background: #c8c9cc;
+
+  border-radius: 1vw;
+}
+
+.img-search {
+  width: 3vw;
+  height: 3vw;
+
+  border-radius: 0.25vw;
+  margin-right: 1vw;
+}

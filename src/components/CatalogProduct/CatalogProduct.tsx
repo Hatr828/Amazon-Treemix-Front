@@ -46,28 +46,56 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
   const isAllDepartments = categoryId === ALL_DEPARTMENTS_ID;
 
   const applyFilters = () => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
+
+    const searchQuery = params.get("q");
+
+    if (searchQuery) {
+      params.set("Search", searchQuery);
+    }
+
+    // ❗ очищаем перед установкой
+    params.delete("BrandIds");
     selectedBrands.forEach((b) => params.append("BrandIds", b));
+
     if (selectedRating) {
       params.set("MinRating", selectedRating.toString());
+    } else {
+      params.delete("MinRating");
     }
-    if (selectedSubCategory) {
-      params.set("CategoryId", selectedSubCategory);
-    } else if (categoryId && !isAllDepartments) {
-      params.set("CategoryId", categoryId);
+
+    if (!searchQuery) {
+      if (selectedSubCategory) {
+        params.set("CategoryId", selectedSubCategory);
+      } else if (categoryId && !isAllDepartments) {
+        params.set("CategoryId", categoryId);
+      }
+    } else {
+      params.delete("CategoryId");
     }
+
     params.set("MinPrice", minPrice.toString());
     params.set("MaxPrice", maxPrice.toString());
+
     router.push(`?${params.toString()}`);
   };
+
   //вывод категории
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const params = new URLSearchParams(searchParams.toString());
-        if (!params.get("CategoryId") && categoryId && !isAllDepartments) {
+
+        const searchQuery = params.get("q");
+
+        if (searchQuery) {
+          params.set("Search", searchQuery);
+        }
+
+        if (!searchQuery && !params.get("CategoryId") && categoryId && !isAllDepartments) {
           params.set("CategoryId", categoryId);
         }
+
         const response = await fetch(`/api/catalog?${params.toString()}`);
         const data = await response.json();
         setProducts(data.items ?? []);
@@ -75,8 +103,11 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
         console.error(error);
       }
     };
+
     loadProducts();
   }, [searchParams, categoryId, isAllDepartments]);
+
+  const searchQuery = searchParams.get("q");
 
   useEffect(() => {
     const loadCategories = async () => {
@@ -91,10 +122,18 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
     };
     loadCategories();
   }, []);
+
   //запрос подкатегории
   useEffect(() => {
     const loadSubCategories = async () => {
       try {
+        const searchQuery = searchParams.get("q");
+
+        if (searchQuery) {
+          setSubCategories([]);
+          return;
+        }
+
         if (isAllDepartments) {
           const rootRes = await fetch("/api/categories/root");
           if (!rootRes.ok) throw new Error("Failed to fetch root categories");
@@ -146,6 +185,26 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
     ...filters,
   ];
 
+  //Search
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    setSelectedBrands(params.getAll("BrandIds"));
+
+    const rating = params.get("MinRating");
+    setSelectedRating(rating ? Number(rating) : null);
+
+    const min = params.get("MinPrice");
+    const max = params.get("MaxPrice");
+
+    setMinPrice(min ? Number(min) : 0);
+    setMaxPrice(max ? Number(max) : 999);
+
+    const cat = params.get("CategoryId");
+    setSelectedSubCategory(cat ?? null);
+
+  }, [searchParams]);
+
   // Для сортировки
   const sortedProducts = useMemo(() => {
     const sorted = [...products];
@@ -172,14 +231,34 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
     }
   }, [products, selectedSort]);
 
+  const filteredBrands = useMemo(() => {
+    if (!searchQuery) return brands;
+
+    const productBrandIds = new Set(products.map(p => p.brandId));
+
+    return brands.filter(b => productBrandIds.has(b.id));
+  }, [brands, products, searchQuery]);
+
   //вывод бренды
   useEffect(() => {
     const loadBrands = async () => {
       try {
         let url = "/api/catalog/brands";
-        if (categoryId && !isAllDepartments) {
-          url += `?categoryId=${categoryId}`;
+
+        const params = new URLSearchParams();
+
+        const searchQuery = searchParams.get("q");
+
+        if (searchQuery) {
+          params.set("Search", searchQuery);
         }
+
+        if (categoryId && !isAllDepartments && !searchQuery) {
+          params.set("categoryId", categoryId);
+        }
+
+        url += `?${params.toString()}`;
+
         const res = await fetch(url);
         const data = await res.json();
         setBrands(data);
@@ -276,7 +355,11 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
     setMaxPrice(999);
 
     // сброс URL
-     router.push(window.location.pathname);
+    if (searchQuery) {
+      router.push(`/search?q=${searchQuery}`);
+    } else {
+      router.push(window.location.pathname);
+    }
   };
   
   return (
@@ -288,7 +371,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
             <FilterSectionComponent key={index} section={section} index={index} openSections={openSections} toggleSection={toggleSection}
               selectedDepartments={selectedDepartments} setSelectedDepartments={setSelectedDepartments} selectedBrands={selectedBrands}
               setSelectedBrands={setSelectedBrands} selectedRating={selectedRating} setSelectedRating={setSelectedRating} minPrice={minPrice}
-              setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} brands={brands} 
+              setMinPrice={setMinPrice} maxPrice={maxPrice} setMaxPrice={setMaxPrice} brands={filteredBrands} 
               selectedSubCategory={selectedSubCategory} setSelectedSubCategory={setSelectedSubCategory}/>
           ))}
           <hr className="hr-leftpart-Prod" />
@@ -298,7 +381,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
         </div>
         {/* Правая часть*/}
         <div className="right-part-categoryProd">
-          {currentCategory ? currentCategory.name : "All Departments"}
+          {searchQuery ? `Search results for "${searchQuery}"` : currentCategory ? currentCategory.name : "All Departments"}
           <div className="right-part-description-categoryProd">
             Shop art supplies including painting, drawing, crafting, scrapbooking, fabric and
             jewelry making
