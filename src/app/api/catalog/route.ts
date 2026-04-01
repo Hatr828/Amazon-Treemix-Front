@@ -8,9 +8,20 @@ export async function GET(request: Request): Promise<NextResponse> {
   try {
     const { searchParams } = new URL(request.url);
 
-    const query = searchParams.toString();
+    const params = new URLSearchParams();
 
-    const response = await fetch(`${BASE_URL}/api/products?${query}`);
+    const search = searchParams.get("q");
+    if (search) {
+      params.set("Search", search);
+    }
+
+    searchParams.forEach((value, key) => {
+      if (key !== "q") {
+        params.append(key, value);
+      }
+    });
+
+    const response = await fetch(`${BASE_URL}/api/products?${params.toString()}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch catalog products");
