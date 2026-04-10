@@ -381,10 +381,9 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
         </div>
         {/* Правая часть*/}
         <div className="right-part-categoryProd">
-          {searchQuery ? `Search results for "${searchQuery}"` : currentCategory ? currentCategory.name : "All Departments"}
+          {searchQuery ? `Search results for "${searchQuery}"` : currentCategory ? currentCategory.name : ""}
           <div className="right-part-description-categoryProd">
-            Shop art supplies including painting, drawing, crafting, scrapbooking, fabric and
-            jewelry making
+            {currentCategory?.description ?? ""}
           </div>
           <div className="div-item-sortBy">
             <div>
@@ -437,7 +436,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
           </div>
         {/* Низ */}
       </div>
-      <div style={{ display: "flex", width: "100%", justifyContent: "center", marginTop: "10vw" }}>
+      {/* <div style={{ display: "flex", width: "100%", justifyContent: "center", marginTop: "10vw" }}>
         <div className="div-list-categoryProd">
           <div className="head-text-more-list">
             Smart home products inspired by your shopping trends
@@ -461,7 +460,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
             <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
           </div>
         </div>
-      </div>
+      </div> */}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="div-recommendations">
           See personalized recommendations
