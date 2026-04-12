@@ -180,7 +180,7 @@ export function Header() {
                     <a href="">
                         <p>Gift Cards</p>
                     </a>
-                    <a href="">
+                    <a href="/sell">
                         <p>Sell</p>
                     </a>
                 </div>
