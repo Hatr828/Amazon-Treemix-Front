@@ -148,8 +148,8 @@ export function HomePage() {
             </div>
             <div className="div-big-for-small-icon">
               {cat.products.slice(0, 4).map((product: any) => (
-                  <Link href={`/product_page/${product.id}`} style={{ textDecoration: "none" }}>
-                  <div className="div-for-small-icon" key={product.id}>
+                  <Link href={`/product_page/${product.id}`} style={{ textDecoration: "none" }}  key={product.id}>
+                  <div className="div-for-small-icon">
                     {product.title}
                     <img src={product.image?.url ?? "/example1-product.png"} className="photo-div-for-small-blocks-in-big" />
                 </div>
