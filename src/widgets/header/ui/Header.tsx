@@ -51,13 +51,15 @@ export function Header() {
         <header>
             <div className='headerTopSection'>
 
-                <Image
-                    className='headerIcon'
-                    width={109}
-                    height={62}
-                    src='/header_main_logo.svg'
-                    alt='main logo'
-                />
+                <Link href="/">
+                    <Image
+                        className='headerIcon'
+                        width={109}
+                        height={62}
+                        src='/header_main_logo.svg'
+                        alt='main logo'
+                    />
+                </Link>
 
                 <button className='geoMarker headerButton'>
                     <span className='headerIcon'>
@@ -74,7 +76,6 @@ export function Header() {
                     </span>
                 </button>
 
-                {/* 🔍 SEARCH */}
                 <div className='searchForm'>
                     <SearchDropdown />
 
