@@ -214,116 +214,36 @@
   padding: 6px 10px;
 }
 
-@media (max-width: 900px) {
-  .headerTopSection {
-    padding: 12px 16px;
-    gap: 10px;
-  }
+/*Search*/
 
-  .geoMarker,
-  .headerButton {
-    display: none;
-  }
-
-  .headerIcon img {
-    width: 90px;
-    height: auto;
-  }
-
-  .searchForm {
-    width: 100%;
-    max-width: none;
-    height: 45px;
-  }
-
-  .formInput {
-    font-size: 14px;
-  }
-
-  .cart {
-    width: 42px;
-    height: 42px;
-  }
-
-  .headerBottomSection {
-    padding: 0 10px;
-    height: 50px;
-  }
-
-  .linksGroup {
-    padding: 0;
-    gap: 15px;
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
-
-  .linksGroup p {
-    font-size: 14px;
-    padding: 0 5px;
-  }
-
-  .linksGroup::-webkit-scrollbar {
-    display: none;
-  }
+.searchForm {
+  position: relative;
 }
 
-@media (max-width: 600px) {
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+.search-suggestions {
+  position: absolute;
+  background: white;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  border: 0.1vw solid #ddd;
+  z-index: 1000;
+  border-radius: 1vw;
+}
 
-  .headerTopSection {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 10px;
-    gap: 8px;
-  }
+.search-suggestion-item {
+  padding: 0.8vw;
+  cursor: pointer;
+}
 
-  .headerIcon img {
-    width: 80px;
-  }
+.search-suggestion-item:hover {
+  background: #c8c9cc;
+  border-radius: 1vw;
+}
 
-  .searchForm {
-    order: 3;
-    width: 100%;
-    height: 42px;
-  }
-
-  .searchForm > *:first-child {
-    display: none;
-  }
-
-  .accountDropdown {
-    display: none;
-  }
-
-  .cartButton {
-    margin-left: auto;
-  }
-
-  .headerBottomSection {
-    height: 45px;
-    padding: 0 10px;
-    justify-content: space-between;
-  }
-
-  .buttonMore {
-    display: flex;
-    align-items: center;
-  }
-
-  .linksGroup {
-    justify-content: flex-end;
-    gap: 10px;
-  }
-
-  .linksGroup a:nth-child(n+3) {
-    display: none;
-  }
-
-  .linksGroup p {
-    font-size: 13px;
-  }
+.img-search {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 0.25vw;
+  margin-right: 1vw;
 }

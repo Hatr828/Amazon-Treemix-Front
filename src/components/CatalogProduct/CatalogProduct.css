@@ -362,6 +362,8 @@
 }
 
 .text-Product-categoryProd {
+  white-space: nowrap;
+  overflow: hidden;
   width: 100%;
   font-weight: 400;
   font-size: 0.938vw;

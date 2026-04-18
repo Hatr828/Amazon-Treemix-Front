@@ -36,7 +36,7 @@
 }
 
 .photo-div-big-block {
-  width: 16.042vw;
+  width: 100%;
   height: 18.75vw;
 }
 
@@ -160,7 +160,7 @@
 }
 
 .photo-div-for-small-blocks-in-big {
-  width: 5.677vw;
+  width: 100%;
   height: 4.948vw;
 }
 
@@ -177,6 +177,8 @@
   position: relative;
   flex-direction: column;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
   color: rgba(51, 51, 51, 1);
 
   border-radius: 0.521vw;
@@ -335,6 +337,7 @@
   display: flex;
   position: relative;
   margin-left: auto;
+  cursor: pointer;
 
   width: 11.25vw;
   height: 19.688vw;

@@ -37,6 +37,7 @@ export interface CategoryListItemDto {
   /** @format uuid */
   parentId?: string | null;
   name?: string | null;
+  description?: string | null;
   imageUrl?: string | null;
   hasChildren?: boolean;
 }
@@ -113,6 +114,9 @@ export interface ProductDetailsDto {
   id?: string;
   title?: string | null;
   description?: string | null;
+  /** @format int32 */
+  stockQuantity?: number;
+  isInStock?: boolean;
   /** @format double */
   rating?: number;
   /** @format int32 */
@@ -122,6 +126,126 @@ export interface ProductDetailsDto {
   images?: ImageDto[] | null;
   category?: CategoryDto;
   brand?: BrandDto;
+}
+
+export interface ProductQuestionAnswerDto {
+  /** @format uuid */
+  id?: string;
+  text?: string | null;
+  authorName?: string | null;
+  isSellerAnswer?: boolean;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+}
+
+export interface ProductQuestionAnswerDtoPagedResult {
+  items?: ProductQuestionAnswerDto[] | null;
+  /** @format int32 */
+  page?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalItems?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+export interface ProductQuestionAnswerRequestDto {
+  /**
+   * @minLength 5
+   * @maxLength 2048
+   */
+  text: string;
+}
+
+export interface ProductQuestionDto {
+  /** @format uuid */
+  id?: string;
+  text?: string | null;
+  authorName?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+  /** @format int32 */
+  answersCount?: number;
+  previewAnswers?: ProductQuestionAnswerDto[] | null;
+}
+
+export interface ProductQuestionDtoPagedResult {
+  items?: ProductQuestionDto[] | null;
+  /** @format int32 */
+  page?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalItems?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+export interface ProductQuestionRequestDto {
+  /**
+   * @minLength 5
+   * @maxLength 1024
+   */
+  text: string;
+}
+
+export interface ProductRatingResponseDto {
+  /** @format double */
+  averageRating?: number;
+  /** @format int32 */
+  ratingsCount?: number;
+  /** @format int32 */
+  userRating?: number;
+}
+
+export interface ProfileUpdateRequestDto {
+  /**
+   * @minLength 3
+   * @maxLength 64
+   * @pattern ^[\p{L}\p{M}]+(?:[ '\-][\p{L}\p{M}]+)*$
+   */
+  firstName?: string | null;
+  /**
+   * @minLength 3
+   * @maxLength 64
+   * @pattern ^[\p{L}\p{M}]+(?:[ '\-][\p{L}\p{M}]+)*$
+   */
+  lastName: string;
+  /**
+   * @format email
+   * @minLength 0
+   * @maxLength 128
+   */
+  email: string;
+  /**
+   * @minLength 0
+   * @maxLength 15
+   * @pattern ^\+[1-9]\d{1,14}$
+   */
+  phoneNumber?: string | null;
+  /** @format date */
+  birthDate?: string | null;
+}
+
+export interface ProfileUpdateResponseDto {
+  /** @format uuid */
+  id?: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  email?: string | null;
+  role?: string | null;
+  phoneNumber?: string | null;
+  /** @format date */
+  birthDate?: string | null;
 }
 
 export interface RefreshRequestDto {
@@ -163,6 +287,78 @@ export interface RegisterRequestDto {
    * @minLength 1
    */
   passwordRepeat: string;
+}
+
+export interface ReviewDto {
+  /** @format uuid */
+  id?: string;
+  /** @format int32 */
+  rating?: number;
+  title?: string | null;
+  text?: string | null;
+  authorName?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+}
+
+export interface ReviewDtoPagedResult {
+  items?: ReviewDto[] | null;
+  /** @format int32 */
+  page?: number;
+  /** @format int32 */
+  pageSize?: number;
+  /** @format int32 */
+  totalItems?: number;
+  /** @format int32 */
+  totalPages?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+export interface ReviewRequestDto {
+  /**
+   * @format int32
+   * @min 1
+   * @max 5
+   */
+  rating?: number;
+  /**
+   * @minLength 1
+   * @maxLength 120
+   */
+  title: string;
+  /**
+   * @minLength 1
+   * @maxLength 4000
+   */
+  text: string;
+}
+
+export interface SearchProductSuggestionDto {
+  /** @format uuid */
+  id?: string;
+  title?: string | null;
+  price?: PriceDto;
+  image?: ImageUrlDto;
+  brandName?: string | null;
+  categoryName?: string | null;
+}
+
+export interface SearchSuggestionsResponseDto {
+  products?: SearchProductSuggestionDto[] | null;
+  categories?: CategoryDto[] | null;
+  brands?: BrandDto[] | null;
+}
+
+export interface SetProductRatingRequestDto {
+  /**
+   * @format int32
+   * @min 1
+   * @max 5
+   */
+  rating?: number;
 }
 
 export interface UserResponseDto {
@@ -532,6 +728,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @maxLength 4000
          */
         Description?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        StockQuantity?: number;
         /** @format uuid */
         BrandId: string;
         /** @format uuid */
@@ -712,6 +914,124 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags ProductQuestions
+     * @name ProductsQuestionsList
+     * @request GET:/api/products/{productId}/questions
+     * @secure
+     */
+    productsQuestionsList: (
+      productId: string,
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Page?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 50
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ProductQuestionDtoPagedResult, any>({
+        path: `/api/products/${productId}/questions`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ProductQuestions
+     * @name ProductsQuestionsCreate
+     * @request POST:/api/products/{productId}/questions
+     * @secure
+     */
+    productsQuestionsCreate: (
+      productId: string,
+      data: ProductQuestionRequestDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<ProductQuestionDto, any>({
+        path: `/api/products/${productId}/questions`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ProductQuestions
+     * @name ProductsQuestionsAnswersList
+     * @request GET:/api/products/{productId}/questions/{questionId}/answers
+     * @secure
+     */
+    productsQuestionsAnswersList: (
+      productId: string,
+      questionId: string,
+      query?: {
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Page?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 50
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ProductQuestionAnswerDtoPagedResult, any>({
+        path: `/api/products/${productId}/questions/${questionId}/answers`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags ProductQuestions
+     * @name ProductsQuestionsAnswersCreate
+     * @request POST:/api/products/{productId}/questions/{questionId}/answers
+     * @secure
+     */
+    productsQuestionsAnswersCreate: (
+      productId: string,
+      questionId: string,
+      data: ProductQuestionAnswerRequestDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<ProductQuestionAnswerDto, any>({
+        path: `/api/products/${productId}/questions/${questionId}/answers`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Products
      * @name ProductsDetail
      * @request GET:/api/products/{id}
@@ -739,6 +1059,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @format uuid */
         CategoryId?: string;
         BrandIds?: string[];
+        /**
+         * @minLength 0
+         * @maxLength 100
+         */
+        Search?: string;
         /**
          * @format double
          * @min 0
@@ -803,6 +1128,153 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         query: query,
         secure: true,
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name ProductsRatingUpdate
+     * @request PUT:/api/products/{productId}/rating
+     * @secure
+     */
+    productsRatingUpdate: (
+      productId: string,
+      data: SetProductRatingRequestDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<ProductRatingResponseDto, any>({
+        path: `/api/products/${productId}/rating`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name ProductsReviewsList
+     * @request GET:/api/products/{productId}/reviews
+     * @secure
+     */
+    productsReviewsList: (
+      productId: string,
+      query?: {
+        Sort?: string;
+        /**
+         * @format int32
+         * @min 1
+         * @max 2147483647
+         */
+        Page?: number;
+        /**
+         * @format int32
+         * @min 1
+         * @max 50
+         */
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ReviewDtoPagedResult, any>({
+        path: `/api/products/${productId}/reviews`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name ProductsReviewUpdate
+     * @request PUT:/api/products/{productId}/review
+     * @secure
+     */
+    productsReviewUpdate: (
+      productId: string,
+      data: ReviewRequestDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<ReviewDto, any>({
+        path: `/api/products/${productId}/review`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Search
+     * @name SearchSuggestionsList
+     * @request GET:/api/search/suggestions
+     * @secure
+     */
+    searchSuggestionsList: (
+      query?: {
+        /**
+         * @minLength 0
+         * @maxLength 100
+         */
+        q?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SearchSuggestionsResponseDto, any>({
+        path: `/api/search/suggestions`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags UserAccount
+     * @name UserUpdateCreate
+     * @request POST:/api/user/update
+     * @secure
+     */
+    userUpdateCreate: (
+      data: ProfileUpdateRequestDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<ProfileUpdateResponseDto, any>({
+        path: `/api/user/update`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags UserAccount
+     * @name UserDeleteCreate
+     * @request POST:/api/user/delete
+     * @secure
+     */
+    userDeleteCreate: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/user/delete`,
+        method: "POST",
+        secure: true,
         ...params,
       }),
   };
