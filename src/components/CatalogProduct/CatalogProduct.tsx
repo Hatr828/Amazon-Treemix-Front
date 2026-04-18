@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { RatingStarsChoice } from "./RatingStarsChoice";
 import { SortBy } from "./SortBy";
 import { RatingStars } from "./RatingStars";
+import Link from "next/link";
 
 // Категории
 type FilterSection =
@@ -350,31 +351,33 @@ export function CatalogProduct() {
           <div className="div-for-blocks-Product">
             {products.map((product) => (
               <div key={product.id} className="block-Product-categoryProd">
-                <div className="div-for-sale-favourite">
-                  <div className="sale-icon">SALE</div>
-                  <div className="favourite-icon">
-                    <i className="bi bi-heart"></i>
+                <Link href={`/product_page/${product.id}`}>
+                  <div className="div-for-sale-favourite">
+                    <div className="sale-icon">SALE</div>
+                    <div className="favourite-icon">
+                      <i className="bi bi-heart"></i>
+                    </div>
                   </div>
-                </div>
-                <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-                  <img
-                    src={product.image?.url ?? "/example1-product.png"}
-                    className="img-Product-categoryProd"
-                  />
-                </div>
-                <div className="text-Product-categoryProd">{product.title}</div>
-                <div className="rating-stars">
-                  <RatingStars rating={product.rating} />
-                </div>
-                <div className="price-Product-categoryProd">
-                  <span className="currency-categoryProd">$</span>
-                  {product.price.current}
-                  <div className="sale-categoryProd">
-                    <span className="currency-categoryProdd">$</span>
-                    {product.price.original}
+                  <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                    <img
+                      src={product.image?.url ?? "/example1-product.png"}
+                      className="img-Product-categoryProd"
+                    />
                   </div>
-                </div>
-                <div className="ship-to-text">Ship to USA</div>
+                  <div className="text-Product-categoryProd">{product.title}</div>
+                  <div className="rating-stars">
+                    <RatingStars rating={product.rating} />
+                  </div>
+                  <div className="price-Product-categoryProd">
+                    <span className="currency-categoryProd">$</span>
+                    {product.price.current}
+                    <div className="sale-categoryProd">
+                      <span className="currency-categoryProdd">$</span>
+                      {product.price.original}
+                    </div>
+                  </div>
+                  <div className="ship-to-text">Ship to USA</div>
+                </Link>
               </div>
             ))}
           </div>
