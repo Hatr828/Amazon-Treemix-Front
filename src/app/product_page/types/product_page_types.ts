@@ -1,11 +1,20 @@
 ﻿export type ProductType = {
   id: string;
   title: string;
-  price: number;
+  price: {
+      current: number;
+      original: number;
+  };
   rating: number;
   ratings: number;
   reviews?: [Reviews[], Reviews[]];
-  images: string[];
+  images: {
+      url: string;
+      sortOrder: number;
+  }[];
+  primaryImage: { ///////////
+      url: string;
+  }
   platform: string;
   description: string;
   IsInStock: boolean;

@@ -198,6 +198,22 @@
   margin-left: 10%;
 }
 
+.linksGroup a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.linksGroup a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.linksGroup p {
+  padding: 6px 10px;
+}
+
 /*Search*/
 
 .searchForm {
@@ -207,7 +223,6 @@
 .search-suggestions {
   position: absolute;
   background: white;
-
   top: 105%;
   left: 0;
   width: 100%;
@@ -223,14 +238,12 @@
 
 .search-suggestion-item:hover {
   background: #c8c9cc;
-
   border-radius: 1vw;
 }
 
 .img-search {
   width: 3vw;
   height: 3vw;
-
   border-radius: 0.25vw;
   margin-right: 1vw;
 }
