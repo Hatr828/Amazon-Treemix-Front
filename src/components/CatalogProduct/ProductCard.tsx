@@ -3,6 +3,7 @@
 import "./CatalogProduct.css";
 import { RatingStars } from "./RatingStars";
 import { ProductPrice } from "./ProductPrice";
+import Link from "next/link";
 
 interface ProductCardProps {
   product: {
@@ -46,32 +47,34 @@ export function ProductCard({ product, variant = "catalog" }: ProductCardProps) 
   }
 
   return (
-    <div className="block-Product-categoryProd">
-      <div className="div-for-sale-favourite">
-        {hasDiscount && <div className="sale-icon">SALE</div>}
-        <div></div>
-        <div className="favourite-icon">
-          <i className="bi bi-heart"></i>
+    <Link href={`/product_page/${product.id}`} style={{ textDecoration: "none", color: "black" }}>
+        <div className="block-Product-categoryProd">
+          <div className="div-for-sale-favourite">
+            {hasDiscount && <div className="sale-icon">SALE</div>}
+            <div></div>
+            <div className="favourite-icon">
+              <i className="bi bi-heart"></i>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+            <img
+              src={product.image?.url ?? "/example1-product.png"}
+              className="img-Product-categoryProd"
+              alt={product.title}
+            />
+          </div>
+
+          <div className="text-Product-categoryProd">{product.title}</div>
+
+          <div className="rating-stars">
+            <RatingStars rating={product.rating} />
+          </div>
+
+          <ProductPrice current={product.price.current} original={product.price.original} />
+
+          <div className="ship-to-text">Ship to USA</div>
         </div>
-      </div>
-
-      <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-        <img
-          src={product.image?.url ?? "/example1-product.png"}
-          className="img-Product-categoryProd"
-          alt={product.title}
-        />
-      </div>
-
-      <div className="text-Product-categoryProd">{product.title}</div>
-
-      <div className="rating-stars">
-        <RatingStars rating={product.rating} />
-      </div>
-
-      <ProductPrice current={product.price.current} original={product.price.original} />
-
-      <div className="ship-to-text">Ship to USA</div>
-    </div>
+    </Link>
   );
 }

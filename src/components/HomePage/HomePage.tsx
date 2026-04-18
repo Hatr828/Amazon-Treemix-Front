@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HomeProductDto } from "@/infra/openapi/amzn.dto";
+import Link from "next/link";
 
 export function HomePage() {
   const [products, setProducts] = useState<HomeProductDto[]>([]);
@@ -116,13 +117,18 @@ export function HomePage() {
       {/*  */}
       <div className="div-for-big-blocks">
         {bigCategories.map((cat) => (
-          <div className="div-big-block" key={cat.id}>
-            <div className="head-text-more">
+
+            <div className="div-big-block" key={cat.id}>
+              <Link href={`/product_page/${cat.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+
+              <div className="head-text-more">
               {cat.name}
               <div className="text-more" onClick={() => router.push(`/catalog/${cat.id}`)}>More →</div>
             </div>
             <img  src={cat.imageUrl ?? "/example1-product.png"} className="photo-div-big-block" />
+                </Link>
           </div>
+
         ))}
         <div className="div-for-special-big-block">
           <div className="div-pre-sign-block">
@@ -142,10 +148,12 @@ export function HomePage() {
             </div>
             <div className="div-big-for-small-icon">
               {cat.products.slice(0, 4).map((product: any) => (
-                <div className="div-for-small-icon" key={product.id}>
-                  {product.title}
-                  <img src={product.image?.url ?? "/example1-product.png"} className="photo-div-for-small-blocks-in-big" />
+                  <Link href={`/product_page/${product.id}`} style={{ textDecoration: "none" }}>
+                  <div className="div-for-small-icon" key={product.id}>
+                    {product.title}
+                    <img src={product.image?.url ?? "/example1-product.png"} className="photo-div-for-small-blocks-in-big" />
                 </div>
+                    </Link>
               ))}
             </div>
           </div>
@@ -159,7 +167,10 @@ export function HomePage() {
             <div className="text-more">More →</div>
           </div>
           {popularProducts.slice(0, 3).map((product) => (
-            <div className="div-column" key={product.id}>
+              <Link href={`/product_page/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}  key={product.id}>
+
+              <div className="div-column">
+
               <div className="icon-column">
                 <img src={product.image?.url ?? "/example1-product.png"} className="photo-column-product" />
               </div>
@@ -172,6 +183,8 @@ export function HomePage() {
                 </div>
               </div>
             </div>
+              </Link>
+
           ))}
         </div>
         <div className="div-for-row-blocks-in-big">
@@ -198,7 +211,9 @@ export function HomePage() {
         <div className="list-product">
           <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
           {visibleItems.map((product) => (
-            <div className="icon-list-product" key={product.id}>
+              <Link href={`/product_page/${product.id}`}  key={product.id} style={{ textDecoration: "none", color: "inherit" }}>
+
+              <div className="icon-list-product">
               <div className="icon-for-list-product-photo">
                 <img
                   src={product.image?.url ?? "/example1-product.png"}
@@ -213,6 +228,7 @@ export function HomePage() {
                 </div>
               </div>
             </div>
+              </Link>
           ))}
           <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
         </div>
