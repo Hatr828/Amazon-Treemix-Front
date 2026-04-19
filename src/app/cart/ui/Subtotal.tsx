@@ -26,8 +26,8 @@ export default function Subtotal({ selectedQuantity, calcSubtotal, onNavigate, d
                 </label>
 
                 <span className="order_contains_a_gift">
-          This order contains a gift
-        </span>
+                    This order contains a gift
+                </span>
             </div>
 
             <button onClick={onNavigate} disabled={disabled}>

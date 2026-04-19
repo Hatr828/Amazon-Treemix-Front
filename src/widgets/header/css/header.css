@@ -118,27 +118,7 @@
   background: none;
   border: none;
 }
-.linksGroup {
-  width: 100%;
-  padding: 0 15.5vw;
-  display: flex;
-  white-space: nowrap;
-  text-decoration: none;
-  justify-content: space-between;
-}
-.linksGroup * {
-  padding: 0 5%;
-  color: white;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 17px;
-  line-height: 1.5;
-  letter-spacing: 0;
-  text-shadow: 0px 2px 4px 0px #00000033;
-  text-decoration: none;
-  margin: 0;
-}
+/* ===== LINKS GROUP FIX (ОСНОВА) ===== *//* ===== LINKS GROUP FIX (ОСНОВА) ===== */
 .searchForm {
   display: flex;
   align-items: center;
@@ -198,12 +178,37 @@
   margin-left: 10%;
 }
 
-.linksGroup a {
+/* ===== LINKS GROUP FIX  ===== */
+
+.linksGroup {
+  width: 100%;
   display: flex;
   align-items: center;
-  height: 100%;
+  gap: 15px;
+
+  justify-content: space-between;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  padding: 0 10px;
+
+  margin: 0 15%;
+
+  flex: 1;
+}
+
+.linksGroup a {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
   border-radius: 8px;
+  white-space: nowrap;
   transition: background 0.2s ease;
+  text-decoration: none;
 }
 
 .linksGroup a:hover {
@@ -212,6 +217,37 @@
 
 .linksGroup p {
   padding: 6px 10px;
+  font-size: 14px;
+  margin: 0;
+  color: white;
+  filter: drop-shadow(0px 2px 4px #00000033);
+  text-decoration: none;
+
+}
+
+.linksGroup::-webkit-scrollbar {
+  display: none;
+}
+
+.headerBottomSection {
+  display: flex;
+  align-items: center;
+  background-color: #9ea5b8;
+  padding: 0 12px;
+  height: 60px;
+  gap: 10px; /* добавь */
+}
+
+.headerBottomSection::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+
+  background: linear-gradient(to left, #9ea5b8, transparent);
+  pointer-events: none;
 }
 
 /*Search*/
@@ -246,4 +282,114 @@
   height: 3vw;
   border-radius: 0.25vw;
   margin-right: 1vw;
+}
+
+@media (max-width: 900px) {
+  .headerTopSection {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  /* убираем лишнее */
+  .geoMarker,
+  .headerButton {
+    display: none;
+  }
+
+  /* логотип */
+  .headerIcon img {
+    width: 90px;
+    height: auto;
+  }
+
+  /* поиск */
+  .searchForm {
+    width: 100%;
+    height: 45px;
+  }
+
+  .formInput {
+    font-size: 14px;
+  }
+
+  /* корзина */
+  .cart {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* нижняя панель */
+  .headerBottomSection {
+    padding: 0 10px;
+    height: 50px;
+  }
+
+  .linksGroup {
+    gap: 15px;
+    justify-content: space-between;
+    margin: 0 5%;
+  }
+}
+@media (max-width: 600px) {
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .headerTopSection {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  /* логотип */
+  .headerIcon img {
+    width: 80px;
+  }
+
+  /* поиск вниз */
+  .searchForm {
+    order: 3;
+    width: 100%;
+    height: 42px;
+  }
+
+  /* убираем dropdown поиска */
+  .searchForm > *:first-child {
+    display: none;
+  }
+
+  /* аккаунт */
+  .accountDropdown {
+    display: none;
+  }
+
+  /* корзина справа */
+  .cartButton {
+    margin-left: auto;
+  }
+
+  /* нижняя панель */
+  .headerBottomSection {
+    height: 45px;
+    padding: 0 10px;
+    justify-content: space-between;
+  }
+
+  /* бургер */
+  .buttonMore {
+    display: flex;
+    align-items: center;
+  }
+
+  /* меню */
+  .linksGroup {
+    gap: 10px;
+  }
+
+  .linksGroup p {
+    font-size: 13px;
+  }
 }
