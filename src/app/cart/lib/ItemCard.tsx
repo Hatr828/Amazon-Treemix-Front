@@ -68,7 +68,7 @@ export function ItemCard({
           </div>
 
           <div className="addition_quantity_container">
-            <div className="controls_row" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <div className="controls_row" style={{ display: 'flex', alignItems: 'center', gap: '15px', width: '100%'}}>
               {item.additions && item.additions.length > 0 && (
                   <button className="dropdown_btn" onClick={toggleDropdown}>
                     <Image
@@ -116,7 +116,7 @@ export function ItemCard({
                             <img src="/cart_item_checkbox_checked.svg" className="icon_checked" alt="checked" />
                           </div>
                         </label>
-                        {addition.name}
+                        <p style={{ margin: '0 20px 0 auto' }}>{addition.name}</p>
                         <span className='addition_price'>${addition.price}</span>
                       </li>
                   ))}

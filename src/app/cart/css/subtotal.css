@@ -20,9 +20,8 @@
 .proceed_to_checkout button {
     background-color: #7C9BC0;
     border-radius: 20px;
-    width: 275px;
     height: 48px;
-    margin-top: auto;
+    margin-top: 30px;
     margin-bottom: 28px;
     border: none;
     color: white;

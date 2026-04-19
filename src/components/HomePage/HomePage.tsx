@@ -119,14 +119,12 @@ export function HomePage() {
         {bigCategories.map((cat) => (
 
             <div className="div-big-block" key={cat.id}>
-              <Link href={`/product_page/${cat.id}`} style={{ textDecoration: "none", color: "inherit" }}>
 
               <div className="head-text-more">
               {cat.name}
               <div className="text-more" onClick={() => router.push(`/catalog/${cat.id}`)}>More →</div>
             </div>
             <img  src={cat.imageUrl ?? "/example1-product.png"} className="photo-div-big-block" />
-                </Link>
           </div>
 
         ))}
