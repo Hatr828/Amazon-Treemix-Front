@@ -13,6 +13,8 @@ import MoreToConsiderSection from "@/app/product_page/ui/MoreToConsiderSection";
 import { useEffect } from "react";
 import { useRecentlyViewed} from "@/app/product_page/hooks/useRecentlyViewed";
 
+const STORAGE_KEY = "recent_products";
+const MAX_ITEMS = 10;
 
 export function ProductPage({ product }: { product: ProductType }) {
 

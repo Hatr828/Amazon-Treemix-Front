@@ -29,10 +29,18 @@ export function HomePage() {
 
   //последние просмотренные
   useEffect(() => {
-    fetch("/api/home/last-viewed")
+    const raw = localStorage.getItem("recent_products");
+
+    if (!raw) return;
+
+    const ids: string[] = JSON.parse(raw);
+
+    if (ids.length === 0) return;
+
+    fetch(`/api/home/last-viewed?ids=${ids.join(",")}`)
       .then(res => res.json())
       .then(data => {
-        setLastViewed(data.products ?? []);
+        setLastViewed(Array.isArray(data) ? data : data.products ?? []);
       });
   }, []);
 
@@ -111,6 +119,7 @@ export function HomePage() {
         )
       : [];
 
+      
   return (
     <div className="main-div-homePage">
       <MainPhotoSlider />
@@ -259,22 +268,24 @@ export function HomePage() {
         )}
       </div> */}
       {/*  */}
-      <div className="div-for-list-product-viewed">
-        <div className="head-text-more-list">Last viewed</div>
-        <div className="list-product-product-viewed">
-          <i className="bi bi-chevron-left chevLeft" onClick={prevLastViewed}></i>
-            {visibleLastViewed.map((product) => (
-              <div className="icon-list-product-viewed" key={product.id}>
-                <img
-                  src={product.image?.url ?? "/example1-product.png"}
-                  className="list-product-photo-viewed"
-                />
-                <div className="name-product-viewed">{product.title}</div>
-              </div>
-            ))}
-          <i className="bi bi-chevron-right chevRight" onClick={nextLastViewed}></i>
+      {lastViewed.length > 0 && (
+        <div className="div-for-list-product-viewed">
+          <div className="head-text-more-list">Last viewed</div>
+          <div className="list-product-product-viewed">
+            <i className="bi bi-chevron-left chevLeft" onClick={prevLastViewed}></i>
+              {visibleLastViewed.map((product) => (
+                <div className="icon-list-product-viewed" key={product.id}>
+                  <img
+                    src={product.image?.url ?? "/example1-product.png"}
+                    className="list-product-photo-viewed"
+                  />
+                  <div className="name-product-viewed">{product.title}</div>
+                </div>
+              ))}
+            <i className="bi bi-chevron-right chevRight" onClick={nextLastViewed}></i>
+          </div>
         </div>
-      </div>
+      )}
       {/*  */}
       <div className="div-recommendations">
         See personalized recommendations
@@ -288,45 +299,6 @@ export function HomePage() {
     </div>
   );
 }
-
-const ChevronBlock = () => {
-  const images = ["/example1-product.png", "/example2-product.png", "/example3-product.png"];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  return (
-    <div className="middle-block-chevron">
-      <div className="head-text-middle-block">Product</div>
-
-      <div className="div-with-chevron">
-        <div className="block-for-chevron">
-          <i className="bi bi-chevron-left left" onClick={prev}></i>
-        </div>
-
-        <img src={images[currentIndex]} className="middle-block-photo-chevron" />
-
-        <div className="block-for-chevron">
-          <i className="bi bi-chevron-right right" onClick={next}></i>
-        </div>
-      </div>
-
-      <div className="div-name-product-middle-block">
-        Product
-        <div className="list-cost-product">
-          <span className="currency">$</span>530
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const MainPhotoSlider = () => {
   const images = ["/main-photo.png", "/main-photo1.png"];
