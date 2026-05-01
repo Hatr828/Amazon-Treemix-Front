@@ -8,8 +8,7 @@
 }
 
 .image_wrapper img {
-    width: 100%;
-    height: auto;
+
     object-fit: contain;
     margin-right: 0;
     border: 1px solid transparent;
@@ -841,6 +840,19 @@ h3 {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    height: 450px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.images_container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.images_container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
 }
 
 .main_image_container {

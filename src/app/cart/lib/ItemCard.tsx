@@ -35,8 +35,18 @@ export function ItemCard({
           </div>
         </label>
 
-        <div className="image_wrapper">
-          <Image src="/dummy_cart_item.png" alt="product image" width={120} height={120} />
+        <div style={{
+          position: "relative",
+          width: "200px",
+          height: "auto",
+          marginRight: "20px",
+        }}>
+          <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              style={{ objectFit: "contain" }}
+          />
         </div>
 
         <div className="card_content">
@@ -89,15 +99,18 @@ export function ItemCard({
               </div>
 
               <div className="prices">
-                <div className="discount">
-                  <span className="discount_dollar_sign">$</span>
-                  <span className="discount_price">{item.old_price}</span>
+                {item.old_price && item.old_price > item.price ? (
+                    <div className="discount">
+                      <span className="discount_dollar_sign">$</span>
+                      <span className="discount_price">{item.old_price}</span>
+                    </div>
+                ) : null}
+
+                  <span className="price">
+                  <span className="dollar_icon">$</span>
+                    {item.price}
+                  </span>
                 </div>
-                <span className="price">
-                <span className="dollar_icon">$</span>
-                  {item.price}
-              </span>
-              </div>
             </div>
 
             {isOpen && item.additions && (

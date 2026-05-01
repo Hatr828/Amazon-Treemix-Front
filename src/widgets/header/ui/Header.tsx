@@ -11,6 +11,8 @@ import { useState, useEffect } from "react"
 
 export function Header() {
 
+    const BASE_URL = process.env.NEXT_PUBLIC_AMZN_API_BASE!;
+
     const [query, setQuery] = useState("")
     const [suggestions, setSuggestions] = useState<string[]>([])
     const [showSuggestions, setShowSuggestions] = useState(false)
@@ -19,6 +21,27 @@ export function Header() {
     const { items } = useCart()
 
     const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0)
+
+    const handleCartClick = async (e: React.MouseEvent) => {
+        e.preventDefault();
+
+        try {
+            const res = await fetch(`${BASE_URL}/api/cart/get`, {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (res.status === 401) {
+                router.push("/auth");
+                return;
+            }
+
+            router.push("/cart");
+        } catch (err) {
+            console.error("Cart check failed", err);
+            router.push("/cart");
+        }
+    };
 
     useEffect(() => {
         if (!query.trim() || query.length < 2) {
@@ -142,20 +165,20 @@ export function Header() {
                     </span>
                 </button>
 
-                <Link href="/cart" className='cartButton'>
+                <div className="cartButton" onClick={handleCartClick} style={{ cursor: "pointer" }}>
                     <div className="cart">
                         <Image
                             className="cart-icon"
-                            src='/cart_icon.svg'
-                            alt='cart'
+                            src="/cart_icon.svg"
+                            alt="cart"
                             width={26}
                             height={23}
                         />
                         <span className="cart-badge">
                             {cartItemsCount > 99 ? "99+" : cartItemsCount}
-                        </span>
+                         </span>
                     </div>
-                </Link>
+                </div>
             </div>
 
             <div className='headerBottomSection'>

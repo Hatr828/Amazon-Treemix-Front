@@ -1,5 +1,5 @@
 'use client'
-import { useState, useMemo, Suspense } from 'react'
+import {useState, useMemo, Suspense, useEffect} from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import '@/app/cart/css/cart.css'
 import '@/app/cart/css/cart_item.css'
@@ -15,11 +15,17 @@ import PaymentMethod from "@/app/cart/ui/PaymentMethodCart";
 import AuthForm from "@/app/cart/ui/LogInSignIn";
 import AddressFormCart from "@/app/cart/ui/ShippingPaymant";
 import PaymentListCart from "@/app/cart/ui/SavedPaymentMethodCart";
+import {useRecentlyViewed} from "@/app/product_page/hooks/useRecentlyViewed";
+import {CartItem} from "@/app/cart/misc/types";
+import Link from "next/link";
 
 const STEPS = ['cart', 'auth', 'saved_addresses', 'address_form', 'payment_list', 'payment_method', 'shipping_info', 'thank_you'];
 
+const BASE_URL = process.env.NEXT_PUBLIC_AMZN_API_BASE!;
+
+
 export function CartContent() {
-  const { items, addToCart, increaseQuantity, decreaseQuantity, toggleItem, selectAll, recentlyItems, calcSubtotal } = useCart()
+  const { items, addToCart, increaseQuantity, decreaseQuantity, toggleItem, selectAll, calcSubtotal } = useCart()
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentStep = searchParams.get('step') || 'cart';
@@ -32,6 +38,8 @@ export function CartContent() {
   const [selectedPaymentIndex, setSelectedPaymentIndex] = useState(0);
 
   const selectedQuantity = items.filter(item => item.selected).length
+
+  const { getProducts } = useRecentlyViewed();
 
   const goToStep = (stepName: string) => {
     router.push(`/cart?step=${stepName}`, { scroll: false });
@@ -95,6 +103,51 @@ export function CartContent() {
   const isThankYouPage = currentStep === 'thank_you';
   const showSubtotal = currentStep !== 'auth' && !isThankYouPage;
 
+
+  const [recentlyItems, setRecentlyItems] = useState<CartItem[]>([]);
+
+  const mapRecentlyViewed = (item: any) => {
+    return {
+      id: item.id,
+      title: item.title,
+      image: item.image?.url ?? "/fallback.png",
+      price: item.price?.current ?? item.price,
+      rating: item.rating ?? 0,
+    };
+  };
+
+  useEffect(() => {
+    const fetchRecentlyViewed = async () => {
+      try {
+        const ids = getProducts();
+
+        const params = new URLSearchParams();
+
+        ids.forEach(id => {
+          params.append("ProductIds", id);
+        });
+
+        const res = await fetch(
+            `${BASE_URL}/api/home/last-viewed?${params.toString()}`
+        );
+
+        if (!res.ok) throw new Error("Failed");
+
+        const data = await res.json();
+
+        const mapped = data.map(mapRecentlyViewed);
+
+        console.log("mapped recently:", mapped);
+
+        setRecentlyItems(mapped);
+      } catch (e) {
+        console.error("recently viewed error", e);
+      }
+    };
+
+    fetchRecentlyViewed();
+  }, []);
+
   return (
       <div className="cart_wrapper">
         <div className="super_mega_wrapper">
@@ -135,7 +188,19 @@ export function CartContent() {
                     <div className="recently_viewed">
                       <h2>Your recently viewed items</h2>
                       <ul className="recently_viewed_list">
-                        {recentlyItems.map((item) => <li key={item.id}><RecentlyViewedItemCard item={item} addToCart={addToCart} /></li>)}
+                        {recentlyItems.slice(0, 4).map((item) => (
+                            <li key={item.id}>
+                              <Link
+                                  href={`/product_page/${item.id}`}
+                                  style={{ textDecoration: "none", color: "inherit" }}
+                              >
+                                <RecentlyViewedItemCard
+                                    item={item}
+                                    addToCart={addToCart}
+                                />
+                              </Link>
+                            </li>
+                        ))}
                       </ul>
                     </div>
                 )}

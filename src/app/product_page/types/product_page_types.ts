@@ -6,13 +6,14 @@
       original: number;
   };
   rating: number;
-  ratings: number;
+  ratingCount: number;
   reviews?: [Reviews[], Reviews[]];
   images: {
       url: string;
       sortOrder: number;
   }[];
-  primaryImage: { ///////////
+
+  primaryImage: {
       url: string;
   }
   platform: string;
@@ -41,6 +42,10 @@
     extension: string,
   }[],
   mentionTags: string[];
+  category: {
+      id: string,
+      name: string,
+  }
 };
 
 export type ProductQuestion = {

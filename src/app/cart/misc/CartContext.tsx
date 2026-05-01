@@ -1,6 +1,10 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 import {CartItem, CartItemAddition} from "@/app/cart/misc/types";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+const BASE_URL = process.env.NEXT_PUBLIC_AMZN_API_BASE!;
 
 type CartContextType = {
   items: CartItem[];
@@ -17,9 +21,33 @@ type CartContextType = {
   toggleItemAddition: (itemId: string, additionId: string) => void;
 };
 
+const mapCartItem = (item: any): CartItem => {
+  const product = item.product;
+
+  const rating =
+      product.ratingCount > 0
+          ? Math.round(product.ratingSum / product.ratingCount)
+          : 0;
+
+  return {
+    id: item.id,
+    quantity: item.quantity,
+    price: product.currentPrice,
+    old_price: product.originalPrice,
+    title: product.title,
+    image: product.primaryImageUrl,
+    is_in_stock: product.stockQuantity > 0,
+    rating,
+    selected: false,
+    additions: [],
+  };
+};
+
 const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
+
+  // hook for recentlyItems is ready
   const [recentlyItems] = useState<CartItem[]>([
     {
       id: "12",
@@ -68,57 +96,59 @@ export function CartProvider({ children }: { children: ReactNode }) {
     },
   ]);
 
-  const [items, setItems] = useState<CartItem[]>([
-    {
-      id: "1",
-      quantity: 1,
-      old_price: 1750,
-      price: 1500,
-      title:
-        "Notebook ASUS TUF Gaming F15 FX506LH-HN153 (90NR03U1-M08940) Fortress Gray + мышь Asus TUF M5",
-      image: "dummy_text",
-      is_in_stock: true,
-      rating: 4,
-      selected: false,
-      additions: [
-          {id: '1', name: 'Installing licensed Windows', price: 20},
-          {id: '2', name: 'Antivirus ESET Internet Security (2 PCs) license for 1 year Basic', price: 20}
-      ],
-    },
-    {
-      id: "2",
-      quantity: 2,
-      old_price: 2000,
-      price: 1800,
-      title: "Laptop Example 2",
-      image: "dummy_text_2",
-      is_in_stock: true,
-      rating: 5,
-      selected: false,
-    },
-    {
-      id: "3",
-      quantity: 1,
-      old_price: 1500,
-      price: 1400,
-      title: "Laptop Example 3",
-      image: "dummy_text_3",
-      is_in_stock: false,
-      rating: 3,
-      selected: false,
-    },
-    {
-      id: "4",
-      quantity: 1,
-      old_price: 1700,
-      price: 1600,
-      title: "Laptop Example 4",
-      image: "dummy_text_4",
-      is_in_stock: true,
-      rating: 4,
-      selected: false,
-    },
-  ]);
+  // const [items, setItems] = useState<CartItem[]>([
+  //   {
+  //     id: "1",
+  //     quantity: 1,
+  //     old_price: 1750,
+  //     price: 1500,
+  //     title:
+  //       "Notebook ASUS TUF Gaming F15 FX506LH-HN153 (90NR03U1-M08940) Fortress Gray + мышь Asus TUF M5",
+  //     image: "dummy_text",
+  //     is_in_stock: true,
+  //     rating: 4,
+  //     selected: false,
+  //     additions: [
+  //         {id: '1', name: 'Installing licensed Windows', price: 20},
+  //         {id: '2', name: 'Antivirus ESET Internet Security (2 PCs) license for 1 year Basic', price: 20}
+  //     ],
+  //   },
+  //   {
+  //     id: "2",
+  //     quantity: 2,
+  //     old_price: 2000,
+  //     price: 1800,
+  //     title: "Laptop Example 2",
+  //     image: "dummy_text_2",
+  //     is_in_stock: true,
+  //     rating: 5,
+  //     selected: false,
+  //   },
+  //   {
+  //     id: "3",
+  //     quantity: 1,
+  //     old_price: 1500,
+  //     price: 1400,
+  //     title: "Laptop Example 3",
+  //     image: "dummy_text_3",
+  //     is_in_stock: false,
+  //     rating: 3,
+  //     selected: false,
+  //   },
+  //   {
+  //     id: "4",
+  //     quantity: 1,
+  //     old_price: 1700,
+  //     price: 1600,
+  //     title: "Laptop Example 4",
+  //     image: "dummy_text_4",
+  //     is_in_stock: true,
+  //     rating: 4,
+  //     selected: false,
+  //   },
+  // ]);
+
+  const [items, setItems] = useState<CartItem[]>([]);
 
   const addToCart = (item: CartItem) => {
     setItems((prev) => {
@@ -194,6 +224,51 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const selectedQuantity = items.filter((item) => item.selected).length;
 
   const isAllSelected = items.length > 0 && items.every((item) => item.selected);
+
+  const mapCartItem = (item: any): CartItem => {
+    return {
+      id: item.productId,
+      quantity: item.quantity,
+      price: item.price,
+      old_price: item.price,
+      title: item.title,
+      image: item.imageUrl,
+      is_in_stock: true,
+      rating: 0,
+      selected: false,
+      additions: [],
+    };
+  };
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const res = await fetch(`${BASE_URL}/api/cart/get`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          console.warn("User not authorized");
+          return;
+        }
+
+        if (!res.ok) {
+          throw new Error(`HTTP error ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        const mappedItems = (data?.items ?? []).map(mapCartItem);
+
+        setItems(mappedItems);
+      } catch (error) {
+        console.error("Network error fetching cart:", error);
+      }
+    };
+
+    fetchCart();
+  }, []);
 
   return (
     <CartContext.Provider
