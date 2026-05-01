@@ -1,12 +1,14 @@
 ﻿"use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import "@/widgets/header/css/header.css";
 import "@/widgets/header/css/dropdown.css";
 
 export const AccountDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -33,9 +35,21 @@ export const AccountDropdown: React.FC = () => {
 
           <div className="accDropdownContent">
             <div className="accAuthSection">
-              <button className="accSigninBtn">Sign in</button>
+              <button
+                className="accSigninBtn"
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/auth?mode=login");
+                }}
+              >
+                Sign in
+              </button>
               <p className="accNewCustomer">
-                New customer? <a href="#">Start here.</a>
+                New customer?{" "}
+                <a href="/auth?mode=signup" onClick={() => setIsOpen(false)}>
+                  Start here.
+                </a>
               </p>
             </div>
 
