@@ -267,6 +267,8 @@
 }
 
 .search-suggestion-item {
+  display: flex;
+  flex-direction: row;
   padding: 0.8vw;
   cursor: pointer;
 }
@@ -281,6 +283,14 @@
   height: 3vw;
   border-radius: 0.25vw;
   margin-right: 1vw;
+}
+
+.text-item-search {
+  display: -webkit-box;
+  font-size: 1vw;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @media (max-width: 900px) {
@@ -390,5 +400,14 @@
 
   .linksGroup p {
     font-size: 13px;
+  }
+
+  .text-item-search {
+    font-size: 2vw;
+  }
+
+  .img-search {
+    width: 6vw;
+    height: 6vw;
   }
 }

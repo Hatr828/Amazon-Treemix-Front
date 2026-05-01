@@ -20,7 +20,17 @@ export function Header() {
 
     const cartItemsCount = items.reduce((total, item) => total + item.quantity, 0)
 
+    const normalizeQuery = (q: string) => {
+        return q
+            .toLowerCase()
+            .replace(/[^\w\s]/g, "")
+            .split(" ")
+            .slice(0, 1)
+            .join(" ")
+    }
+
     useEffect(() => {
+
         if (!query.trim() || query.length < 2) {
             setSuggestions([])
             setShowSuggestions(false)
@@ -29,15 +39,14 @@ export function Header() {
 
         const timeout = setTimeout(async () => {
             try {
-                const res = await fetch(`/api/search/suggestions?q=${query}`)
+                const normalized = normalizeQuery(query)
+                const params = new URLSearchParams({ q: normalized })
+                const res = await fetch(`/api/search/suggestions?${params.toString()}`)
                 const data = await res.json()
 
                 const result = (data.products ?? []).slice(0, 7);
                 setSuggestions(result);
                 setShowSuggestions(true);
-
-                setSuggestions(result)
-                setShowSuggestions(true)
             } catch (e) {
                 console.error(e)
                 setSuggestions([])
@@ -86,7 +95,9 @@ export function Header() {
                             e.preventDefault()
                             if (!query.trim()) return
 
-                            router.push(`/search?q=${query}`)
+                            const normalized = normalizeQuery(query)
+                            const params = new URLSearchParams({ q: normalized })
+                            router.push(`/search?${params.toString()}`)
                             setShowSuggestions(false)
                         }}
                     >
@@ -120,13 +131,16 @@ export function Header() {
                                 key={item.id}
                                 className="search-suggestion-item"
                                 onClick={() => {
-                                setQuery(item.title);
-                                setShowSuggestions(false);
-                                router.push(`/search?q=${item.title}`);
-                                }}
+    setShowSuggestions(false);
+
+    const normalized = normalizeQuery(item.title)
+    const params = new URLSearchParams({ q: normalized })
+
+    router.push(`/search?${params.toString()}`)
+}}
                             >
                                 <img className='img-search' src={item.image.url} />
-                                {item.title}
+                                <span className='text-item-search'>{item.title}</span>
                             </div>
                             ))}
                         </div>
@@ -169,9 +183,6 @@ export function Header() {
                 </button>
 
                 <div className='linksGroup'>
-                    <a href="">
-                        <p>Today&#39;s Deals</p>
-                    </a>
                     <a onClick={() => router.push("/customService")} style={{ cursor: "pointer" }}>
                         <p>Customer Service</p>
                     </a>

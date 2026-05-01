@@ -243,7 +243,7 @@ export function HomePage() {
       <div className="div-banner">
         <div className="banner-text-button">
           Sign in for the best experience
-          <button className="banner-button">Sign in securely</button>
+          <button className="banner-button" onClick={() => router.push("/auth?mode=login")}>Sign in securely</button>
         </div>
         <div className="banner-name">Naming</div>
       </div>
@@ -269,10 +269,10 @@ export function HomePage() {
       {/*  */}
       <div className="div-recommendations">
         See personalized recommendations
-        <button className="button-recommendations">Sign in</button>
+        <button className="button-recommendations" onClick={() => router.push("/auth?mode=login")}>Sign in</button>
         <div className="div-customer-text">
           New Customer?
-          <div className="div-start-here">Start here.</div>
+          <div className="div-start-here" onClick={() => router.push("/auth?mode=signup")}>Start here.</div>
         </div>
       </div>
       {/*  */}
