@@ -2,6 +2,7 @@
 
 import "../customServ.css";
 import "../../../components/HomePage/HomePage.css";
+import "../../../components/HomePage/mobHomePage.css";
 import { useRouter } from "next/navigation";
 import SupportTree from "../SupportTree";
 import { giftTree } from "../data";

@@ -2,6 +2,8 @@
 
 import "../customServ.css";
 import "../../../components/HomePage/HomePage.css";
+import "../mobPageServ.css"
+import "../../../components/HomePage/mobHomePage.css";
 import { useRouter } from "next/navigation";
 
 export default function Delivery() {
