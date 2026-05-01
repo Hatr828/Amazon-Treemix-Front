@@ -173,7 +173,6 @@ export function HomePage() {
         <div className="div-for-column-blocks-in-big">
           <div className="head-text-more-column">
             Popular
-            <div className="text-more">More →</div>
           </div>
           {popularProducts.slice(0, 3).map((product) => (
               <Link href={`/product_page/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}  key={product.id}>
@@ -199,7 +198,6 @@ export function HomePage() {
         <div className="div-for-row-blocks-in-big">
           <div className="head-text-more-column">
             Most popular categories of the week
-            <div className="text-more">More →</div>
           </div>
           <div className="div-for-rows">
             {popularCategories.slice(0, 3).map((cat) => (
@@ -215,7 +213,6 @@ export function HomePage() {
       <div className="div-for-list-product">
         <div className="head-text-more-list">
           Home Decor Under $20
-          <div className="text-more">More →</div>
         </div>
         <div className="list-product">
           <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
@@ -231,10 +228,10 @@ export function HomePage() {
               </div>
               <div className="text-list-product">
                 {product.title}
-                <div className="list-cost-product">
+              </div>
+              <div className="list-cost-product">
                   <span className="currency">$</span>
                   {product.price.original}
-                </div>
               </div>
             </div>
               </Link>
@@ -250,23 +247,6 @@ export function HomePage() {
         </div>
         <div className="banner-name">Naming</div>
       </div>
-      {/*  */}
-      {/* <div className="div-for-middle-blocks">
-        {[1, 2, 3, 4].map((_, index) =>
-          index % 2 === 0 ? (
-            <ChevronBlock key={index} />
-          ) : (
-            <div className="middle-block" key={index}>
-              <div className="head-text-more-list">
-                Product
-                <div className="text-more">More →</div>
-              </div>
-
-              <img src="/example1-product.png" className="middle-block-photo" />
-            </div>
-          ),
-        )}
-      </div> */}
       {/*  */}
       {lastViewed.length > 0 && (
         <div className="div-for-list-product-viewed">

@@ -27,7 +27,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
   const searchParams = useSearchParams();
 
   // Сортировка
-  const [selectedSort, setSelectedSort] = useState<SortOption>("Featured");
+  const [selectedSort, setSelectedSort] = useState<SortOption>("Price: Low to High");
 
   const [totalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -198,7 +198,7 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
     const max = params.get("MaxPrice");
 
     setMinPrice(min ? Number(min) : 0);
-    setMaxPrice(max ? Number(max) : 999);
+    setMaxPrice(max ? Number(max) : 9999);
 
     const cat = params.get("CategoryId");
     setSelectedSubCategory(cat ?? null);
@@ -219,13 +219,6 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
       case "Avg. Customer Review":
         return sorted.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
 
-      case "Newest Arrivals":
-        return sorted.sort(
-          (a, b) =>
-            new Date(b.createdAt ?? 0).getTime() - new Date(a.createdAt ?? 0).getTime()
-        );
-
-      case "Featured":
       default:
         return sorted;
     }
@@ -312,22 +305,6 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const nextSlide = () => {
-    if (produc.length === 0) return;
-    setStartIndex((prev) => (prev + 1) % products.length);
-  };
-
-  const prevSlide = () => {
-    if (produc.length === 0) return;
-    setStartIndex((prev) => (prev - 1 + products.length) % products.length);
-  };
-
-  const visibleItems = products.length > 0
-    ? Array.from({ length: Math.min(visibleCount, products.length) }, (_, i) =>
-        products[(startIndex + i) % products.length]
-      )
-    : [];
 
   //Пагинация
   const changePage = (page: number) => {
@@ -436,31 +413,6 @@ export function CatalogProduct({ slug }: { slug: string[] }) {
           </div>
         {/* Низ */}
       </div>
-      {/* <div style={{ display: "flex", width: "100%", justifyContent: "center", marginTop: "10vw" }}>
-        <div className="div-list-categoryProd">
-          <div className="head-text-more-list">
-            Smart home products inspired by your shopping trends
-            <div className="text-more">More →</div>
-          </div>
-          <div className="list-product">
-            <i className="bi bi-chevron-left chevLeft" onClick={prevSlide}></i>
-            {visibleItems.map((product) => (
-              <div className="icon-list-product" key={product.id}>
-                <div className="icon-for-list-product-photo">
-                  <img src={product.image?.url ?? "/example1-product.png"} className="list-product-photo" />
-                </div>
-                <div className="text-list-product">
-                  {product.title}
-                  <div className="list-cost-product">
-                    <span className="currency">$</span>{product.price.original}
-                  </div>
-                </div>
-              </div>
-            ))}
-            <i className="bi bi-chevron-right chevRight" onClick={nextSlide}></i>
-          </div>
-        </div>
-      </div> */}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="div-recommendations">
           See personalized recommendations

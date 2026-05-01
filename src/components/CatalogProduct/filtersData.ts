@@ -39,6 +39,6 @@ export const filters: FilterSection[] = [
     title: "Price",
     type: "price",
     min: 0,
-    max: 999,
+    max: 9999,
   },
 ];

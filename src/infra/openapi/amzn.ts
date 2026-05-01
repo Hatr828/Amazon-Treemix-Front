@@ -10,6 +10,20 @@
  * ---------------------------------------------------------------
  */
 
+/** @format int32 */
+export enum UserRole {
+  Value0 = 0,
+  Value1 = 1,
+  Value2 = 2,
+}
+
+/** @format int32 */
+export enum OrderStatus {
+  Value0 = 0,
+  Value1 = 1,
+  Value2 = 2,
+}
+
 export interface AuthResponseDto {
   accessToken?: string | null;
   /** @format int32 */
@@ -19,10 +33,59 @@ export interface AuthResponseDto {
   user?: UserResponseDto;
 }
 
+export interface Brand {
+  /** @format uuid */
+  id?: string;
+  name?: string | null;
+  products?: Product[] | null;
+}
+
 export interface BrandDto {
   /** @format uuid */
   id?: string;
   name?: string | null;
+}
+
+export interface Cart {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  userId?: string;
+  user?: User;
+  items?: CartItem[] | null;
+}
+
+export interface CartItem {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  cartId?: string;
+  /** @format uuid */
+  productId?: string;
+  /** @format int32 */
+  quantity?: number;
+  cart?: Cart;
+  product?: Product;
+}
+
+export interface CartResponseDto {
+  cart?: Cart;
+  products?: Product[] | null;
+}
+
+export interface Category {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  parentId?: string | null;
+  name?: string | null;
+  description?: string | null;
+  imageUrl?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+  products?: Product[] | null;
 }
 
 export interface CategoryDto {
@@ -42,8 +105,102 @@ export interface CategoryListItemDto {
   hasChildren?: boolean;
 }
 
-export interface HomeResponseDto {
+export interface DeliveryAddress {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  userId?: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  address?: string | null;
+  city?: string | null;
+  postalCode?: string | null;
+  country?: string | null;
+  state?: string | null;
+  phoneNumber?: string | null;
+  isDefault?: boolean;
+  user?: User;
+}
+
+export interface DeliveryAddressRequestDto {
+  /**
+   * @minLength 3
+   * @maxLength 64
+   * @pattern ^[\p{L}\p{M}]+(?:[ '\-][\p{L}\p{M}]+)*$
+   */
+  firstName: string;
+  /**
+   * @minLength 3
+   * @maxLength 64
+   * @pattern ^[\p{L}\p{M}]+(?:[ '\-][\p{L}\p{M}]+)*$
+   */
+  lastName: string;
+  /**
+   * @minLength 1
+   * @pattern ^[\w\s\d.,\-\/]{5,100}$
+   */
+  streetAddress: string;
+  /**
+   * @minLength 2
+   * @maxLength 32
+   * @pattern ^[\p{L}][\p{L}\s.'-]*[\p{L}]$
+   */
+  city: string;
+  /**
+   * @minLength 2
+   * @maxLength 10
+   */
+  postalCode: string;
+  /**
+   * @minLength 1
+   * @pattern ^[\p{L}][\p{L}\s.'()-]{1,60}[\p{L}.]$
+   */
+  country: string;
+  /** @pattern ^[\p{L}0-9\s.'-]{2,32}$ */
+  state?: string | null;
+  /**
+   * @minLength 1
+   * @pattern ^\+[1-9]\d{1,14}$
+   */
+  phoneNumber: string;
+  isDefault?: boolean;
+}
+
+export interface DeliveryAddressResponseDto {
+  /** @format uuid */
+  id?: string;
+  isDefault?: boolean;
+  firstName?: string | null;
+  lastName?: string | null;
+  address?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postalCode?: string | null;
+  country?: string | null;
+  phoneNumber?: string | null;
+}
+
+export interface HomeCategoryBlockDto {
+  /** @format uuid */
+  categoryId?: string;
+  categoryName?: string | null;
   products?: ProductCardDto[] | null;
+}
+
+export interface HomeCategoryCardDto {
+  /** @format uuid */
+  id?: string;
+  name?: string | null;
+  imageUrl?: string | null;
+}
+
+export interface HomeResponseDto {
+  topCategories?: HomeCategoryCardDto[] | null;
+  categoryBlocks?: HomeCategoryBlockDto[] | null;
+  popularProducts?: ProductCardDto[] | null;
+  popularCategories?: HomeCategoryCardDto[] | null;
+  productsUnderTwenty?: ProductCardDto[] | null;
+  moreProducts?: ProductCardDto[] | null;
 }
 
 export interface ImageDto {
@@ -78,11 +235,107 @@ export interface MeResponseDto {
   role?: string | null;
 }
 
+export interface Order {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  userId?: string;
+  /** @format uuid */
+  cartId?: string;
+  /** @format int32 */
+  quantity?: number;
+  /** @format double */
+  totalAmount?: number;
+  status?: OrderStatus;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+  /** @format date-time */
+  confirmedAt?: string | null;
+  /** @format date-time */
+  canceledAt?: string | null;
+  user?: User;
+  cart?: Cart;
+}
+
+export interface PaymentMethod {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  userId?: string;
+  cardNumber?: string | null;
+  /** @format date */
+  expirationDate?: string;
+  isDefault?: boolean;
+  user?: User;
+}
+
+export interface PaymentMethodRequestDto {
+  /**
+   * @minLength 1
+   * @pattern ^\d{13,19}?$
+   */
+  cardNumber: string;
+  /**
+   * @minLength 1
+   * @pattern ^\d{3,4}$
+   */
+  cvv: string;
+  /** @format date */
+  expirationDate: string;
+  isDefault?: boolean;
+}
+
+export interface PaymentMethodResponseDto {
+  /** @format uuid */
+  id?: string;
+  isDefault?: boolean;
+  holderFirstName?: string | null;
+  holderLastName?: string | null;
+  cardNumber?: string | null;
+  /** @format date */
+  expirationDate?: string;
+}
+
 export interface PriceDto {
   /** @format double */
   current?: number;
   /** @format double */
   original?: number;
+}
+
+export interface Product {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  categoryId?: string;
+  title?: string | null;
+  description?: string | null;
+  /** @format int32 */
+  stockQuantity?: number;
+  /** @format double */
+  currentPrice?: number;
+  /** @format double */
+  originalPrice?: number | null;
+  primaryImageUrl?: string | null;
+  /** @format int32 */
+  ratingSum?: number;
+  /** @format int32 */
+  ratingCount?: number;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format uuid */
+  sellerId?: string;
+  seller?: User;
+  category?: Category;
+  images?: ProductImage[] | null;
+  ratings?: ProductRating[] | null;
+  reviews?: ProductReview[] | null;
+  questions?: ProductQuestion[] | null;
+  /** @format uuid */
+  brandId?: string;
+  brand?: Brand;
 }
 
 export interface ProductCardDto {
@@ -126,6 +379,50 @@ export interface ProductDetailsDto {
   images?: ImageDto[] | null;
   category?: CategoryDto;
   brand?: BrandDto;
+}
+
+export interface ProductImage {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  productId?: string;
+  url?: string | null;
+  /** @format int32 */
+  sortOrder?: number;
+  product?: Product;
+}
+
+export interface ProductQuestion {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  productId?: string;
+  /** @format uuid */
+  userId?: string;
+  text?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+  product?: Product;
+  user?: User;
+  answers?: ProductQuestionAnswer[] | null;
+}
+
+export interface ProductQuestionAnswer {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  questionId?: string;
+  /** @format uuid */
+  userId?: string;
+  text?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+  question?: ProductQuestion;
+  user?: User;
 }
 
 export interface ProductQuestionAnswerDto {
@@ -198,6 +495,19 @@ export interface ProductQuestionRequestDto {
   text: string;
 }
 
+export interface ProductRating {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  productId?: string;
+  /** @format uuid */
+  userId?: string;
+  /** @format int32 */
+  value?: number;
+  product?: Product;
+  user?: User;
+}
+
 export interface ProductRatingResponseDto {
   /** @format double */
   averageRating?: number;
@@ -207,13 +517,30 @@ export interface ProductRatingResponseDto {
   userRating?: number;
 }
 
+export interface ProductReview {
+  /** @format uuid */
+  id?: string;
+  title?: string | null;
+  text?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string | null;
+  /** @format uuid */
+  userId?: string;
+  user?: User;
+  /** @format uuid */
+  productId?: string;
+  product?: Product;
+}
+
 export interface ProfileUpdateRequestDto {
   /**
    * @minLength 3
    * @maxLength 64
    * @pattern ^[\p{L}\p{M}]+(?:[ '\-][\p{L}\p{M}]+)*$
    */
-  firstName?: string | null;
+  firstName: string;
   /**
    * @minLength 3
    * @maxLength 64
@@ -361,6 +688,38 @@ export interface SetProductRatingRequestDto {
   rating?: number;
 }
 
+export interface User {
+  /** @format uuid */
+  id?: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  email?: string | null;
+  passwordHash?: string | null;
+  phoneNumber?: string | null;
+  role?: UserRole;
+  /** @format date */
+  birthDate?: string | null;
+  /** @format date-time */
+  createdAt?: string;
+  refreshTokens?: UserRefreshToken[] | null;
+  products?: Product[] | null;
+  paymentMethods?: PaymentMethod[] | null;
+  deliveryAddresses?: DeliveryAddress[] | null;
+  orders?: Order[] | null;
+}
+
+export interface UserRefreshToken {
+  /** @format uuid */
+  id?: string;
+  /** @format uuid */
+  userId?: string;
+  tokenHash?: string | null;
+  /** @format date-time */
+  expiresAt?: string;
+  isRevoked?: boolean;
+  user?: User;
+}
+
 export interface UserResponseDto {
   /** @format uuid */
   id?: string;
@@ -394,7 +753,10 @@ export interface FullRequestParams extends Omit<RequestInit, "body"> {
   cancelToken?: CancelToken;
 }
 
-export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<
+  FullRequestParams,
+  "body" | "method" | "query" | "path"
+>;
 
 export interface ApiConfig<SecurityDataType = unknown> {
   baseUrl?: string;
@@ -405,7 +767,8 @@ export interface ApiConfig<SecurityDataType = unknown> {
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown> extends Response {
+export interface HttpResponse<D extends unknown, E extends unknown = unknown>
+  extends Response {
   data: D;
   error: E;
 }
@@ -425,7 +788,8 @@ export class HttpClient<SecurityDataType = unknown> {
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
-  private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
+  private customFetch = (...fetchParams: Parameters<typeof fetch>) =>
+    fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
     credentials: "same-origin",
@@ -458,7 +822,9 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected toQueryString(rawQuery?: QueryParamsType): string {
     const query = rawQuery || {};
-    const keys = Object.keys(query).filter((key) => "undefined" !== typeof query[key]);
+    const keys = Object.keys(query).filter(
+      (key) => "undefined" !== typeof query[key],
+    );
     return keys
       .map((key) =>
         Array.isArray(query[key])
@@ -483,7 +849,9 @@ export class HttpClient<SecurityDataType = unknown> {
         ? JSON.stringify(input)
         : input,
     [ContentType.Text]: (input: any) =>
-      input !== null && typeof input !== "string" ? JSON.stringify(input) : input,
+      input !== null && typeof input !== "string"
+        ? JSON.stringify(input)
+        : input,
     [ContentType.FormData]: (input: any) => {
       if (input instanceof FormData) {
         return input;
@@ -505,7 +873,10 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(
+    params1: RequestParams,
+    params2?: RequestParams,
+  ): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -518,7 +889,9 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (
+    cancelToken: CancelToken,
+  ): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -568,10 +941,18 @@ export class HttpClient<SecurityDataType = unknown> {
         ...requestParams,
         headers: {
           ...(requestParams.headers || {}),
-          ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+          ...(type && type !== ContentType.FormData
+            ? { "Content-Type": type }
+            : {}),
         },
-        signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
-        body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
+        signal:
+          (cancelToken
+            ? this.createAbortSignal(cancelToken)
+            : requestParams.signal) || null,
+        body:
+          typeof body === "undefined" || body === null
+            ? null
+            : payloadFormatter(body),
       },
     ).then(async (response) => {
       const r = response as HttpResponse<T, E>;
@@ -609,7 +990,9 @@ export class HttpClient<SecurityDataType = unknown> {
  * @title AMZN API
  * @version Swag v1
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown,
+> extends HttpClient<SecurityDataType> {
   admin = {
     /**
      * No description
@@ -655,7 +1038,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       query: {
         /**
          * @minLength 0
-         * @maxLength 128
+         * @maxLength 64
          */
         Name: string;
       },
@@ -674,20 +1057,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags AdminBrands
      * @name BrandsDeleteCreate
-     * @request POST:/Admin/Brands/Delete
+     * @request POST:/Admin/Brands/Delete/{id}
      * @secure
      */
-    brandsDeleteCreate: (
-      query?: {
-        /** @format uuid */
-        id?: string;
-      },
-      params: RequestParams = {},
-    ) =>
+    brandsDeleteCreate: (id: string, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/Admin/Brands/Delete`,
+        path: `/Admin/Brands/Delete/${id}`,
         method: "POST",
-        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdminProducts
+     * @name ProductsList
+     * @request GET:/Admin/Products
+     * @secure
+     */
+    productsList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/Admin/Products`,
+        method: "GET",
         secure: true,
         ...params,
       }),
@@ -730,7 +1122,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         Description?: string;
         /**
          * @format int32
-         * @min 1
+         * @min 0
          * @max 2147483647
          */
         StockQuantity?: number;
@@ -740,13 +1132,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         CategoryId: string;
         /**
          * @format double
-         * @min 0
+         * @min 1
          * @max 999999999
          */
         CurrentPrice?: number;
         /**
          * @format double
-         * @min 0
+         * @min 1
          * @max 999999999
          */
         OriginalPrice?: number;
@@ -767,6 +1159,100 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         type: ContentType.FormData,
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags AdminProducts
+     * @name ProductsEditDetail
+     * @request GET:/Admin/Products/Edit/{id}
+     * @secure
+     */
+    productsEditDetail: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/Admin/Products/Edit/${id}`,
+        method: "GET",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdminProducts
+     * @name ProductsEditCreate
+     * @request POST:/Admin/Products/Edit/{id}
+     * @secure
+     */
+    productsEditCreate: (
+      id: string,
+      query: {
+        /**
+         * @minLength 0
+         * @maxLength 256
+         */
+        Title: string;
+        /**
+         * @minLength 0
+         * @maxLength 4000
+         */
+        Description?: string;
+        /**
+         * @format int32
+         * @min 0
+         * @max 2147483647
+         */
+        StockQuantity?: number;
+        /** @format uuid */
+        BrandId: string;
+        /** @format uuid */
+        CategoryId: string;
+        /**
+         * @format double
+         * @min 0
+         * @max 999999999
+         */
+        CurrentPrice?: number;
+        /**
+         * @format double
+         * @min 0
+         * @max 999999999
+         */
+        OriginalPrice?: number;
+        ExistingGalleryImageIdsInOrder?: string[];
+      },
+      data: {
+        /** @format binary */
+        NewPrimaryImage?: File;
+        NewGalleryImages?: File[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/Admin/Products/Edit/${id}`,
+        method: "POST",
+        query: query,
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags AdminProducts
+     * @name ProductsDeleteCreate
+     * @request POST:/Admin/Products/Delete/{id}
+     * @secure
+     */
+    productsDeleteCreate: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/Admin/Products/Delete/${id}`,
+        method: "POST",
+        secure: true,
+        ...params,
+      }),
   };
   api = {
     /**
@@ -777,7 +1263,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/api/auth/register
      * @secure
      */
-    authRegisterCreate: (data: RegisterRequestDto, params: RequestParams = {}) =>
+    authRegisterCreate: (
+      data: RegisterRequestDto,
+      params: RequestParams = {},
+    ) =>
       this.request<AuthResponseDto, any>({
         path: `/api/auth/register`,
         method: "POST",
@@ -846,6 +1335,114 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Cart
+     * @name CartAddCreate
+     * @request POST:/api/cart/add
+     * @secure
+     */
+    cartAddCreate: (productId: string, params: RequestParams = {}) =>
+      this.request<CartResponseDto, any>({
+        path: `/api/cart/add`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Cart
+     * @name CartRemoveCreate
+     * @request POST:/api/cart/remove
+     * @secure
+     */
+    cartRemoveCreate: (productId: string, params: RequestParams = {}) =>
+      this.request<CartResponseDto, any>({
+        path: `/api/cart/remove`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Cart
+     * @name CartClearCreate
+     * @request POST:/api/cart/clear
+     * @secure
+     */
+    cartClearCreate: (params: RequestParams = {}) =>
+      this.request<CartResponseDto, any>({
+        path: `/api/cart/clear`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Cart
+     * @name CartGetCreate
+     * @request POST:/api/cart/get
+     * @secure
+     */
+    cartGetCreate: (params: RequestParams = {}) =>
+      this.request<CartResponseDto, any>({
+        path: `/api/cart/get`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Cart
+     * @name CartIncreaseQuantityCreate
+     * @request POST:/api/cart/increaseQuantity
+     * @secure
+     */
+    cartIncreaseQuantityCreate: (
+      productId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<CartResponseDto, any>({
+        path: `/api/cart/increaseQuantity`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Cart
+     * @name CartDecreaseQuantityCreate
+     * @request POST:/api/cart/decreaseQuantity
+     * @secure
+     */
+    cartDecreaseQuantityCreate: (
+      productId: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<CartResponseDto, any>({
+        path: `/api/cart/decreaseQuantity`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Categories
      * @name CategoriesRootList
      * @request GET:/api/categories/root
@@ -892,18 +1489,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/home
      * @secure
      */
-    homeList: (
+    homeList: (params: RequestParams = {}) =>
+      this.request<HomeResponseDto, any>({
+        path: `/api/home`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Home
+     * @name HomeLastViewedList
+     * @request GET:/api/home/last-viewed
+     * @secure
+     */
+    homeLastViewedList: (
       query?: {
-        /**
-         * @format int32
-         * @default 20
-         */
-        take?: number;
+        ProductIds?: string[];
       },
       params: RequestParams = {},
     ) =>
-      this.request<HomeResponseDto, any>({
-        path: `/api/home`,
+      this.request<ProductCardDto[], any>({
+        path: `/api/home/last-viewed`,
         method: "GET",
         query: query,
         secure: true,
@@ -1275,6 +1885,84 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/user/delete`,
         method: "POST",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags UserAccount
+     * @name UserAddPaymentMethodCreate
+     * @request POST:/api/user/addPaymentMethod
+     * @secure
+     */
+    userAddPaymentMethodCreate: (
+      data: PaymentMethodRequestDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<PaymentMethodResponseDto, any>({
+        path: `/api/user/addPaymentMethod`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags UserAccount
+     * @name UserGetPaymentMethodsCreate
+     * @request POST:/api/user/getPaymentMethods
+     * @secure
+     */
+    userGetPaymentMethodsCreate: (params: RequestParams = {}) =>
+      this.request<PaymentMethodResponseDto[], any>({
+        path: `/api/user/getPaymentMethods`,
+        method: "POST",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags UserAccount
+     * @name UserAddDeliveryAddressCreate
+     * @request POST:/api/user/addDeliveryAddress
+     * @secure
+     */
+    userAddDeliveryAddressCreate: (
+      data: DeliveryAddressRequestDto,
+      params: RequestParams = {},
+    ) =>
+      this.request<DeliveryAddressResponseDto, any>({
+        path: `/api/user/addDeliveryAddress`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags UserAccount
+     * @name UserGetDeliveryAddressesCreate
+     * @request POST:/api/user/getDeliveryAddresses
+     * @secure
+     */
+    userGetDeliveryAddressesCreate: (params: RequestParams = {}) =>
+      this.request<DeliveryAddressResponseDto[], any>({
+        path: `/api/user/getDeliveryAddresses`,
+        method: "POST",
+        secure: true,
+        format: "json",
         ...params,
       }),
   };

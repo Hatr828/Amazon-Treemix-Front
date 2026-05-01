@@ -214,4 +214,10 @@
   .div-visit-contact {
     font-size: 1.46vw;
   }
+
+  .button-reset {
+    padding: 0.5vw 2.5vw;
+    border-radius: 2.656vw;
+    font-size: 1.880vw;
+  }
 }

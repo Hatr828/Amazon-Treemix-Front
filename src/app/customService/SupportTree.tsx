@@ -1,6 +1,7 @@
 "use client";
 
 import "./customServ.css";
+import "./mobPageServ.css"
 import { useState } from "react";
 import { SupportNode } from "./data";
 
