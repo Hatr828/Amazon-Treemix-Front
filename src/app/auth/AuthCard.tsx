@@ -1,8 +1,8 @@
 "use client";
 
 import { AuthRequestError, login, register } from "@/infra/auth/authService";
-import { useRouter } from "next/navigation";
-import { type FormEvent, useId, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { type FormEvent, useEffect, useId, useRef, useState } from "react";
 import styles from "./auth.module.css";
 
 type Mode = "login" | "signup";
@@ -13,6 +13,16 @@ export default function AuthCard() {
   const [errorDetails, setErrorDetails] = useState<string[]>([]);
   const isSubmittingRef = useRef(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const queryMode = searchParams.get("mode");
+    if (queryMode === "login" || queryMode === "signup") {
+      setMode(queryMode);
+      setErrorMessage(null);
+      setErrorDetails([]);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

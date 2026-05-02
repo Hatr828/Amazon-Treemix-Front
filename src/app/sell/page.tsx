@@ -1,3 +1,6 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import styles from "./sell.module.css";
 
 const benefits = [
@@ -14,12 +17,18 @@ const featureCards = [
 ];
 
 export default function SellPage() {
+  const router = useRouter();
+
   return (
     <main className={styles.page}>
       <section className={styles.topStrip}>
         <div className={`${styles.container} ${styles.stripInner}`}>
           <h1 className={styles.stripTitle}>Sell on TreeMiix</h1>
-          <button type="button" className={styles.primaryButton}>
+          <button
+            type="button"
+            className={styles.primaryButton}
+            onClick={() => router.push("/auth?mode=signup")}
+          >
             Sign up
           </button>
         </div>
@@ -33,7 +42,11 @@ export default function SellPage() {
               More than half the units sold in our stores are from independent sellers.
             </p>
             <p className={styles.heroSubText}>$39.99 a month + selling fees</p>
-            <button type="button" className={styles.primaryButton}>
+            <button
+              type="button"
+              className={styles.primaryButton}
+              onClick={() => router.push("/auth?mode=signup")}
+            >
               Sign up
             </button>
           </div>
@@ -131,7 +144,11 @@ export default function SellPage() {
               Put your products in front of the millions of customers who search TreeMiix.com every
               day.
             </p>
-            <button type="button" className={styles.primaryButton}>
+            <button
+              type="button"
+              className={styles.primaryButton}
+              onClick={() => router.push("/auth?mode=signup")}
+            >
               Sign up
             </button>
           </div>

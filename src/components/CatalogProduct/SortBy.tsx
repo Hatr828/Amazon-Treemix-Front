@@ -4,9 +4,7 @@ import "./CatalogProduct.css";
 export type SortOption =
   | "Price: Low to High"
   | "Price: High to Low"
-  | "Avg. Customer Review"
-  | "Newest Arrivals"
-  | "Featured";
+  | "Avg. Customer Review";
 
 type SortByProps = {
   selectedSort: SortOption;
@@ -20,8 +18,6 @@ export function SortBy({ selectedSort, onChange }: SortByProps) {
     "Price: Low to High",
     "Price: High to Low",
     "Avg. Customer Review",
-    "Newest Arrivals",
-    "Featured",
   ];
 
   const handleSelect = (option: SortOption) => {
