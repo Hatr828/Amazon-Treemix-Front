@@ -18,28 +18,7 @@ const MAX_ITEMS = 10;
 
 export function ProductPage({ product }: { product: ProductType }) {
 
-
-
-    const exampleMoreToConsiderItem: MoreToConsiderItem = {
-        id: "hyperx-cloud-orbit-s-black",
-        is_on_sale: true,
-        favorite: true,
-        image: "/product_page/408e07536ec727720b8e9f7a99befeb458e43fd8.jpg",
-        title: "Gaming headset HYPERX Cloud Orbit S Black",
-        rating: 4,
-        price: 1050,
-        old_price: 1250
-    }
-
-    const exampleMoreToConsiderItemArray: MoreToConsiderItem[] = [exampleMoreToConsiderItem,
-        exampleMoreToConsiderItem,
-        exampleMoreToConsiderItem,
-        exampleMoreToConsiderItem,
-        exampleMoreToConsiderItem,
-        exampleMoreToConsiderItem,
-        exampleMoreToConsiderItem,
-        exampleMoreToConsiderItem
-    ]
+    const BASE_URL = process.env.NEXT_PUBLIC_AMZN_API_BASE!;
 
     const [selectedItemMarker, setSelectedItemMarker] = useState<number>(0);
 
@@ -60,7 +39,7 @@ export function ProductPage({ product }: { product: ProductType }) {
 
     //----====----====----====----====----====----====----====----====----//
 
-    const { addProduct } = useRecentlyViewed();
+    const { addProduct, getProducts } = useRecentlyViewed();
 
 
 
@@ -68,6 +47,7 @@ export function ProductPage({ product }: { product: ProductType }) {
         if (product?.id) {
             addProduct(product.id);
         }
+        console.log(getProducts())
     }, [product?.id]);
 
 
@@ -114,7 +94,7 @@ export function ProductPage({ product }: { product: ProductType }) {
                         ))}
                     </div>
                         <span className="rating_text">
-                            {(product?.ratings ?? 0).toLocaleString()} ratings
+                            {(product?.ratingCount ?? 0).toLocaleString()} ratings
                         </span>
                 </div>
 
@@ -168,7 +148,28 @@ export function ProductPage({ product }: { product: ProductType }) {
                 </div>
 
                 <div className="action_buttons">
-                    <button className="add_to_cart_btn">
+                    <button
+                        className="add_to_cart_btn"
+                        onClick={async () => {
+                            try {
+                                const res = await fetch(
+                                    `${BASE_URL}/api/cart/add/${product.id}`,
+                                    {
+                                        method: "POST",
+                                        credentials: "include",
+                                    }
+                                );
+
+                                if (!res.ok) {
+                                    throw new Error("Failed to add to cart");
+                                }
+
+                                console.log("Added to cart");
+                            } catch (err) {
+                                console.error(err);
+                            }
+                        }}
+                    >
                         <span>Add to Cart</span>
                     </button>
                     <button className="buy_now_btn">Buy Now</button>
@@ -181,7 +182,7 @@ export function ProductPage({ product }: { product: ProductType }) {
             </div>
         </div>
 
-        <MoreToConsiderSection MoreToConsiderItemArray={exampleMoreToConsiderItemArray}/>
+        <MoreToConsiderSection categoryId={product.category.id} />
 
         <div className="offers_section">
 
