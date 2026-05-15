@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 
 const menuItems = [
   { href: "/account", icon: "/icons/person.png", label: "Account Details" },
-  { href: "/account/lists", icon: "/icons/more.png", label: "Your Lists" },
   { href: "/account/gift-card", icon: "/icons/gift.png", label: "Gift Card" },
   { href: "/account/orders", icon: "/icons/cart.png", label: "Your Orders" },
   {
@@ -18,11 +17,6 @@ const menuItems = [
     href: "/account/payment-methods",
     icon: "/icons/payment.png",
     label: "Payment Methods",
-  },
-  {
-    href: "/account/digital-services",
-    icon: "/icons/question.png",
-    label: "Digital Services and Device Support",
   },
 ];
 
