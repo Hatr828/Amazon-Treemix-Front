@@ -119,3 +119,58 @@
     filter: drop-shadow(0 2px 4px #00000033);
     color: #fff;
 }
+@media (max-width: 1024px) {
+
+    .address-wrapper,
+    .address-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .address-wrapper {
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .address-container {
+        padding: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .address-wrapper {
+        padding: 0 14px;
+    }
+
+    .address-container {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .address-title {
+        font-size: 22px;
+    }
+
+    .address-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        height: auto;
+        padding: 18px 16px;
+    }
+
+    .address-left {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .address-info {
+        font-size: 13px;
+    }
+
+    .address-edit,
+    .address-add {
+        width: 100%;
+    }
+}

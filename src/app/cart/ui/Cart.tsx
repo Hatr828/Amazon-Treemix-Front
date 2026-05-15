@@ -1,5 +1,5 @@
 'use client'
-import {useState, useMemo, Suspense, useEffect} from 'react'
+import {useState, Suspense, useEffect} from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import '@/app/cart/css/cart.css'
 import '@/app/cart/css/cart_item.css'
@@ -12,17 +12,15 @@ import SavedAddressesCart from "@/app/cart/ui/SavedAddressesCart"
 import ShippingInfoCart from "@/app/cart/ui/ShippingInfoCart"
 import ThankYouPageCart from "@/app/cart/ui/ThankYouPageCart"
 import PaymentMethod from "@/app/cart/ui/PaymentMethodCart";
-import AuthForm from "@/app/cart/ui/LogInSignIn";
 import AddressFormCart from "@/app/cart/ui/ShippingPaymant";
 import PaymentListCart from "@/app/cart/ui/SavedPaymentMethodCart";
 import {useRecentlyViewed} from "@/app/product_page/hooks/useRecentlyViewed";
 import {CartItem} from "@/app/cart/misc/types";
 import Link from "next/link";
 
-const STEPS = ['cart', 'auth', 'saved_addresses', 'address_form', 'payment_list', 'payment_method', 'shipping_info', 'thank_you'];
+const STEPS = ['cart', 'saved_addresses', 'address_form', 'payment_list', 'payment_method', 'shipping_info', 'thank_you'];
 
 const BASE_URL = process.env.NEXT_PUBLIC_AMZN_API_BASE!;
-
 
 export function CartContent() {
   const { items, addToCart, increaseQuantity, decreaseQuantity, toggleItem, selectAll, calcSubtotal } = useCart()
@@ -53,11 +51,6 @@ export function CartContent() {
 
     if (currentStep === 'cart') {
       if (selectedQuantity === 0) return alert("Select items");
-      goToStep('auth');
-      return;
-    }
-
-    if (currentStep === 'auth') {
       addresses.length === 0 ? goToStep('address_form') : goToStep('saved_addresses');
       return;
     }
@@ -101,8 +94,7 @@ export function CartContent() {
 
   const isMainCart = currentStep === 'cart';
   const isThankYouPage = currentStep === 'thank_you';
-  const showSubtotal = currentStep !== 'auth' && !isThankYouPage;
-
+  const showSubtotal = !isThankYouPage;
 
   const [recentlyItems, setRecentlyItems] = useState<CartItem[]>([]);
 
@@ -120,7 +112,6 @@ export function CartContent() {
     const fetchRecentlyViewed = async () => {
       try {
         const ids = getProducts();
-
         const params = new URLSearchParams();
 
         ids.forEach(id => {
@@ -134,10 +125,7 @@ export function CartContent() {
         if (!res.ok) throw new Error("Failed");
 
         const data = await res.json();
-
         const mapped = data.map(mapRecentlyViewed);
-
-        console.log("mapped recently:", mapped);
 
         setRecentlyItems(mapped);
       } catch (e) {
@@ -153,7 +141,6 @@ export function CartContent() {
         <div className="super_mega_wrapper">
           <div className="main_content_area" key={currentStep}>
             {currentStep === 'cart' && <ShoppingCart items={items} toggleItem={toggleItem} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} selectAll={selectAll} />}
-            {currentStep === 'auth' && <AuthForm onNavigate={handleNextStep}/>}
             {currentStep === 'saved_addresses' && (
                 <SavedAddressesCart
                     addresses={addresses}
@@ -211,8 +198,8 @@ export function CartContent() {
         {isMainCart && (
             <div className="sign_in_footer">
               <span>See personalized recommendations</span>
-              <button onClick={() => goToStep('auth')}>
-                <span className='sign_in_footer_button_text'>Sign in</span>
+              <button onClick={() => goToStep('saved_addresses')}>
+                <span className='sign_in_footer_button_text'>Continue</span>
               </button>
               <div className="new_customer">
                 <span>New Customer?</span>

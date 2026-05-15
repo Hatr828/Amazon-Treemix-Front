@@ -5,13 +5,12 @@ type ReviewComponentProps = {
     review: Reviews;
 };
 
-/* Updated ReviewComponent.jsx */
 export function ReviewComponent({ review }: ReviewComponentProps) {
     return (
         <div className="review-card">
             <div className="user-profile">
                 <div className="avatar-wrapper">
-                    <Image src="/user/avatar.png" alt="avatar" width={34} height={34} /> {/*//TODO: change to user avatar*/}
+                    <Image src="/product_page/avatar-default.svg" alt="avatar" width={34} height={34} />
                 </div>
                 <div className="user-info-row">
                     <span className="author-badge">By Kingston</span>
@@ -37,16 +36,18 @@ export function ReviewComponent({ review }: ReviewComponentProps) {
             <div className="verified-purchase">Verified Purchase</div>
 
             <div className="review-content-layout">
-                <div className="review-visuals">
-                    {review.videos?.map((video, index) => (
-                        <div key={index} className="review-video-wrapper">
-                            <div className="video-placeholder">
-                                {video}
-                                <div className="play-button-overlay">▶</div>
+                {(review.videos?.length ?? 0) > 0 && (
+                    <div className="review-visuals">
+                        {review.videos!.map((video, index) => (
+                            <div key={index} className="review-video-wrapper">
+                                <div className="video-placeholder">
+                                    {video}
+                                    <div className="play-button-overlay">▶</div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                )}
 
                 <div className="review-text-column">
                     <p className="main-text">{review.text}</p>
