@@ -38,8 +38,9 @@ export function ItemCard({
         <div style={{
           position: "relative",
           width: "200px",
-          height: "auto",
+          height: "200px",
           marginRight: "20px",
+            alignSelf: "center",
         }}>
           <Image
               src={item.image}

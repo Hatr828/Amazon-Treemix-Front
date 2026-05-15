@@ -23,7 +23,12 @@ export function MoreToConsiderItemCard({item} : {item: MoreToConsiderItem}) {
                 />
             </div>
 
-            <h4 className="product_title">{item.title}</h4>
+            <h4 className="product_title"
+                style={{
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+            }}>{item.title}</h4>
 
             <div className="rating_row">
                 {Array.from({ length: 5 }, (_, i) => i < Math.round(item.rating)).map((filled, i) => (

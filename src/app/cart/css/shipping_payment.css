@@ -4,7 +4,6 @@
 
 .address-wrapper {
     width: 100%;
-    min-height: 100vh;
 }
 
 .address-container {
@@ -115,4 +114,53 @@
 
 .address-button span {
     filter: drop-shadow(0 2px 4px #00000033);
+}
+@media (max-width: 1024px) {
+
+    .header-section {
+        margin-left: 0;
+    }
+
+    .address-container {
+        width: 100%;
+        height: auto;
+        margin: 20px auto;
+    }
+
+    .address-wrapper {
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .address-wrapper {
+        padding: 0 14px;
+    }
+
+    .address-container {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .address-title {
+        font-size: 22px;
+    }
+
+    .address-row {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .address-button {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .address-subtitle,
+    .address-link,
+    .address-checkbox {
+        font-size: 13px;
+    }
 }

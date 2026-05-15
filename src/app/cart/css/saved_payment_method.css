@@ -109,3 +109,56 @@
     cursor: pointer;
     box-shadow: 0 6px 10px rgba(0,0,0,0.15);
 }
+@media (max-width: 1024px) {
+
+    .paymentlist-wrapper,
+    .paymentlist-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .paymentlist-wrapper {
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .paymentlist-container {
+        padding: 32px;
+    }
+    .super-mega-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .paymentlist-wrapper {
+        padding: 0 14px;
+    }
+
+    .paymentlist-container {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .paymentlist-title {
+        font-size: 22px;
+    }
+
+    .paymentlist-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        height: auto;
+    }
+
+    .paymentlist-left {
+        align-items: flex-start;
+    }
+
+    .paymentlist-edit,
+    .paymentlist-add {
+        width: 100%;
+    }
+}

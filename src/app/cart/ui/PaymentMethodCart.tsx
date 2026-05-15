@@ -91,9 +91,6 @@ export default function PaymentMethod({ onSave }: any) {
                         </div>
                         <div className="payment-link small">Learn more</div>
 
-                        <button className="payment-button bottom">
-                            Add a personal checking account
-                        </button>
                     </div>
                 </div>
         </div>

@@ -36,3 +36,44 @@
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
+@media (max-width: 1024px) {
+
+    .proceed_to_checkout {
+        width: 100%;
+        padding-bottom: 20px;
+        margin-top: 130px;
+    }
+
+    .proceed_to_checkout button {
+        margin: 24px 20px 0;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .proceed_to_checkout {
+        padding-bottom: 16px;
+        margin-top: 130px;
+    }
+
+    .proceed_to_checkout h2 {
+        font-size: 22px;
+        padding-left: 16px;
+    }
+
+    .proceed_to_checkout button {
+        width: calc(100% - 32px);
+        margin: 20px 16px 0;
+    }
+
+    .order_contains_a_gift {
+        font-size: 14px;
+    }
+}
+@media (max-width: 1440px) {
+    .proceed_to_checkout {
+        width: 100%;
+        padding: 0 10px 20px;
+        margin-top: 130px;
+    }
+}

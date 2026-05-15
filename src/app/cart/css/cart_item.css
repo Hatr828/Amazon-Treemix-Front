@@ -88,7 +88,7 @@
   font-size: 18px;
   line-height: 1.5;
   max-height: 1.5em;
-  overflow-wrap: break-word;
+  overflow: hidden;
 }
 .price {
   display: inline-flex;
@@ -305,4 +305,83 @@
   justify-content: space-between;
   flex-direction: row;
   padding-bottom: 1.5em;
+}
+@media (max-width: 1024px) {
+
+  .item_cart_modal_wrapper {
+    width: 100%;
+  }
+
+  .image_wrapper {
+    width: 140px;
+    padding-right: 20px;
+  }
+
+  .quantity_container {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .item_cart_modal_wrapper {
+    flex-direction: column;
+    gap: 18px;
+    padding: 16px;
+    min-height: auto;
+  }
+.controls_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+  .title_delete_container {
+    gap: 12px;
+  }
+
+  .image_wrapper {
+    width: 100%;
+    max-width: 180px;
+    padding-right: 0;
+    margin: 0 auto;
+  }
+
+  .product_title {
+    font-size: 16px;
+    max-height: none;
+  }
+
+  .quantity_container {
+    justify-content: flex-start;
+    margin-left: 0;
+    gap: 10px;
+  }
+
+  .quantity_container button {
+    width: 32px;
+    height: 24px;
+  }
+
+  .prices {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+
+  .additions,
+  .additions_list,
+  .is_in_stock_and_learn_more,
+  .is_a_gift {
+    font-size: 14px;
+  }
+
+  .additions_list {
+    gap: 12px;
+  }
 }

@@ -45,3 +45,45 @@
     font-size: 14px;
     color: #777;
 }
+@media (max-width: 1024px) {
+
+    .shipping-wrapper,
+    .shipping-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .shipping-wrapper {
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .shipping-container {
+        padding: 32px;
+        gap: 28px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .shipping-wrapper {
+        padding: 0 14px;
+    }
+
+    .shipping-container {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .shipping-title {
+        font-size: 20px;
+    }
+
+    .shipping-subtitle {
+        font-size: 15px;
+    }
+
+    .shipping-text {
+        font-size: 13px;
+    }
+}
